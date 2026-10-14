@@ -1,8 +1,8 @@
 # Options d’architecture — Document de discussion
 
-> **Statut : proposition à discuter. Rien n’est décidé ici.**
+> **Statut : proposition à discuter. Direction convenue, détails techniques ouverts.**
 >
-> Ce document présente des options pour l’architecture du sélecteur d’ordre de passage, pour que Avery et Mira puissent en discuter. Aucune base de données, aucun fournisseur, aucune plateforme d’hébergement et aucun modèle d’accès n’est choisi. Les règles convenues sont dans `regles-selecteur.md`; les questions ouvertes sont dans `questions-ouvertes.md` (en particulier les questions 10 et 11 : architecture et accès simultané).
+> Ce document présente des options pour l’architecture du sélecteur d’ordre de passage, pour que Avery et Mira puissent en discuter. **Direction convenue 2026-10-14 (Avery) : option A** — site statique + base de données hébergée, éventuellement avec fonctions serveur gérées — sous réserve d’une évaluation réaliste de l’hébergement, de la confidentialité, de l’accès, des sauvegardes / exportations et de la protection contre les écrasements concurrents. **Aucun fournisseur, aucune base de données, aucun schéma d’authentification ni aucune région d’hébergement n’est choisi.** Les règles convenues sont dans `regles-selecteur.md`; les questions ouvertes sont dans `questions-ouvertes.md` (en particulier les questions 10 et 11 : architecture et accès simultané).
 
 ## 1. Rappel des besoins
 
@@ -20,9 +20,11 @@ Ce que l’architecture doit permettre (d’après les règles convenues) :
 
 ## 2. Options
 
-### Option A — Site statique + base de données hébergée (service tout-en-un)
+### Option A — Site statique + base de données hébergée (service tout-en-un) — DIRECTION CONVENUE, SOUS RÉSERVE D’ÉVALUATION
 
 **Principe :** l’interface est un site statique (HTML, CSS, JavaScript). Les données vivent dans un service de base de données hébergée qui offre aussi l’authentification et la synchronisation.
+
+**Conditions de la direction convenue :** évaluer de façon réaliste l’hébergement, la confidentialité, l’accès, les sauvegardes / exportations et la protection contre les écrasements concurrents avant de s’engager. Friction de connexion quotidienne minimale — idéalement, une session protégée persistante sur les appareils de confiance de l’équipe.
 
 **Avantages :**
 
@@ -38,7 +40,7 @@ Ce que l’architecture doit permettre (d’après les règles convenues) :
 
 **Questions que cette option soulève :** quel fournisseur? Où sont hébergées les données? Quel plan (gratuit/payant)? Qui administre les accès?
 
-### Option B — Petite application avec backend léger
+### Option B — Petite application avec backend léger (non retenue comme direction)
 
 **Principe :** l’interface communique avec un petit backend dédié (serveur léger ou fonctions à la demande) et une base de données gérée. Le tirage et l’enregistrement passent par le backend.
 
@@ -56,7 +58,7 @@ Ce que l’architecture doit permettre (d’après les règles convenues) :
 
 **Questions que cette option soulève :** quel langage / cadre? Où héberger le backend? Qui le maintient si quelque chose brise?
 
-### Option C — Mono-appareil d’abord (repli déjà prévu)
+### Option C — Mono-appareil d’abord (repli déjà prévu, non retenue comme direction)
 
 **Principe :** l’application fonctionne sur un seul appareil (par exemple, la tablette de l’atelier). Les données sont conservées localement sur l’appareil, avec export / sauvegarde manuelle.
 
@@ -76,15 +78,15 @@ Ce que l’architecture doit permettre (d’après les règles convenues) :
 
 **Questions que cette option soulève :** quel appareil? Qui fait les sauvegardes, et à quelle fréquence? Comment exporter l’historique?
 
-### Ce que ce document ne recommande pas
+### Ce que ce document ne recommande plus comme ouvert
 
-Aucune option n’est recommandée ici. Le choix dépendra de ce que Avery et Mira (et Max, pour l’usage réel) jugent acceptable en matière de coût, de maintenance, de protection des données et de simplicité d’usage. Une option hybride est aussi possible (par exemple, commencer mono-appareil et passer au partagé plus tard), mais il faut alors décider si l’historique pourra migrer d’un mode à l’autre sans être perdu ni réécrit.
+La direction est convenue (option A, sous réserve d’évaluation). Restent ouverts : le fournisseur, la base de données, le schéma d’authentification, la région d’hébergement, et l’approbation de Max pour l’accès d’équipe (voir §3 et §6).
 
-## 3. Modèles d’accès (à discuter, quelle que soit l’option)
+## 3. Modèles d’accès (préférence initiale, sous réserve de l’approbation de Max)
 
-L’architecture ne choisit pas seulement où vivent les données, mais **qui peut ouvrir l’outil et faire quoi**. Options à discuter, sans en choisir une :
+L’architecture ne choisit pas seulement où vivent les données, mais **qui peut ouvrir l’outil et faire quoi**. Préférence initiale (pas une décision définitive) : **accès d’équipe protégé simple** plutôt que beaucoup de comptes individuels — **sous réserve de l’approbation opérationnelle / confidentialité de Max**. La friction de connexion quotidienne doit rester minimale (idéalement, session protégée persistante sur les appareils de confiance de l’équipe).
 
-- **Accès partagé protégé (un seul mot de passe ou code pour l’équipe) :** simple, mais on ne sait pas qui a fait quelle modification. La traçabilité des corrections et des dérogations devient difficile (« quelqu’un de l’équipe », sans nom).
+- **Accès partagé protégé (un seul mot de passe ou code pour l’équipe) :** simple, mais on ne sait pas qui a fait quelle modification. La traçabilité des corrections et des dérogations devient difficile (« quelqu’un de l’équipe », sans nom). Pour les corrections, on enregistre au moins que le changement a eu lieu, quand, et ce qui a changé; l’auteur seulement si le modèle d’accès le permet.
 - **Comptes individuels (chaque membre de l’équipe a son accès) :** on sait qui a enregistré, modifié ou corrigé quoi. Plus de gestion (créer / retirer des comptes), mais meilleure traçabilité.
 - **Lien protégé / code d’accès :** intermédiaire — plus simple que des comptes, mais la protection dépend du secret du lien ou du code, et il faut pouvoir le changer si le code circule.
 
@@ -111,11 +113,15 @@ Dans la pratique quotidienne (un tirage par groupe et par jour, fait par une per
 - **Protection des données :** où sont hébergées les données (pays)? Qui a accès au service d’hébergement, en plus de l’équipe? Les prénoms seuls réduisent le risque, mais l’historique des présences reste une donnée sensible à protéger.
 - **Journal d’audit :** quelles actions consigne-t-on (priorités, modifications, dérogations, corrections)? Pour chaque action, consigne-t-on la date, l’heure et, selon le modèle d’accès, la personne?
 
-## 6. Liste des décisions à prendre (pour la discussion)
+## 6. Liste des décisions : tranchées vs à prendre (pour la discussion)
 
-1. Option d’architecture (A, B, C, ou hybride) — et pourquoi.
-2. Modèle d’accès (partagé, individuel, lien/code) — et ce que ça implique pour la traçabilité.
-3. Comportement en cas d’accès simultané.
+**Tranchée :** option d’architecture = **A** (site statique + base de données hébergée, éventuellement fonctions serveur gérées), sous réserve d’une évaluation réaliste de l’hébergement, de la confidentialité, de l’accès, des sauvegardes / exportations et de la protection contre les écrasements concurrents.
+
+**À prendre :**
+
+1. Fournisseur, base de données, schéma d’authentification, région d’hébergement — aucun choix fait.
+2. Modèle d’accès définitif — préférence initiale : accès d’équipe protégé simple, **sous réserve de l’approbation opérationnelle / confidentialité de Max** — et ce que ça implique pour la traçabilité (auteur des corrections seulement si le modèle le permet).
+3. Comportement en cas d’accès simultané + protection contre les écrasements concurrents (à évaluer).
 4. Sauvegarde, exportation, conservation, suppression.
 5. Fonctionnement sans connexion.
 6. Coût, hébergement, maintenance, et qui est responsable de chaque point.
