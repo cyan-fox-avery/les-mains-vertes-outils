@@ -115,8 +115,9 @@ Approche choisie : **hasard pondéré avec équilibrage doux à long terme**. Le
   - **Deux personnes présentes :** dans le cas ordinaire, les deux règles peuvent être respectées en même temps en inversant l’ordre précédent. Par exemple, si le dernier tirage était `Amélie → Benoît`, le tirage `Benoît → Amélie` respecte les deux règles : la première place change et la dernière place change.
   - **Trois personnes présentes :** les contraintes restreignent les ordres possibles, mais des ordres conformes existent généralement.
 - L’impossibilité peut survenir dans des cas plus particuliers, par exemple :
-  - une séance précédente avec une seule personne : cette personne était à la fois première et dernière, donc tout ordre suivant la met forcément en première ou en dernière, ce qui répète l’une des deux places;
+  - une séance précédente avec une seule personne, **à condition** que cette personne participe au tirage suivant et qu’il y ait au plus deux personnes admissibles (sans compter les priorités manuelles) : avec trois personnes ou plus au tirage suivant, l’ancienne participante unique peut être placée au milieu et éviter les deux répétitions;
   - des priorités manuelles qui entrent en conflit avec les règles de non-répétition.
+- Question ouverte liée : les séances à une seule personne sont-elles exemptées des contraintes de positions consécutives (c’est-à-dire qu’elles ne créent pas d’historique de première/dernière place), ou compte-t-on quand même leur première/dernière place pour le tirage suivant? Le présent document dit que les règles « n’ont pas de sens » pour un tirage à une seule personne, sans trancher si cette séance compte pour le tirage suivant. Ce choix reste ouvert (voir `questions-ouvertes.md`, question 5).
 - L’ordre de priorité entre les règles quand elles entrent en conflit (laquelle on relâche en premier, et comment on l’explique à l’équipe) est une question ouverte. Le système doit au moins :
   - toujours produire un ordre valide (chaque personne présente exactement une fois);
   - ne jamais bloquer l’équipe;
