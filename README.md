@@ -61,6 +61,8 @@ Tout le contenu destiné aux personnes qui utilisent l’outil est écrit en fra
 | `docs/regles-selecteur.md` | Règles fonctionnelles détaillées et comportements convenus. C’est le document de référence pour programmer et tester l’outil. |
 | `docs/questions-ouvertes.md` | Décisions qui restent à prendre. Ces questions sont volontairement séparées des règles convenues. Rien dans ce fichier ne doit être lu comme déjà décidé. |
 | `docs/guide-equipe.md` | Guide court (une à deux pages) pour Max et l’équipe : ce que l’outil fait, comment l’utiliser, et comment le tirage reste juste. Sans jargon technique. |
+| `docs/options-architecture.md` | Options d’architecture (stockage, accès, appareils multiples) — **en discussion**. Aucune option n’est choisie. |
+| `docs/proposition-algorithme-equite.md` | Proposition d’algorithme d’équité + plan de simulations — **en discussion**. Aucun paramètre n’est adopté. |
 
 ## Logo
 
@@ -76,10 +78,9 @@ Aucune base de données, aucun fournisseur d’authentification ni aucune platef
 
 ## Prochaines étapes
 
-1. Relire et corriger la documentation de la demande de tirage nº 1.
-2. Trancher les questions ouvertes qui bloquent l’architecture ou l’algorithme d’équité.
-3. Documenter les options d’architecture (stockage partagé, accès, appareils multiples) sans s’engager trop tôt.
-4. Programmer ensuite, en commençant par un prototype simple.
+1. ~~Relire et corriger la documentation de la demande de tirage nº 1.~~ Fait — demande nº 1 fusionnée.
+2. Discuter les options d’architecture et la proposition d’algorithme d’équité (demande nº 2), puis trancher les questions ouvertes qui bloquent l’architecture ou l’algorithme.
+3. Programmer ensuite, en commençant par un prototype simple.
 
 ## Contribuer
 
