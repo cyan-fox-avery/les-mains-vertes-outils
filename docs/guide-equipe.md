@@ -44,6 +44,7 @@ Dans **« Priorités de passage »**, indiquez jusqu’à **trois** personnes qu
 - Le plus souvent, il n’y a qu’une seule priorité, ou aucune.
 - Une priorité, c’est une décision de l’équipe, pas un résultat du hasard. L’outil la note comme telle.
 - Si une priorité placerait la même personne première deux fois de suite, l’outil affiche un avertissement. Vous pouvez quand même confirmer, si c’est vraiment voulu.
+- Une place donnée par priorité compte comme une vraie place dans l’historique. Les accommodements se vivent dans les tâches, pas dans l’ordre de passage.
 
 ### 4. Lancer le tirage
 
@@ -53,6 +54,8 @@ Vous avez deux façons de voir le résultat :
 
 - **« Liste complète »** : vous voyez tout l’ordre d’un coup.
 - **« Une personne à la fois »** : vous révélez les noms un par un, avec **« Révéler le prochain nom »**. L’ordre est déjà décidé avant le premier nom : l’outil ne « re-tire » pas entre deux noms.
+
+**Si le tirage s’est trompé avant la révélation** (mauvais groupe, mauvaise présence), on peut recommencer après confirmation (« Êtes-vous sûr(e)? »). Après le début de la révélation, on corrige à la main plutôt que de recommencer en secret. Les tirages recommencés ne comptent jamais.
 
 ### 5. Modifier l’ordre, si besoin
 
@@ -68,13 +71,19 @@ C’est ce résultat final — celui qui s’est vraiment passé — qui compte 
 
 **N’oubliez pas cette étape.** Tant que le résultat n’est pas enregistré, il ne compte pas dans l’historique.
 
+Si une erreur est découverte après l’enregistrement, on peut corriger le résultat. L’ancienne version est conservée, et la correction est notée.
+
 ### 7. Consulter l’historique, au besoin
 
-**« Historique »** vous montre les tirages passés : la date, le groupe, les personnes présentes, l’ordre final et les priorités.
+**« Historique »** vous montre les tirages passés : la date, le groupe, les personnes présentes, l’ordre final et les priorités. On y voit aussi les exceptions (anniversaire, correction).
 
 ## Et si quelqu’un arrive après le tirage?
 
 La personne se fait attribuer une tâche séparément, par l’équipe, parmi ce qui reste. Elle reste notée comme absente du tirage pour ce jour-là.
+
+## Et si c’est l’anniversaire de quelqu’un?
+
+La personne fêtée passe **première, pour célébrer** — c’est le « Mode anniversaire ». Ça ne change rien à ses chances futures : sa première place d’anniversaire ne compte pas dans le calcul d’équité. L’équipe l’active le jour même. L’outil ne conserve aucune date de naissance.
 
 ## Comment le tirage reste juste?
 
@@ -84,6 +93,8 @@ Deux règles simples :
 2. **Un petit coup de pouce pour les places tardives répétées.** Si une personne s’est retrouvée souvent vers la fin dernièrement, l’outil lui donne un peu plus de chances d’avoir une meilleure place. C’est un coup de pouce, pas une garantie : le hasard reste présent.
 
 Les tirages de chaque jour (lundi, mardi, mercredi, jeudi) sont calculés séparément. Être première un mardi n’influence pas le tirage du jeudi.
+
+**Exception :** le jour de son anniversaire, une personne passe première pour célébrer, sans que ça change ses chances futures.
 
 ## Questions fréquentes
 
@@ -95,6 +106,9 @@ Oui. Vous pouvez modifier l’ordre, et vous devez enregistrer le résultat fina
 
 **Est-ce qu’une absence est pénalisante?**
 Non. Une absence ne compte pas comme une mauvaise place.
+
+**Qu’est-ce que « Ajuster les chances »?**
+C’est une option avancée, hors de l’écran quotidien. Elle change les chances pour le jour même seulement — elle ne donne pas une place garantie à quelqu’un. Elle se réinitialise le lendemain.
 
 **Qu’est-ce qu’on fait si l’outil propose quelque chose qui ne fonctionne pas?**
 Vous modifiez l’ordre, puis vous enregistrez le résultat final. Si le problème revient souvent, dites-le à Avery pour qu’on ajuste l’outil.
