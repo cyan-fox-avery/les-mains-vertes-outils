@@ -56,8 +56,8 @@
 
 **Interprétations possibles (sans en choisir une) :**
 
-- **A — Tirages du groupe :** on regarde les deux derniers tirages du groupe, peu importe si la personne était présente. Léa ne pourrait pas être première le 20, parce que sa dernière place enregistrée (le 6) était la première.
-- **B — Tirages où la personne était présente :** on regarde les deux derniers tirages où la personne a participé. Le résultat est le même dans cet exemple, mais la différence apparaît si la personne a été première, puis absente plusieurs semaines, puis revient : l’interprétation B « oublie » plus lentement ou plus vite selon la fenêtre.
+- **A — Tirages du groupe :** on regarde les deux derniers tirages du groupe, peu importe si la personne était présente. Le tirage du 13 octobre a eu lieu entre les deux, même sans Léa : le 6 et le 20 ne sont donc pas deux tirages consécutifs du groupe. Léa **pourrait** être première le 20 sous cette interprétation.
+- **B — Tirages où la personne était présente :** on regarde les deux derniers tirages où la personne a participé. Le 6 et le 20 sont consécutifs **pour Léa** (elle n’a participé à aucun tirage entre les deux). Léa **ne pourrait pas** être première le 20 sous cette interprétation.
 - **C — Semaines civiles consécutives :** seules deux semaines de suite, sans absence entre les deux, comptent comme consécutives. Une absence « brise » la séquence.
 
 **Ce qu’il faudra décider :** une seule définition, appliquée partout de la même façon, pour la première et la dernière place.
@@ -66,7 +66,7 @@
 
 **Question :** Quand il est impossible de respecter toutes les règles d’équité en même temps, laquelle on relâche en premier?
 
-**Pourquoi ça compte :** Avec 2 personnes présentes, on ne peut pas éviter à la fois la répétition de la première place et celle de la dernière place. Il faut une règle de repli explicite, sinon le comportement sera arbitraire.
+**Pourquoi ça compte :** Dans le cas ordinaire à 2 personnes, les deux règles peuvent être respectées en même temps en inversant l’ordre précédent. L’impossibilité survient plutôt dans des cas particuliers — par exemple, une séance précédente avec une seule personne (qui était à la fois première et dernière), ou des priorités manuelles qui entrent en conflit avec les règles. Il faut une règle de repli explicite pour ces cas-là, sinon le comportement sera arbitraire.
 
 **Pistes à évaluer (sans en choisir une) :**
 
@@ -106,13 +106,21 @@
 - Est-ce qu’une correction recalcule l’équité des tirages suivants qui ont déjà eu lieu? (En principe, non : on ne réécrit pas le passé. Mais il faut le dire explicitement.)
 - Est-ce que la correction elle-même est enregistrée comme une décision manuelle, avec la raison?
 
-## 8. Arrivée tardive et équité future
+## 8. Réorganisation manuelle qui crée une répétition de première ou de dernière place
 
-**Question :** La tâche attribuée séparément à une personne arrivée après la sélection compte-t-elle pour l’équité future?
+**Question :** Que fait l’application quand une réorganisation manuelle produit un ordre final où la même personne est première (ou dernière) pour une deuxième fois consécutive?
 
-**Règle convenue :** la personne reste enregistrée comme absente du tirage.
+**Règle convenue :** l’ordre final réel est l’ordre qui fait foi, même si l’équipe l’a modifié. Le résultat final enregistré est ce qui compte pour l’équité future.
 
-**Ce qui reste à décider :** si la personne a quand même obtenu une tâche ce jour-là (parfois une bonne tâche qui restait), est-ce que ça doit influencer ses chances futures, ou est-ce qu’on l’ignore complètement parce qu’elle n’a pas participé au tirage? Les deux options ont des conséquences sur la perception de justice.
+**Pourquoi ça compte :** le tirage généré respecte les règles de non-répétition, mais l’équipe peut ensuite déplacer les noms. Si ce déplacement crée une répétition de première ou de dernière place, l’application ne doit pas traiter silencieusement cette exception manuelle comme un résultat aléatoire conforme.
+
+**Pistes à évaluer (sans en choisir une) :**
+
+- Afficher un avertissement, demander une confirmation explicite, et enregistrer l’exception comme une décision manuelle — par analogie avec les dérogations pour les priorités de première place.
+- Enregistrer l’exception sans avertissement, mais la signaler dans l’historique.
+- Autre traitement convenu avec l’équipe.
+
+**Ce qu’il faudra décider :** avertissement ou non, confirmation ou non, et comment l’exception est enregistrée. Aucune politique n’est choisie ici.
 
 ## 9. Simulations d’équité
 
