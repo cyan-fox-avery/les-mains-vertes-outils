@@ -61,7 +61,7 @@ Tout le contenu destiné aux personnes qui utilisent l’outil est écrit en fra
 | `docs/regles-selecteur.md` | Règles fonctionnelles détaillées et comportements convenus. C’est le document de référence pour programmer et tester l’outil. |
 | `docs/questions-ouvertes.md` | Décisions qui restent à prendre. Ces questions sont volontairement séparées des règles convenues. Rien dans ce fichier ne doit être lu comme déjà décidé. |
 | `docs/guide-equipe.md` | Guide court (une à deux pages) pour Max et l’équipe : ce que l’outil fait, comment l’utiliser, et comment le tirage reste juste. Sans jargon technique. |
-| `docs/options-architecture.md` | Options d’architecture (stockage, accès, appareils multiples) — **en discussion**. Aucune option n’est choisie. |
+| `docs/options-architecture.md` | Options d’architecture (stockage, accès, appareils multiples) — **direction A convenue** (architecture partagée et synchronisée), sous réserve de validation faisabilité / confidentialité / sécurité; fournisseur, base de données, schéma d’authentification et région non choisis. Détails en discussion. |
 | `docs/proposition-algorithme-equite.md` | Proposition d’algorithme d’équité + plan de simulations — **en discussion**. Aucun paramètre n’est adopté. |
 
 ## Logo
@@ -79,7 +79,7 @@ Aucune base de données, aucun fournisseur d’authentification ni aucune platef
 ## Prochaines étapes
 
 1. ~~Relire et corriger la documentation de la demande de tirage nº 1.~~ Fait — demande nº 1 fusionnée.
-2. Discuter les options d’architecture et la proposition d’algorithme d’équité (demande nº 2), puis trancher les questions ouvertes qui bloquent l’architecture ou l’algorithme.
+2. ~~Discuter les options d’architecture et la proposition d’algorithme d’équité (demande nº 2).~~ Direction A convenue; demandes nº 4, 5 et 6 fusionnées (règles complètes). Reste : valider les paramètres mathématiques par simulations, trancher les détails techniques ouverts (fournisseur, verrouillage, synchronisation hors connexion, conservation) et obtenir les approbations de Maxime.
 3. Programmer ensuite, en commençant par un prototype simple.
 
 ## Contribuer
