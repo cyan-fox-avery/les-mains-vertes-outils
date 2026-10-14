@@ -10,10 +10,13 @@
 - **Tirage / sélection :** le processus qui produit un ordre de passage pour une journée donnée.
 - **Ordre de passage :** la liste, de la première à la dernière personne, dans laquelle les personnes présentes choisissent leur tâche du jour.
 - **Groupe du jour :** la liste des personnes participantes associées à un jour de semaine donné (lundi, mardi, mercredi ou jeudi).
-- **Sélection pertinente :** une sélection antérieure du même groupe du jour qui compte pour les règles d’équité. La définition exacte de « consécutive » quand une personne s’est absentée reste une question ouverte (voir `questions-ouvertes.md`).
+- **Sélection pertinente :** une sélection antérieure du même groupe du jour qui compte pour les règles d’équité. Pour les règles de non-répétition, on compare les **deux derniers tirages auxquels la personne a réellement participé**, dans le groupe du jour (décision confirmée 2026-10-14).
 - **Brouillon :** un ordre généré mais pas encore confirmé.
 - **Résultat final :** l’ordre confirmé par l’équipe une fois le choix des tâches terminé. C’est le seul qui compte pour l’équité future.
 - **Priorité de passage :** une place de début d’ordre (1, 2 ou 3) attribuée manuellement par l’équipe, avant le tirage aléatoire.
+- **Pause d’équité :** une sélection qui ne fait avancer ni la fenêtre de pondération ni la séquence des extrêmes consécutifs d’une personne. Les absences et les sélections d’anniversaire (pour la personne fêtée) sont des pauses.
+- **Participant anniversaire :** une personne présente au tirage, le jour de son anniversaire, dont la première place célébratoire est enregistrée comme exception d’anniversaire et exclue de son calcul personnel d’équité. Distinct de `absent au tirage`.
+- **Ajustement des chances :** une modification manuelle des chances / poids pour la sélection du jour courant seulement (voir §5.5). Ce n’est pas une priorité : il change les chances, il n’attribue pas de place garantie.
 
 ## 2. Groupes par jour de semaine
 
@@ -57,7 +60,7 @@ Les règles exactes pour l’historique d’une personne renommée ou retirée (
 
 - **Manquer un tirage ne doit pas pénaliser quelqu’un** dans les calculs d’équité futurs.
 - Concrètement : une absence ne doit pas être comptée comme une mauvaise place, ni comme une place du tout, dans l’historique d’équité de la personne.
-- La façon exacte de calculer la fenêtre d’historique quand une personne manque des semaines (derniers tirages du groupe vs derniers tirages où la personne était présente) reste une question ouverte.
+- **Décision confirmée : les absences sont une pause.** Pour les règles de non-répétition, on compare les deux derniers tirages auxquels la personne a réellement participé, dans le groupe du jour. Une semaine d’absence ne réinitialise ni ne fait avancer la séquence de la personne et ne fournit aucune position. Les séances manquées mettent aussi en pause la fenêtre d’historique effective (six tirages participés, pas six semaines civiles).
 
 ## 4. Deux modes de sélection
 
@@ -77,7 +80,14 @@ L’application doit offrir les deux modes suivants. Les deux utilisent le **mê
 ### 4.3 Règle commune
 
 - Dans les deux modes, chaque personne admissible apparaît **exactement une fois** dans l’ordre.
-- Le fait de régénérer un brouillon non terminé (est-ce permis? dans quelles circonstances? combien de fois?) est une question ouverte.
+
+### 4.4 Refaire un tirage (brouillon non terminé)
+
+- **Décision confirmée :** on peut recommencer un tirage provisoire, avec une **confirmation obligatoire « Êtes-vous sûr(e)? »**. Le but est de corriger un tirage provisoire erroné, pas de pêcher un résultat préféré.
+- **Avant la révélation**, l’équipe peut recommencer après confirmation.
+- **Après le début de la sélection** (noms déjà révélés), on utilise des **corrections manuelles explicites** plutôt que de remplacer secrètement des noms déjà révélés.
+- Les propositions écartées **n’entrent jamais** dans l’historique d’équité. Seul l’ordre final explicitement enregistré du jour compte, qu’il vienne du tirage accepté ou d’ajustements manuels.
+- Le parcours doit distinguer clairement **« nouveau brouillon »**, **« tirage écarté »** et **« résultat final enregistré »**. Conserver ou non une trace d’audit minimale des tentatives annulées est un détail d’implémentation, pas une position dans l’historique d’équité.
 
 ## 5. Règles d’équité obligatoires
 
@@ -89,6 +99,8 @@ Approche choisie : **hasard pondéré avec équilibrage doux à long terme**. Le
 2. **Pas deux fois dernière de suite.** La même personne ne peut pas occuper la dernière place dans deux sélections pertinentes consécutives.
 3. **Chaque personne admissible apparaît exactement une fois.**
 
+**Décision confirmée :** pour la non-répétition, on compare les **deux derniers tirages auxquels la personne a réellement participé**, dans le groupe du jour. Une absence ne réinitialise ni ne fait avancer sa séquence. Une séance à une seule personne est exclue de la contrainte des extrêmes consécutifs (voir §5.4).
+
 « Quand c’est mathématiquement possible » veut dire : dans certains cas particuliers, il peut devenir impossible de respecter les deux règles de non-répétition en même temps. Dans ce cas, le système doit gérer la situation avec élégance (voir section 5.4), pas planter ni produire un ordre invalide.
 
 ### 5.2 Équilibrage à long terme
@@ -97,7 +109,8 @@ Approche choisie : **hasard pondéré avec équilibrage doux à long terme**. Le
 - L’effet doit rester **doux** : une amélioration des chances, pas une garantie, et jamais une rotation déguisée.
 - Les positions historiques doivent être **normalisées selon la taille du groupe**. Être 12e sur 14, ce n’est pas la même chose qu’être 12e sur 12 ou 5e sur 6. La formule exacte de normalisation reste à décider.
 - L’équité se calcule **séparément pour chaque groupe du jour**.
-- Point de départ discuté (proposition, pas une règle finalisée) : utiliser **environ les six derniers tirages auxquels la personne a assisté** comme fenêtre d’historique. Le nombre exact, la façon de pondérer les tirages récents par rapport aux plus anciens, et la force de la compensation restent à décider.
+- **Décision confirmée : fenêtre d’historique = six derniers tirages auxquels la personne a assisté**, par groupe du jour. Six tirages participés, pas nécessairement six semaines civiles : les séances manquées mettent l’historique effectif en pause. Les personnes nouvelles commencent avec un poids neutre.
+- La fonction de pondération exacte, le coefficient, les bornes et le traitement des très courts historiques sont des candidats techniques à valider par simulations, pas encore décidés.
 - La pondération doit être **testée par simulations** avant d’être considérée comme fiable. On ne suppose pas que la pondération fonctionne comme prévu; on le vérifie.
 
 ### 5.3 Ce que l’équilibrage ne doit pas devenir
@@ -117,11 +130,19 @@ Approche choisie : **hasard pondéré avec équilibrage doux à long terme**. Le
 - L’impossibilité peut survenir dans des cas plus particuliers, par exemple :
   - une séance précédente avec une seule personne, **à condition** que cette personne participe au tirage suivant et qu’il y ait au plus deux personnes admissibles (sans compter les priorités manuelles) : avec trois personnes ou plus au tirage suivant, l’ancienne participante unique peut être placée au milieu et éviter les deux répétitions;
   - des priorités manuelles qui entrent en conflit avec les règles de non-répétition.
-- Question ouverte liée : les séances à une seule personne sont-elles exemptées des contraintes de positions consécutives (c’est-à-dire qu’elles ne créent pas d’historique de première/dernière place), ou compte-t-on quand même leur première/dernière place pour le tirage suivant? Le présent document dit que les règles « n’ont pas de sens » pour un tirage à une seule personne, sans trancher si cette séance compte pour le tirage suivant. Ce choix reste ouvert (voir `questions-ouvertes.md`, question 5).
+- **Décision confirmée :** une séance à une seule personne peut être enregistrée comme événement, mais sa première/dernière place inévitable est **exclue de la pondération d’équité et de la contrainte des extrêmes consécutifs**. Elle ne crée pas d’historique de première/dernière place pour le tirage suivant.
 - L’ordre de priorité entre les règles quand elles entrent en conflit (laquelle on relâche en premier, et comment on l’explique à l’équipe) est une question ouverte. Le système doit au moins :
   - toujours produire un ordre valide (chaque personne présente exactement une fois);
   - ne jamais bloquer l’équipe;
   - indiquer clairement, dans l’interface, quand une règle d’équité n’a pas pu être respectée et pourquoi.
+
+### 5.5 Ajustements manuels des chances : aujourd’hui seulement
+
+- **Nouvelle exigence confirmée :** l’équipe doit pouvoir **ajuster manuellement les chances** quand c’est nécessaire, par une option avancée « Ajuster les chances », hors de l’écran quotidien ordinaire.
+- Un ajustement **change les chances**; il n’attribue pas de place garantie. Ce n’est **pas** une priorité de passage (voir §6).
+- **Décision confirmée : par défaut, aujourd’hui seulement.** Un ajustement affecte la sélection du jour courant et se réinitialise pour les jours suivants, plutôt que de persister silencieusement pendant des mois.
+- La modification du jour doit être **compréhensible et identifiable comme manuelle**; elle ne réécrit pas les positions historiques.
+- **Points ouverts (voir `questions-ouvertes.md`, question 18) :** multiplicateur / plage exacts, direction, avertissement / confirmation, affichage de vérification, permission, réinitialisation, effet sur les simulations, et existence éventuelle d’une variante explicitement persistante. **Aucun biais permanent caché** du système d’équité.
 
 ## 6. Priorités manuelles
 
@@ -136,6 +157,8 @@ Approche choisie : **hasard pondéré avec équilibrage doux à long terme**. Le
 - Les autres personnes sont placées par tirage aléatoire avec l’algorithme d’équité, dans les places restantes.
 - Les priorités doivent être **enregistrées comme des décisions manuelles** (pas comme des résultats du hasard).
 - Les places réellement obtenues **comptent quand même** pour l’équité à long terme. Par exemple, une personne prioritaire qui obtient la place 1 verra cette place 1 dans son historique.
+- **Décision confirmée : tout compte pareil.** Si l’équipe attribue manuellement une première place à quelqu’un, c’est une vraie première place qui compte pleinement dans l’historique d’équité enregistré, avec sa provenance manuelle. Les accommodements se vivent **dans les tâches, pas dans le processus de sélection de l’ordre** : le sélecteur est censé être réellement égal.
+- **Ne pas mettre en place** de catégories d’accommodement, de champs de raison médicale, ni d’exclusions spéciales de priorité.
 
 ### 6.2 Priorité et règle de non-répétition de la première place
 
@@ -143,11 +166,31 @@ Approche choisie : **hasard pondéré avec équilibrage doux à long terme**. Le
 - La dérogation doit être un geste explicite de l’équipe (on ne passe pas outre à l’avertissement par accident).
 - La dérogation est enregistrée comme une décision manuelle.
 
-### 6.3 Questions liées aux priorités (non tranchées)
+### 6.3 Mode anniversaire — exception célébratoire (fonctionnalité confirmée)
+
+**Règle d’Avery, en substance : « Si c’est l’anniversaire de quelqu’un, cette personne passe première, mais ça ne compte pas pour la pondération future. »**
+
+- **Activation explicite :** « Mode anniversaire » (libellé de travail). Quand une personne présente au tirage a un anniversaire, elle obtient la **première place comme exception célébratoire** — ni par pondération, ni comme priorité manuelle ordinaire.
+- **Pause pour la personne fêtée :** la sélection d’anniversaire est essentiellement un tirage sauté **pour sa propre histoire d’équité**, même si elle a participé et choisi une tâche. Sa position du jour d’anniversaire **n’entre pas** dans sa fenêtre glissante de six tirages participés, et sa séquence des extrêmes consécutifs continue à partir de sa dernière sélection ordinaire comptabilisée. Recevoir la première place d’anniversaire **n’empêche pas** un premier résultat légitime au prochain tirage ordinaire et ne la « compense » pas en la poussant vers la fin plus tard.
+- **La première place d’anniversaire est possible même si** la personne était première à son dernier tirage ordinaire participé : l’exception ne crée ni pénalité ni exclusion forcée d’une chance équitable de première place la fois suivante. Exclure seulement la place d’anniversaire de la moyenne, sans mettre aussi en pause la contrainte de non-répétition, pénaliserait discrètement la personne fêtée. Le « saute essentiellement » d’Avery règle les deux à la fois.
+- **La position réelle reste dans l’ordre final enregistré** de la date, explicitement marquée comme exception d’anniversaire. On n’efface pas ce qui s’est passé.
+- **Les autres personnes (non fêtées) comptent normalement :** leurs positions finales réelles nourrissent leur équité future. L’exception d’anniversaire vaut par personne fêtée, pas pour tout le groupe ni toute la date.
+- **Deux anniversaires le même jour (décision confirmée) :** les deux personnes obtiennent les deux premières places, ordonnées **aléatoirement entre elles**, et les deux bénéficient de la pause d’historique.
+- **Test conceptuel :** Léa était première la semaine dernière, est première à nouveau aujourd’hui grâce au mode anniversaire, puis peut encore être première ou dernière la semaine prochaine *selon la contrainte normale par rapport à son dernier tirage ordinaire comptabilisé*. La célébration ne fait avancer ni sa fenêtre de pondération ni sa séquence première/dernière.
+- **Vie privée et simplicité :** activation manuelle le jour même (bascule / sélecteur de personne), par défaut désactivée, **sans base de données de dates de naissance**. L’activation manuelle est une recommandation UX, pas une exigence confirmée par Avery. La dérogation doit être claire et explicite, visible dans le brouillon et dans le résultat enregistré. La commande peut vivre dans une petite zone facultative « priorité / exception », sans occuper le parcours ordinaire.
+
+**Interactions ouvertes — propositions pour approbation (pas des décisions) :**
+
+- **Anniversaire + priorités ordinaires :** quand le mode anniversaire et une ou plusieurs priorités ordinaires sont actifs en même temps, deux « premières places » sont revendiquées. *Proposition :* l’application signale le conflit et l’équipe choisit explicitement l’arrangement des premières places (anniversaire d’abord, ou priorité d’abord, les autres suivant), sans hiérarchie silencieuse.
+- **Personne marquée anniversaire absente au tirage :** *proposition :* l’exception d’anniversaire ne s’applique tout simplement pas ce jour-là (personne enregistrée comme `absente au tirage`; aucune première place d’anniversaire attribuée à quelqu’un d’autre; la bascule du jour est effacée).
+- **Réorganisation manuelle après un tirage en mode anniversaire :** *proposition :* si l’équipe déplace manuellement la personne fêtée hors de la première place (après confirmation), l’exception d’anniversaire est annulée pour ce jour-là et sa position finale réelle compte normalement; si elle reste première, l’exception tient.
+
+Voir `questions-ouvertes.md`, question 19.
+
+### 6.4 Question liée aux priorités (non tranchée)
 
 - Qu’est-ce qui se passe si une personne prioritaire est absente le jour même? (Sa priorité est-elle ignorée, déplacée, ou annulée?)
 - Qu’est-ce qui se passe si une priorité entre en conflit avec la règle de non-répétition de la dernière place dans un très petit groupe? (Voir section 5.4.)
-- Est-ce qu’une personne qui reçoit souvent des priorités (par exemple, pour un accommodement récurrent) devrait voir ses priorités compter exactement comme les autres places dans l’historique d’équité, ou être signalée différemment? La règle convenue dit « ça compte », mais la tension avec les accommodements récurrents est notée comme préoccupation à trancher.
 
 ## 7. Brouillon, modification et enregistrement du résultat final
 
@@ -163,7 +206,7 @@ C’est une partie particulièrement importante du système.
 
 - L’équipe doit pouvoir **réorganiser manuellement** les personnes pour refléter les changements du monde réel (par exemple, quelqu’un doit partir plus tôt, une contrainte de dernière minute).
 - La modification manuelle est un geste normal, pas une exception. L’outil ne doit pas la décourager ni la cacher.
-- Si une réorganisation manuelle crée une répétition de première ou de dernière place, la façon de le traiter (avertissement, confirmation, enregistrement de l’exception) est une question ouverte (voir `questions-ouvertes.md`, question 8). L’application ne doit pas traiter silencieusement une exception manuelle comme un résultat aléatoire conforme.
+- **Décision confirmée :** si une réorganisation manuelle crée une répétition de première ou de dernière place, l’application **avertit et exige une confirmation intentionnelle**, puis conserve le résultat comme **exception manuelle**, tandis que le résultat réel compte quand même. L’ordre final réel fait autorité. L’application ne doit pas traiter silencieusement une exception manuelle comme un résultat aléatoire conforme.
 
 ### 7.3 Enregistrement final
 
@@ -174,8 +217,10 @@ C’est une partie particulièrement importante du système.
 
 ### 7.4 Corrections après enregistrement
 
-- On a discuté de permettre des **corrections à des résultats déjà enregistrés**, idéalement avec un **historique de vérification** de base (qui a changé quoi, et quand).
-- Le flux de travail précis (qui peut corriger, jusqu’à quand, est-ce qu’on garde l’ancienne version, est-ce que la correction recalcule l’équité future?) **reste à finaliser**. Voir `questions-ouvertes.md`.
+- **Décision confirmée :** les résultats enregistrés **peuvent être corrigés** par la suite.
+- On **conserve la version antérieure** et on **enregistre la correction** : au moins que le changement a eu lieu, quand, et ce qui a changé; l’auteur, si le modèle d’accès le permet.
+- L’**ordre corrigé** sert aux calculs futurs. On ne fait **pas** de nouveau tirage rétroactif des séances passées.
+- Qui peut corriger et jusqu’à quand reste à préciser.
 
 ## 8. Historique
 
@@ -188,7 +233,11 @@ Pour chaque tirage enregistré, on conserve :
 - les **noms des personnes participantes** (les personnes présentes au tirage);
 - l’**ordre final**;
 - les **priorités manuelles** attribuées, le cas échéant;
-- les **renseignements de présence** pertinents pour le tirage (qui était absent au tirage).
+- les **exceptions d’anniversaire** marquées comme telles, le cas échéant;
+- les **ajustements manuels des chances** appliqués au jour courant, le cas échéant;
+- les **exceptions manuelles** (par exemple, une réorganisation manuelle qui crée une répétition), le cas échéant;
+- les **renseignements de présence** pertinents pour le tirage (qui était absent au tirage);
+- les **corrections** apportées après enregistrement, avec la version antérieure conservée (voir §7.4).
 
 ### 8.2 Règles d’historique
 
@@ -225,14 +274,15 @@ Pour chaque tirage enregistré, on conserve :
 - **Accueillant visuellement**, sans être encombré.
 - **Cohérent** avec l’identité visuelle de Les Mains Vertes.
 - Le logo officiel apparaîtra dans l’en-tête ou dans un coin. Avery fournira le logo. On ne génère pas de logo de remplacement.
+- **Interface principale extrêmement épurée, avec des contrôles plus poussés en option (exigence confirmée).** Le parcours quotidien ne porte pratiquement aucun encombrement, mais l’équipe doit pouvoir (a) **consulter les résultats enregistrés passés** et (b) **ajuster manuellement les chances** quand c’est nécessaire (voir §5.5). La consultation de l’historique et les contrôles de pondération vivent **loin du parcours quotidien ordinaire** et doivent être compréhensibles en français québécois. Libellés de travail : « Ajuster les chances », « Mode anniversaire ».
 - Voir aussi §13 — critère d’acceptation non négociable (« plus facile que le contenant de yogourt »).
 
 ## 10. Données et stockage
 
-- Direction privilégiée : un système **partagé et synchronisé**, accessible par plusieurs membres de l’équipe à partir de différents appareils.
-- Solution de repli acceptable : une solution sur **un seul appareil**, si le stockage partagé ajoute une complexité disproportionnée.
+- **Direction convenue (2026-10-14) : architecture partagée et synchronisée, option A** (site statique + base de données hébergée, éventuellement avec fonctions serveur gérées), **sous réserve** d’une évaluation réaliste de l’hébergement, de la confidentialité, de l’accès, des sauvegardes / exportations et de la protection contre les écrasements concurrents.
+- **Préférence initiale :** accès d’équipe protégé simple plutôt que beaucoup de comptes individuels — **sous réserve de l’approbation opérationnelle / confidentialité de Max**. La friction de connexion quotidienne doit rester minimale (idéalement, session protégée persistante sur les appareils de confiance de l’équipe).
+- **Aucun** fournisseur, base de données, schéma d’authentification ni région d’hébergement n’est choisi. Ne pas présenter ces détails techniques comme décidés.
 - On ne conserve que les **prénoms**. Malgré tout, les données des personnes participantes et les historiques de présence doivent rester **en dehors du code source**, avec une protection d’accès raisonnable.
-- Aucune base de données, aucun fournisseur d’authentification ni aucune plateforme d’hébergement n’est choisi à ce stade. Les options techniques seront documentées sans engagement lors de l’étape d’architecture.
 
 ## 11. Ce que l’outil ne fait pas
 
@@ -249,11 +299,12 @@ Pour chaque tirage enregistré, on conserve :
 - Une personne prioritaire est absente.
 - Une personne arrive après la sélection.
 - Une séance est annulée ou sautée.
-- Un brouillon est abandonné sans être enregistré.
+- Un brouillon est abandonné sans être enregistré (les propositions écartées n’entrent jamais dans l’historique).
 - La page est rafraîchie pendant un brouillon ou pendant une révélation un à un.
 - Deux membres de l’équipe modifient le même tirage en même temps, à partir de deux appareils.
 - Deux personnes ont le même prénom dans un groupe.
 - Une personne change de groupe ou quitte l’atelier.
+- **Anniversaire :** deux personnes fêtent leur anniversaire le même jour (décidé : les deux premières places, ordre aléatoire, les deux en pause — voir §6.3). Anniversaire + priorités ordinaires, personne marquée anniversaire absente, réorganisation manuelle après un tirage en mode anniversaire (propositions pour approbation — voir §6.3 et `questions-ouvertes.md`, question 19).
 
 Chaque cas limite doit avoir un comportement défini avant ou pendant la programmation. Les cas qui n’ont pas encore de réponse sont repris dans `questions-ouvertes.md`.
 
@@ -272,7 +323,7 @@ Les critères ci-dessous traduisent le principe en exigences pratiques. Ils sont
 - **Complexité hors du chemin quotidien :** la gestion des listes, les statistiques historiques, les explications d’équité, les corrections aux journées plus anciennes et les options d’administration ne doivent pas encombrer l’écran principal. Elles restent accessibles au besoin.
 - **Pas de travail répétitif inutile :** les listes par jour de semaine se répètent; les présences doivent être rapides à cocher; rouvrir la page doit retrouver le brouillon du jour ou le résultat confirmé, plutôt que de forcer une nouvelle séance. On ne fait pas reconstruire l’état de la journée à l’équipe après un rafraîchissement.
 - **Fiabilité, ça fait partie de la facilité d’usage :** réponse rapide, statut clair (« brouillon » vs « enregistré »), prévention des retirages accidentels, et plan de reprise en cas d’échec. Une approche de connexion ou de synchronisation qui se met sans cesse en travers du chemin contredit le but.
-- **Tester avec de vraies tâches :** idéalement, observer une collègue ou un collègue qui ne connaît pas le site l’utiliser sans accompagnement; comparer l’effort, la confusion et le temps avec la pratique actuelle des petits papiers. Si l’outil ajoute de la friction, simplifier avant la sortie.
+- **Tester avec de vraies tâches :** idéalement, observer une collègue ou un collègue qui ne connaît pas le site l’utiliser sans accompagnement; comparer l’effort, la confusion et le temps avec la pratique actuelle des petits papiers. Si l’outil ajoute de la friction, simplifier avant la sortie. **Comparer tout le processus quotidien** avec la procédure actuelle des petits papiers — y compris les présences, les corrections de l’équipe et la tenue du dossier final — plutôt qu’une seule pression de bouton comparée au tirage d’un papier. Le test porte sur la facilité, la confusion, la fiabilité et l’effort, pas seulement sur la vitesse.
 
 ### Garde-fou : la simplicité ne retire pas les exigences choisies
 
