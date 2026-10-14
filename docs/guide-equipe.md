@@ -22,7 +22,7 @@ Le nouvel outil garde le hasard, mais il se souvient des tirages passés pour é
 
 **En bref :** c’est encore un tirage au sort. Mais l’outil tient compte des résultats précédents pour répartir les bonnes et les moins bonnes places plus équitablement, au fil des semaines.
 
-Ce n’est pas une rotation (« chacun son tour »). Dans un tirage normal, sans priorité, l’ordre reste imprévisible d’un jour à l’autre : personne ne peut deviner à l’avance qui va passer premier. (Si l’équipe a indiqué une priorité, la personne prioritaire passe première, comme décidé par l’équipe.)
+Ce n’est pas une rotation (« chacun son tour »). Dans un groupe habituel, l’ordre demeure généralement imprévisible d’un jour à l’autre. (Si l’équipe a indiqué une priorité, la personne prioritaire passe première, comme décidé par l’équipe.)
 
 ## Comment l’utiliser, chaque jour
 
@@ -88,7 +88,7 @@ Les tirages de chaque jour (lundi, mardi, mercredi, jeudi) sont calculés sépar
 ## Questions fréquentes
 
 **Est-ce que l’outil favorise quelqu’un?**
-Non. Il ne connaît que les prénoms et les résultats passés. Il ne classe personne selon son rendement.
+Pas selon la personne ni selon son rendement : il ne connaît que les prénoms et les résultats passés. Par contre, il donne un léger avantage statistique aux personnes qui se sont retrouvées souvent vers la fin dernièrement, pour rééquilibrer les chances au fil du temps.
 
 **Est-ce qu’on peut encore changer l’ordre à la main?**
 Oui. Vous pouvez modifier l’ordre, et vous devez enregistrer le résultat final.
