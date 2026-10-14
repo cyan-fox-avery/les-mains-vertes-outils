@@ -49,7 +49,7 @@ Les premières places sont avantageuses, parce qu’il reste plus de tâches à 
 - **Hasard + mémoire.** Le tirage reste aléatoire, mais il tient compte des résultats précédents pour éviter que les mêmes personnes passent toujours en dernier.
 - **Transparence.** L’équipe voit l’ordre, peut le modifier et doit le confirmer. On garde une trace de ce qui s’est vraiment passé, pas seulement de ce que l’outil avait proposé au départ.
 - **Simplicité.** L’outil doit être utilisable avec un minimum de formation, sur téléphone, tablette et ordinateur.
-- **Accessibilité.** Libellés clairs, texte lisible, grosses zones de touché, navigation simple.
+- **Accessibilité.** Libellés clairs, texte lisible, grandes zones tactiles, navigation simple.
 - **Respect de la vie privée.** On ne conserve que les prénoms. Les données des personnes participantes et l’historique des présences restent en dehors du code source public, avec une protection d’accès raisonnable.
 
 ## Documentation
