@@ -66,7 +66,7 @@
 
 **Question :** Quand il est impossible de respecter toutes les règles d’équité en même temps, laquelle on relâche en premier?
 
-**Pourquoi ça compte :** Dans le cas ordinaire à 2 personnes, les deux règles peuvent être respectées en même temps en inversant l’ordre précédent. L’impossibilité survient plutôt dans des cas particuliers — par exemple, une séance précédente avec une seule personne (qui était à la fois première et dernière), ou des priorités manuelles qui entrent en conflit avec les règles. Il faut une règle de repli explicite pour ces cas-là, sinon le comportement sera arbitraire.
+**Pourquoi ça compte :** Dans le cas ordinaire à 2 personnes, les deux règles peuvent être respectées en même temps en inversant l’ordre précédent. L’impossibilité survient plutôt dans des cas particuliers — par exemple, une séance précédente avec une seule personne, à condition que cette personne participe au tirage suivant et qu’il y ait au plus deux personnes admissibles (avec trois personnes ou plus, elle peut être placée au milieu et éviter les deux répétitions), ou des priorités manuelles qui entrent en conflit avec les règles. Il faut une règle de repli explicite pour ces cas-là, sinon le comportement sera arbitraire.
 
 **Pistes à évaluer (sans en choisir une) :**
 
@@ -75,7 +75,7 @@
 - Relâcher les deux et se fier seulement à la pondération.
 - Tirer au hasard parmi les ordres qui violent le moins de règles.
 
-**Ce qu’il faudra décider :** la hiérarchie de repli, et le message affiché à l’équipe quand une règle n’a pas pu être respectée.
+**Ce qu’il faudra décider :** la hiérarchie de repli, et le message affiché à l’équipe quand une règle n’a pas pu être respectée — ainsi que la question de savoir si les séances à une seule personne sont exemptées des contraintes de positions consécutives (c’est-à-dire qu’elles ne créent pas d’historique de première/dernière place) ou si leur première/dernière place compte quand même pour le tirage suivant.
 
 ## 6. Régénération d’un brouillon non terminé
 
