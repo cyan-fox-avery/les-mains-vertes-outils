@@ -4,7 +4,7 @@
 >
 > Ce fichier liste les décisions qui **ne sont pas encore prises**. Rien ici ne doit être lu comme déjà décidé, ni programmé comme si c’était réglé.
 >
-> Quand une question est tranchée, on la déplace dans `regles-selecteur.md` avec la décision et sa date, et on retire la question d’ici.
+> Quand une question est tranchée, on la déplace dans `regles-selecteur.md` avec la décision et sa date, et on la marque ici **RÉSOLU** avec un renvoi. La numérotation est conservée (les autres documents y font référence), même pour les questions résolues.
 
 ## 1. Formule de pondération exacte
 
@@ -35,38 +35,30 @@
 
 **Ce qu’il faudra décider :** la formule de normalisation et son comportement quand le groupe est très petit (1 ou 2 personnes).
 
-## 3. Fenêtre d’historique
+## 3. Fenêtre d’historique (partiellement résolue)
 
-**Question :** Sur combien de tirages passés calcule-t-on l’équité? Et que veut dire « derniers tirages » quand une personne s’est absentée?
+**Décision confirmée 2026-10-14 (Avery) :** fenêtre = **six dernières sélections comptabilisées dans l’historique d’équité de cette personne**, par groupe du jour. Six sélections comptabilisées, pas nécessairement six semaines civiles : seules les sélections ordinaires participées comptent; une absence, une sélection d’anniversaire (pour la personne fêtée) et une séance à une seule personne ne font pas avancer la fenêtre. Les personnes nouvelles commencent avec un poids neutre. Voir `regles-selecteur.md` §5.2.
 
-**Point de départ discuté (proposition seulement) :** environ les six derniers tirages auxquels la personne a assisté.
+**Ce qu’il reste à décider :**
 
-**Ce qu’il faudra décider :**
-
-- Le nombre exact (6? autre chose?).
-- Est-ce qu’on compte les six derniers tirages **du groupe** (avec des trous quand la personne était absente) ou les six derniers tirages **où la personne était présente**?
 - Est-ce que les tirages récents comptent plus que les plus anciens, ou est-ce que chaque tirage de la fenêtre compte également?
-- Que fait-on pour une personne nouvelle qui n’a pas encore d’historique (pas de désavantage, pas d’avantage indu)?
+- Traitement des très courts historiques (à partir de combien de tirages l’historique compte-t-il « pleinement »? faut-il lisser les premiers tirages?).
 
 ## 4. « Consécutive » : que veut dire deux sélections de suite?
 
-**Question :** Comment interpréter les règles « pas deux fois première de suite » et « pas deux fois dernière de suite » quand quelqu’un manque une ou plusieurs semaines?
+**RÉSOLU 2026-10-14 (décision d’Avery) — voir `regles-selecteur.md` §5.1 et §3.3.**
 
-**Exemple :** Léa est première le mardi 6 octobre. Elle est absente le mardi 13 octobre. Peut-elle être première le mardi 20 octobre?
+**Décision :** on compare les **deux dernières sélections comptabilisées** de la personne, dans le groupe du jour. Une absence ne réinitialise ni ne fait avancer la séquence de la personne et ne fournit aucune position. Les absences sont une pause.
 
-**Interprétations possibles (sans en choisir une) :**
+**Exemple :** Léa est première le mardi 6 octobre. Elle est absente le mardi 13 octobre. Le 6 et le 20 octobre sont consécutifs **pour Léa** (elle n’a participé à aucun tirage entre les deux) : elle **ne peut pas** être première le 20 octobre en vertu de la règle ordinaire (sauf exception d’anniversaire, voir §6.3 des règles, ou dérogation manuelle confirmée).
 
-- **A — Tirages du groupe :** on regarde les deux derniers tirages du groupe, peu importe si la personne était présente. Le tirage du 13 octobre a eu lieu entre les deux, même sans Léa : le 6 et le 20 ne sont donc pas deux tirages consécutifs du groupe. Léa **pourrait** être première le 20 sous cette interprétation.
-- **B — Tirages où la personne était présente :** on regarde les deux derniers tirages où la personne a participé. Le 6 et le 20 sont consécutifs **pour Léa** (elle n’a participé à aucun tirage entre les deux). Léa **ne pourrait pas** être première le 20 sous cette interprétation.
-- **C — Semaines civiles consécutives :** seules deux semaines de suite, sans absence entre les deux, comptent comme consécutives. Une absence « brise » la séquence.
+## 5. Ordre de priorité quand les règles entrent en conflit (partiellement résolue)
 
-**Ce qu’il faudra décider :** une seule définition, appliquée partout de la même façon, pour la première et la dernière place.
+**Décision confirmée 2026-10-14 (Avery) :** une séance à une seule personne peut être enregistrée comme événement, mais sa première/dernière place inévitable est **exclue de la pondération d’équité et de la contrainte des extrêmes consécutifs**. Voir `regles-selecteur.md` §5.4.
 
-## 5. Ordre de priorité quand les règles entrent en conflit
+**Question restante :** Quand il est impossible de respecter toutes les règles d’équité en même temps, laquelle on relâche en premier?
 
-**Question :** Quand il est impossible de respecter toutes les règles d’équité en même temps, laquelle on relâche en premier?
-
-**Pourquoi ça compte :** Dans le cas ordinaire à 2 personnes, les deux règles peuvent être respectées en même temps en inversant l’ordre précédent. L’impossibilité survient plutôt dans des cas particuliers — par exemple, une séance précédente avec une seule personne, à condition que cette personne participe au tirage suivant et qu’il y ait au plus deux personnes admissibles (avec trois personnes ou plus, elle peut être placée au milieu et éviter les deux répétitions), ou des priorités manuelles qui entrent en conflit avec les règles. Il faut une règle de repli explicite pour ces cas-là, sinon le comportement sera arbitraire.
+**Pourquoi ça compte :** Dans le cas ordinaire à 2 personnes, les deux règles peuvent être respectées en même temps en inversant l’ordre précédent. L’impossibilité survient plutôt dans des cas particuliers — par exemple, des priorités manuelles qui entrent en conflit avec les règles de non-répétition, ou un cas lié aux absences : si les deux personnes admissibles aujourd’hui ont toutes les deux été premières à leur dernier tirage comptabilisé respectif, aucune des deux n’est admissible à la première place sous la contrainte stricte. Il faut une règle de repli explicite pour ces cas-là, sinon le comportement sera arbitraire.
 
 **Pistes à évaluer (sans en choisir une) :**
 
@@ -75,52 +67,29 @@
 - Relâcher les deux et se fier seulement à la pondération.
 - Tirer au hasard parmi les ordres qui violent le moins de règles.
 
-**Ce qu’il faudra décider :** la hiérarchie de repli, et le message affiché à l’équipe quand une règle n’a pas pu être respectée — ainsi que la question de savoir si les séances à une seule personne sont exemptées des contraintes de positions consécutives (c’est-à-dire qu’elles ne créent pas d’historique de première/dernière place) ou si leur première/dernière place compte quand même pour le tirage suivant.
+**Ce qu’il faudra décider :** la hiérarchie de repli, et le message affiché à l’équipe quand une règle n’a pas pu être respectée.
 
 ## 6. Régénération d’un brouillon non terminé
 
-**Question :** Est-ce que l’équipe peut régénérer un brouillon non terminé? Dans quelles circonstances?
+**RÉSOLU 2026-10-14 (décision d’Avery) — voir `regles-selecteur.md` §4.4.**
 
-**Pourquoi ça compte :** Si on peut régénérer sans limite jusqu’à obtenir un ordre qui « plaît », le tirage n’est plus un tirage : c’est un choix déguisé. Si on ne peut jamais régénérer, une erreur de manipulation (mauvais groupe, mauvaise présence) devient difficile à corriger.
+**Décision :** on peut recommencer un tirage provisoire, avec une **confirmation obligatoire « Êtes-vous sûr(e)? »**. Avant la révélation, l’équipe peut recommencer après confirmation; après le début de la sélection, on utilise des corrections manuelles explicites plutôt que de remplacer secrètement des noms déjà révélés. Les propositions écartées **n’entrent jamais** dans l’historique d’équité. Le parcours distingue « nouveau brouillon », « tirage écarté » et « résultat final enregistré ». Conserver ou non une trace d’audit minimale des tentatives annulées est un détail d’implémentation.
 
-**Pistes à évaluer (sans en choisir une) :**
+## 7. Corrections aux résultats enregistrés (partiellement résolue)
 
-- Aucune régénération : on modifie manuellement le brouillon.
-- Régénération permise seulement avant la première révélation / avant toute modification manuelle.
-- Régénération permise, mais chaque tentative est journalisée.
-- Régénération permise seulement si les présences ou les priorités changent.
+**Décisions confirmées 2026-10-14 (Avery) — voir `regles-selecteur.md` §7.4 :** les résultats enregistrés **peuvent être corrigés**. On **conserve la version antérieure** et on **enregistre la correction** (au moins que le changement a eu lieu, quand, et ce qui a changé; l’auteur, si le modèle d’accès le permet). L’**ordre corrigé** sert aux calculs futurs. On ne fait **pas** de nouveau tirage rétroactif des séances passées.
 
-**Ce qu’il faudra décider :** la règle, et ce qui est journalisé.
-
-## 7. Corrections aux résultats enregistrés
-
-**Question :** Comment corriger un résultat déjà enregistré, et comment suivre ces corrections?
-
-**Pourquoi ça compte :** Une erreur peut être découverte après l’enregistrement (mauvais nom, mauvaise date, ordre mal noté). Mais si on peut réécrire l’historique sans trace, la confiance dans l’équité s’effrite.
-
-**Ce qu’il faudra décider :**
+**Ce qu’il reste à décider :**
 
 - Qui peut corriger un résultat enregistré?
 - Jusqu’à quand (le jour même? tant que le tirage suivant n’a pas eu lieu? toujours?)?
-- Est-ce qu’on garde l’ancienne version (historique de vérification) ou est-ce qu’on écrase?
-- Est-ce qu’une correction recalcule l’équité des tirages suivants qui ont déjà eu lieu? (En principe, non : on ne réécrit pas le passé. Mais il faut le dire explicitement.)
-- Est-ce que la correction elle-même est enregistrée comme une décision manuelle, avec la raison?
+- Est-ce que la correction elle-même est enregistrée avec une raison?
 
 ## 8. Réorganisation manuelle qui crée une répétition de première ou de dernière place
 
-**Question :** Que fait l’application quand une réorganisation manuelle produit un ordre final où la même personne est première (ou dernière) pour une deuxième fois consécutive?
+**RÉSOLU 2026-10-14 (décision d’Avery) — voir `regles-selecteur.md` §7.2.**
 
-**Règle convenue :** l’ordre final réel est l’ordre qui fait foi, même si l’équipe l’a modifié. Le résultat final enregistré est ce qui compte pour l’équité future.
-
-**Pourquoi ça compte :** le tirage généré respecte les règles de non-répétition, mais l’équipe peut ensuite déplacer les noms. Si ce déplacement crée une répétition de première ou de dernière place, l’application ne doit pas traiter silencieusement cette exception manuelle comme un résultat aléatoire conforme.
-
-**Pistes à évaluer (sans en choisir une) :**
-
-- Afficher un avertissement, demander une confirmation explicite, et enregistrer l’exception comme une décision manuelle — par analogie avec les dérogations pour les priorités de première place.
-- Enregistrer l’exception sans avertissement, mais la signaler dans l’historique.
-- Autre traitement convenu avec l’équipe.
-
-**Ce qu’il faudra décider :** avertissement ou non, confirmation ou non, et comment l’exception est enregistrée. Aucune politique n’est choisie ici.
+**Décision :** si une réorganisation manuelle crée une répétition de première ou de dernière place, l’application **avertit et exige une confirmation intentionnelle**, puis conserve le résultat comme **exception manuelle**, tandis que le résultat réel compte quand même. L’ordre final réel fait autorité. L’application ne doit pas traiter silencieusement une exception manuelle comme un résultat aléatoire conforme.
 
 ## 9. Simulations d’équité
 
@@ -131,27 +100,28 @@
 - Quelles mesures on suit (par exemple : distribution des places sur 500 tirages simulés, taux de répétition première/dernière, temps moyen avant qu’une personne « due » obtienne une bonne place, écart entre la personne la plus avantagée et la plus désavantagée).
 - Quels scénarios on simule (groupes de 10–15, petits groupes, absences fréquentes, priorités fréquentes, nouvelle personne qui arrive).
 - Quel seuil de performance on exige avant de considérer l’algorithme acceptable.
+- **Nouveaux scénarios à simuler (décisions 2026-10-14) :** exceptions d’anniversaire — (a) la personne fêtée est placée première; (b) sa place d’anniversaire ne modifie pas son poids futur ni sa séquence des extrêmes; (c) les positions réelles des autres continuent de compter; (d) un re-tirage / une annulation ne crée pas d’historique fantôme. Brouillons non enregistrés : jamais comptés. Ajustements manuels des chances : effet le jour même seulement, par défaut, réinitialisation le lendemain, ajustement identifiable comme manuel, pas de persistance silencieuse. Corrections de résultats enregistrés : version antérieure conservée, ordre corrigé utilisé pour la suite, aucune réécriture rétroactive des séances passées.
 
 Tant que les simulations ne sont pas faites, la pondération reste une hypothèse, pas une garantie.
 
-## 10. Architecture de stockage partagé et hébergement
+## 10. Architecture de stockage partagé et hébergement (partiellement résolue)
 
-**Question :** Quelle architecture pour le stockage partagé?
+**Direction convenue 2026-10-14 (Avery) :** architecture partagée et synchronisée, **option A** (site statique + base de données hébergée, éventuellement avec fonctions serveur gérées), **sous réserve** d’une évaluation réaliste de l’hébergement, de la confidentialité, de l’accès, des sauvegardes / exportations et de la protection contre les écrasements concurrents. **Préférence initiale :** accès d’équipe protégé simple plutôt que beaucoup de comptes individuels — **sous réserve de l’approbation opérationnelle / confidentialité de Max**. Friction de connexion quotidienne minimale (idéalement, session protégée persistante sur les appareils de confiance de l’équipe). Voir `regles-selecteur.md` §10.
 
-**Direction privilégiée :** système partagé et synchronisé, accessible par plusieurs membres de l’équipe à partir de différents appareils. Solution de repli acceptable : un seul appareil.
+**Ce qu’il reste à décider (aucun choix fait — ne pas présenter comme décidés) :**
 
-**Ce qu’il faudra décider (sans s’engager pour l’instant) :**
-
-- Base de données ou autre mécanisme de stockage (aucun choix fait).
-- Fournisseur d’authentification, si authentification il y a (aucun choix fait).
-- Plateforme d’hébergement (aucun choix fait).
-- Comment l’équipe se connecte (compte partagé? comptes individuels? lien protégé? code?).
+- Base de données ou autre mécanisme de stockage.
+- Fournisseur d’authentification / schéma d’authentification.
+- Plateforme d’hébergement et région d’hébergement.
+- Modèle d’accès définitif et approbation de Max.
 - Où les données sont hébergées et qui y a accès.
 - Sauvegarde et récupération en cas de problème.
 
 ## 11. Accès simultané et modifications à partir de plusieurs appareils
 
 **Question :** Que se passe-t-il si deux membres de l’équipe modifient le même tirage en même temps?
+
+**À évaluer dans le cadre de la direction convenue (option A) :** la protection contre les écrasements concurrents fait partie des conditions d’évaluation avant de s’engager.
 
 **Ce qu’il faudra décider :**
 
@@ -186,25 +156,15 @@ Tant que les simulations ne sont pas faites, la pondération reste une hypothès
 
 ## 14. Priorités récurrentes et accommodements
 
-**Question :** Si une personne reçoit souvent des priorités pour un accommodement récurrent, est-ce que ses places prioritaires doivent compter exactement comme les autres dans l’historique d’équité?
+**RÉSOLU 2026-10-14 (décision d’Avery) — voir `regles-selecteur.md` §6.1 : « tout compte pareil ».**
 
-**Règle convenue :** les places réellement obtenues comptent pour l’équité future.
-
-**Tension à trancher :** si une personne obtient souvent la place 1 par priorité (accommodement), l’algorithme d’équité va ensuite la pousser vers des places tardives les jours sans priorité, pour « compenser ». Ça pourrait punir l’accommodement lui-même.
-
-**Pistes à évaluer (sans en choisir une) :**
-
-- Garder la règle telle quelle : tout compte pareil.
-- Signaler les tirages avec priorité dans l’historique, et les traiter différemment dans le calcul d’équité (par exemple, les exclure du calcul, ou les pondérer moins).
-- Autre traitement convenu avec Max et l’équipe.
-
-Cette question doit être tranchée avec Max et l’équipe avant de programmer l’algorithme, parce qu’elle change le calcul.
+**Décision :** toute place prioritaire compte pleinement dans l’historique d’équité, avec sa provenance manuelle enregistrée. La suggestion de créer une exemption d’équité spéciale pour les priorités d’accommodement a été explicitement rejetée : les accommodements se vivent **dans les tâches, pas dans le processus de sélection de l’ordre**; le sélecteur est censé être réellement égal. **Ne pas mettre en place** de catégories d’accommodement, de champs de raison médicale, ni d’exclusions spéciales de priorité.
 
 ## 15. Ordre généré vs ordre final : que garde-t-on?
 
 **Question :** Quand l’équipe modifie manuellement un ordre, garde-t-on aussi l’ordre généré au départ?
 
-**Règle convenue :** seul le résultat final compte pour l’équité future.
+**Règle convenue :** seul le résultat final compte pour l’équité future. Les brouillons écartés et les tirages annulés n’entrent jamais dans l’historique d’équité (décision 2026-10-14).
 
 **Ce qui reste à décider :** est-ce qu’on conserve l’ordre généré au départ à des fins de transparence (pour voir que l’équipe a modifié l’ordre, et comment), ou est-ce qu’on ne conserve que le résultat final? Conserver les deux aide la vérification, mais ajoute une donnée à expliquer.
 
@@ -223,3 +183,28 @@ Cette question doit être tranchée avec Max et l’équipe avant de programmer 
 **Question :** Jusqu’où va l’explication de l’équité dans l’outil lui-même?
 
 La page « Comment ça fonctionne? » doit expliquer le principe sans jargon ni équations. Il faudra décider si on y montre des exemples concrets, et si on y mentionne les règles de non-répétition et la compensation douce, ou si on reste à un niveau très général (« le tirage tient compte des tirages passés »).
+
+## 18. Ajustements manuels des chances : mécanique exacte
+
+**Décision confirmée 2026-10-14 (Avery) :** l’équipe peut ajuster manuellement les chances quand c’est nécessaire, par une option avancée « Ajuster les chances », hors de l’écran quotidien ordinaire. **Par défaut, aujourd’hui seulement** : l’ajustement affecte la sélection du jour courant et se réinitialise pour les jours suivants. Un ajustement change les chances, il n’attribue pas de place garantie — ce n’est pas une priorité. La modification du jour doit être compréhensible et identifiable comme manuelle; elle ne réécrit pas les positions historiques. Voir `regles-selecteur.md` §5.5.
+
+**Ce qu’il reste à décider (sous-décisions ouvertes, avec garde-fous de sécurité / traçabilité) :**
+
+- Ajustement individuel (une personne) ou de groupe, ou les deux?
+- Multiplicateur / plage exacts et direction (augmenter ou diminuer les chances de qui?).
+- Avertissement / confirmation avant d’appliquer.
+- Affichage de vérification (comment l’équipe voit que l’ajustement est actif et ce qu’il change).
+- Permission : qui peut ajuster?
+- Réinitialisation : automatique le lendemain, manuelle, ou les deux?
+- Effet sur les simulations (les scénarios de test doivent couvrir les ajustements).
+- Existence éventuelle d’une variante explicitement persistante — jamais de persistance silencieuse. **Aucun biais permanent caché** du système d’équité.
+
+## 19. Mode anniversaire : interactions ouvertes
+
+**Décisions confirmées 2026-10-14 (Avery) — voir `regles-selecteur.md` §6.3 :** le mode anniversaire est une exception célébratoire explicitement activée. La personne fêtée obtient la première place, sa sélection est une pause pour sa propre histoire d’équité (fenêtre de six sélections comptabilisées + séquence des extrêmes), sa position réelle reste dans l’ordre final enregistré, marquée comme exception d’anniversaire. Les autres personnes comptent normalement. Deux anniversaires le même jour : les deux premières places, ordre aléatoire entre les deux, les deux en pause. Activation manuelle le jour même, sans base de données de dates de naissance (recommandation UX, pas une exigence confirmée).
+
+**Interactions ouvertes — à trancher avec Avery (pas des décisions) :**
+
+- **Anniversaire + priorités ordinaires :** conflit à exposer, sans hiérarchie choisie. La règle d’Avery dit que les anniversaires passent devant, et la règle des priorités les limite à trois places (1, 2, 3). Avec deux anniversaires et trois priorités, cinq places de tête seraient revendiquées. Aucune hiérarchie n’est choisie ici : il faut demander à Avery comment ces règles se combinent.
+- **Personne marquée anniversaire absente au tirage :** *proposition :* l’exception ne s’applique pas ce jour-là (personne enregistrée comme `absente au tirage`; aucune première place d’anniversaire attribuée à quelqu’un d’autre; bascule du jour effacée).
+- **Réorganisation manuelle après un tirage en mode anniversaire :** la règle doit porter sur les **positions d’anniversaire attribuées** (places 1–2 si deux anniversaires), pas seulement sur la première place. Si l’équipe déplace manuellement une personne fêtée hors de sa position d’anniversaire attribuée, il reste à trancher avec Avery si l’exception est **annulée** (sa position finale réelle compte normalement) ou **conservée**.
