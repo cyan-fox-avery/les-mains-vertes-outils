@@ -37,7 +37,7 @@
 
 ## 3. Fenêtre d’historique (partiellement résolue)
 
-**Décision confirmée 2026-10-14 (Avery) :** fenêtre = **six derniers tirages auxquels la personne a assisté**, par groupe du jour. Six tirages participés, pas nécessairement six semaines civiles : les séances manquées mettent l’historique effectif en pause. Les personnes nouvelles commencent avec un poids neutre. Voir `regles-selecteur.md` §5.2.
+**Décision confirmée 2026-10-14 (Avery) :** fenêtre = **six dernières sélections comptabilisées dans l’historique d’équité de cette personne**, par groupe du jour. Six sélections comptabilisées, pas nécessairement six semaines civiles : seules les sélections ordinaires participées comptent; une absence, une sélection d’anniversaire (pour la personne fêtée) et une séance à une seule personne ne font pas avancer la fenêtre. Les personnes nouvelles commencent avec un poids neutre. Voir `regles-selecteur.md` §5.2.
 
 **Ce qu’il reste à décider :**
 
@@ -48,7 +48,7 @@
 
 **RÉSOLU 2026-10-14 (décision d’Avery) — voir `regles-selecteur.md` §5.1 et §3.3.**
 
-**Décision :** on compare les **deux derniers tirages auxquels la personne a réellement participé**, dans le groupe du jour. Une absence ne réinitialise ni ne fait avancer la séquence de la personne et ne fournit aucune position. Les absences sont une pause.
+**Décision :** on compare les **deux dernières sélections comptabilisées** de la personne, dans le groupe du jour. Une absence ne réinitialise ni ne fait avancer la séquence de la personne et ne fournit aucune position. Les absences sont une pause.
 
 **Exemple :** Léa est première le mardi 6 octobre. Elle est absente le mardi 13 octobre. Le 6 et le 20 octobre sont consécutifs **pour Léa** (elle n’a participé à aucun tirage entre les deux) : elle **ne peut pas** être première le 20 octobre en vertu de la règle ordinaire (sauf exception d’anniversaire, voir §6.3 des règles, ou dérogation manuelle confirmée).
 
@@ -58,7 +58,7 @@
 
 **Question restante :** Quand il est impossible de respecter toutes les règles d’équité en même temps, laquelle on relâche en premier?
 
-**Pourquoi ça compte :** Dans le cas ordinaire à 2 personnes, les deux règles peuvent être respectées en même temps en inversant l’ordre précédent. L’impossibilité survient plutôt dans des cas particuliers — par exemple, une séance précédente avec une seule personne, à condition que cette personne participe au tirage suivant et qu’il y ait au plus deux personnes admissibles (avec trois personnes ou plus, elle peut être placée au milieu et éviter les deux répétitions), ou des priorités manuelles qui entrent en conflit avec les règles. Il faut une règle de repli explicite pour ces cas-là, sinon le comportement sera arbitraire.
+**Pourquoi ça compte :** Dans le cas ordinaire à 2 personnes, les deux règles peuvent être respectées en même temps en inversant l’ordre précédent. L’impossibilité survient plutôt dans des cas particuliers — par exemple, des priorités manuelles qui entrent en conflit avec les règles de non-répétition, ou un cas lié aux absences : si les deux personnes admissibles aujourd’hui ont toutes les deux été premières à leur dernier tirage comptabilisé respectif, aucune des deux n’est admissible à la première place sous la contrainte stricte. Il faut une règle de repli explicite pour ces cas-là, sinon le comportement sera arbitraire.
 
 **Pistes à évaluer (sans en choisir une) :**
 
@@ -100,7 +100,7 @@
 - Quelles mesures on suit (par exemple : distribution des places sur 500 tirages simulés, taux de répétition première/dernière, temps moyen avant qu’une personne « due » obtienne une bonne place, écart entre la personne la plus avantagée et la plus désavantagée).
 - Quels scénarios on simule (groupes de 10–15, petits groupes, absences fréquentes, priorités fréquentes, nouvelle personne qui arrive).
 - Quel seuil de performance on exige avant de considérer l’algorithme acceptable.
-- **Nouveaux scénarios à simuler (décisions 2026-10-14) :** exceptions d’anniversaire — (a) la personne fêtée est placée première; (b) sa place d’anniversaire ne modifie pas son poids futur ni sa séquence des extrêmes; (c) les positions réelles des autres continuent de compter; (d) un re-tirage / une annulation ne crée pas d’historique fantôme. Brouillons non enregistrés : jamais comptés. Ajustements manuels des chances : effet le jour même seulement, réinitialisation le lendemain, ajustement identifiable comme manuel, pas de persistance silencieuse. Corrections de résultats enregistrés : version antérieure conservée, ordre corrigé utilisé pour la suite, aucune réécriture rétroactive des séances passées.
+- **Nouveaux scénarios à simuler (décisions 2026-10-14) :** exceptions d’anniversaire — (a) la personne fêtée est placée première; (b) sa place d’anniversaire ne modifie pas son poids futur ni sa séquence des extrêmes; (c) les positions réelles des autres continuent de compter; (d) un re-tirage / une annulation ne crée pas d’historique fantôme. Brouillons non enregistrés : jamais comptés. Ajustements manuels des chances : effet le jour même seulement, par défaut, réinitialisation le lendemain, ajustement identifiable comme manuel, pas de persistance silencieuse. Corrections de résultats enregistrés : version antérieure conservée, ordre corrigé utilisé pour la suite, aucune réécriture rétroactive des séances passées.
 
 Tant que les simulations ne sont pas faites, la pondération reste une hypothèse, pas une garantie.
 
@@ -201,10 +201,10 @@ La page « Comment ça fonctionne? » doit expliquer le principe sans jargon ni 
 
 ## 19. Mode anniversaire : interactions ouvertes
 
-**Décisions confirmées 2026-10-14 (Avery) — voir `regles-selecteur.md` §6.3 :** le mode anniversaire est une exception célébratoire explicitement activée. La personne fêtée obtient la première place, sa sélection est une pause pour sa propre histoire d’équité (fenêtre de six tirages participés + séquence des extrêmes), sa position réelle reste dans l’ordre final enregistré, marquée comme exception d’anniversaire. Les autres personnes comptent normalement. Deux anniversaires le même jour : les deux premières places, ordre aléatoire entre les deux, les deux en pause. Activation manuelle le jour même, sans base de données de dates de naissance (recommandation UX, pas une exigence confirmée).
+**Décisions confirmées 2026-10-14 (Avery) — voir `regles-selecteur.md` §6.3 :** le mode anniversaire est une exception célébratoire explicitement activée. La personne fêtée obtient la première place, sa sélection est une pause pour sa propre histoire d’équité (fenêtre de six sélections comptabilisées + séquence des extrêmes), sa position réelle reste dans l’ordre final enregistré, marquée comme exception d’anniversaire. Les autres personnes comptent normalement. Deux anniversaires le même jour : les deux premières places, ordre aléatoire entre les deux, les deux en pause. Activation manuelle le jour même, sans base de données de dates de naissance (recommandation UX, pas une exigence confirmée).
 
-**Interactions ouvertes — propositions pour approbation (pas des décisions) :**
+**Interactions ouvertes — à trancher avec Avery (pas des décisions) :**
 
-- **Anniversaire + priorités ordinaires :** *proposition :* l’application signale le conflit et l’équipe choisit explicitement l’arrangement des premières places, sans hiérarchie silencieuse.
+- **Anniversaire + priorités ordinaires :** conflit à exposer, sans hiérarchie choisie. La règle d’Avery dit que les anniversaires passent devant, et la règle des priorités les limite à trois places (1, 2, 3). Avec deux anniversaires et trois priorités, cinq places de tête seraient revendiquées. Aucune hiérarchie n’est choisie ici : il faut demander à Avery comment ces règles se combinent.
 - **Personne marquée anniversaire absente au tirage :** *proposition :* l’exception ne s’applique pas ce jour-là (personne enregistrée comme `absente au tirage`; aucune première place d’anniversaire attribuée à quelqu’un d’autre; bascule du jour effacée).
-- **Réorganisation manuelle après un tirage en mode anniversaire :** *proposition :* si l’équipe déplace manuellement la personne fêtée hors de la première place (après confirmation), l’exception est annulée et sa position finale réelle compte normalement; si elle reste première, l’exception tient.
+- **Réorganisation manuelle après un tirage en mode anniversaire :** la règle doit porter sur les **positions d’anniversaire attribuées** (places 1–2 si deux anniversaires), pas seulement sur la première place. Si l’équipe déplace manuellement une personne fêtée hors de sa position d’anniversaire attribuée, il reste à trancher avec Avery si l’exception est **annulée** (sa position finale réelle compte normalement) ou **conservée**.
