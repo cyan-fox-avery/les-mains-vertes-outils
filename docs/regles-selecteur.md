@@ -51,7 +51,7 @@ Les règles exactes pour l’historique d’une personne renommée ou retirée (
 
 - Une personne qui arrive après la sélection se fait attribuer une tâche **séparément, par l’équipe**, parmi ce qui reste.
 - Elle reste enregistrée comme **absente du tirage**, même si elle a finalement travaillé ce jour-là.
-- La façon dont cette attribution séparée doit (ou ne doit pas) compter pour l’équité future est une question ouverte.
+- Règle décidée : elle est simplement traitée comme **absente du tirage**, avec **aucune place et aucune pénalité d’équité** pour cette date. On n’évalue pas si la tâche attribuée plus tard était « bonne », et on ne suit pas cette attribution séparément dans le sélecteur : un seul statut « absent au tirage » suffit.
 
 ### 3.3 Ne pas pénaliser les absences
 
@@ -89,7 +89,7 @@ Approche choisie : **hasard pondéré avec équilibrage doux à long terme**. Le
 2. **Pas deux fois dernière de suite.** La même personne ne peut pas occuper la dernière place dans deux sélections pertinentes consécutives.
 3. **Chaque personne admissible apparaît exactement une fois.**
 
-« Quand c’est mathématiquement possible » veut dire : avec un très petit nombre de personnes présentes, il peut devenir impossible de respecter les deux règles de non-répétition en même temps. Dans ce cas, le système doit gérer la situation avec élégance (voir section 5.4), pas planter ni produire un ordre invalide.
+« Quand c’est mathématiquement possible » veut dire : dans certains cas particuliers, il peut devenir impossible de respecter les deux règles de non-répétition en même temps. Dans ce cas, le système doit gérer la situation avec élégance (voir section 5.4), pas planter ni produire un ordre invalide.
 
 ### 5.2 Équilibrage à long terme
 
@@ -112,8 +112,11 @@ Approche choisie : **hasard pondéré avec équilibrage doux à long terme**. Le
 - Le système doit gérer les cas limites avec élégance, en particulier quand très peu de personnes sont présentes.
 - Exemples de cas limites :
   - **Une seule personne présente :** l’ordre est trivial (une seule place). Les règles de non-répétition n’ont pas de sens.
-  - **Deux personnes présentes :** on ne peut pas éviter à la fois la répétition de la première place et celle de la dernière place : la première d’un jour devient forcément la dernière de l’autre si on alterne, et vice-versa.
-  - **Trois personnes présentes :** les contraintes restreignent très fortement les ordres possibles.
+  - **Deux personnes présentes :** dans le cas ordinaire, les deux règles peuvent être respectées en même temps en inversant l’ordre précédent. Par exemple, si le dernier tirage était `Amélie → Benoît`, le tirage `Benoît → Amélie` respecte les deux règles : la première place change et la dernière place change.
+  - **Trois personnes présentes :** les contraintes restreignent les ordres possibles, mais des ordres conformes existent généralement.
+- L’impossibilité peut survenir dans des cas plus particuliers, par exemple :
+  - une séance précédente avec une seule personne : cette personne était à la fois première et dernière, donc tout ordre suivant la met forcément en première ou en dernière, ce qui répète l’une des deux places;
+  - des priorités manuelles qui entrent en conflit avec les règles de non-répétition.
 - L’ordre de priorité entre les règles quand elles entrent en conflit (laquelle on relâche en premier, et comment on l’explique à l’équipe) est une question ouverte. Le système doit au moins :
   - toujours produire un ordre valide (chaque personne présente exactement une fois);
   - ne jamais bloquer l’équipe;
@@ -159,6 +162,7 @@ C’est une partie particulièrement importante du système.
 
 - L’équipe doit pouvoir **réorganiser manuellement** les personnes pour refléter les changements du monde réel (par exemple, quelqu’un doit partir plus tôt, une contrainte de dernière minute).
 - La modification manuelle est un geste normal, pas une exception. L’outil ne doit pas la décourager ni la cacher.
+- Si une réorganisation manuelle crée une répétition de première ou de dernière place, la façon de le traiter (avertissement, confirmation, enregistrement de l’exception) est une question ouverte (voir `questions-ouvertes.md`, question 8). L’application ne doit pas traiter silencieusement une exception manuelle comme un résultat aléatoire conforme.
 
 ### 7.3 Enregistrement final
 
@@ -183,7 +187,7 @@ Pour chaque tirage enregistré, on conserve :
 - les **noms des personnes participantes** (les personnes présentes au tirage);
 - l’**ordre final**;
 - les **priorités manuelles** attribuées, le cas échéant;
-- les **renseignements de présence** pertinents pour le tirage (qui était absent, qui est arrivé après la sélection).
+- les **renseignements de présence** pertinents pour le tirage (qui était absent au tirage).
 
 ### 8.2 Règles d’historique
 
@@ -216,7 +220,7 @@ Pour chaque tirage enregistré, on conserve :
 
 - **Simple à utiliser** avec un minimum de formation.
 - **Confortable** sur téléphone, tablette et ordinateur.
-- **Accessible** : libellés clairs, typographie lisible, grosses zones de touché.
+- **Accessible** : libellés clairs, typographie lisible, grandes zones tactiles.
 - **Accueillant visuellement**, sans être encombré.
 - **Cohérent** avec l’identité visuelle de Les Mains Vertes.
 - Le logo officiel apparaîtra dans l’en-tête ou dans un coin. Avery fournira le logo. On ne génère pas de logo de remplacement.
