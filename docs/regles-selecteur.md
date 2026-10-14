@@ -225,6 +225,7 @@ Pour chaque tirage enregistré, on conserve :
 - **Accueillant visuellement**, sans être encombré.
 - **Cohérent** avec l’identité visuelle de Les Mains Vertes.
 - Le logo officiel apparaîtra dans l’en-tête ou dans un coin. Avery fournira le logo. On ne génère pas de logo de remplacement.
+- Voir aussi §13 — critère d’acceptation non négociable (« plus facile que le contenant de yogourt »).
 
 ## 10. Données et stockage
 
@@ -255,3 +256,24 @@ Pour chaque tirage enregistré, on conserve :
 - Une personne change de groupe ou quitte l’atelier.
 
 Chaque cas limite doit avoir un comportement défini avant ou pendant la programmation. Les cas qui n’ont pas encore de réponse sont repris dans `questions-ouvertes.md`.
+
+## 13. Critère d’acceptation non négociable : plus facile que le contenant de yogourt
+
+**Règle décidée (exigence d’Avery, confirmée, non négociable) :** le sélecteur doit être réellement **plus facile et plus intuitif à utiliser que les petits papiers dans le contenant de yogourt** qu’il remplace.
+
+Ce n’est pas une préférence esthétique générale ni un élément de finition à venir. C’est un **critère d’acceptation central** qui gouverne l’interface *et* l’architecture. Un processus de sélection mathématiquement meilleur ne suffit pas si Max et l’équipe doivent naviguer dans plusieurs écrans, mémoriser des instructions ou attendre.
+
+### Traduction pratique proposée (à valider avec Avery et l’équipe, pas finale)
+
+Les critères ci-dessous traduisent le principe en exigences pratiques. Ils sont proposés pour validation — la disposition exacte des écrans, les réglages par défaut et les cibles mesurables d’utilisabilité restent des choix de conception à évaluer avec Avery et l’équipe :
+
+- **Parcours normal presque sans friction :** ouvrir le site → le groupe du jour de la semaine est déjà sélectionné → cocher seulement les noms des personnes absentes → désigner facultativement 1 à 3 priorités → lancer le tirage → voir l’ordre complet OU révéler un nom à la fois → enregistrer explicitement le résultat final réel. Pas d’assistant de configuration ni d’écran de réglages obligatoire.
+- **Actions courantes explicites par elles-mêmes :** gros boutons clairement libellés, en français québécois naturel; lisibilité et contraste élevés; commandes confortables au touché; aucune connaissance technique ni formation nécessaire.
+- **Complexité hors du chemin quotidien :** la gestion des listes, les statistiques historiques, les explications d’équité, les corrections aux journées plus anciennes et les options d’administration ne doivent pas encombrer l’écran principal. Elles restent accessibles au besoin.
+- **Pas de travail répétitif inutile :** les listes par jour de semaine se répètent; les présences doivent être rapides à cocher; rouvrir la page doit retrouver le brouillon du jour ou le résultat confirmé, plutôt que de forcer une nouvelle séance. On ne fait pas reconstruire l’état de la journée à l’équipe après un rafraîchissement.
+- **Fiabilité, ça fait partie de la facilité d’usage :** réponse rapide, statut clair (« brouillon » vs « enregistré »), prévention des retirages accidentels, et plan de reprise en cas d’échec. Une approche de connexion ou de synchronisation qui se met sans cesse en travers du chemin contredit le but.
+- **Tester avec de vraies tâches :** idéalement, observer une collègue ou un collègue qui ne connaît pas le site l’utiliser sans accompagnement; comparer l’effort, la confusion et le temps avec la pratique actuelle des petits papiers. Si l’outil ajoute de la friction, simplifier avant la sortie.
+
+### Garde-fou : la simplicité ne retire pas les exigences choisies
+
+On n’élimine pas les exigences qu’Avery a délibérément choisies — les deux modes de révélation, les priorités facultatives, le résultat modifiable et l’enregistrement final explicite — au nom de la simplicité. La solution, c’est une **divulgation progressive et de meilleurs réglages par défaut**, pas la suppression d’un contrôle nécessaire.
