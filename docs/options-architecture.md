@@ -86,42 +86,44 @@ La direction est convenue (option A, sous réserve d’évaluation). Restent ouv
 
 L’architecture ne choisit pas seulement où vivent les données, mais **qui peut ouvrir l’outil et faire quoi**. Préférence initiale (pas une décision définitive) : **accès d’équipe protégé simple** plutôt que beaucoup de comptes individuels — **sous réserve de l’approbation opérationnelle / confidentialité de Max**. La friction de connexion quotidienne doit rester minimale (idéalement, session protégée persistante sur les appareils de confiance de l’équipe).
 
-- **Accès partagé protégé (un seul mot de passe ou code pour l’équipe) :** simple, mais on ne sait pas qui a fait quelle modification. La traçabilité des corrections et des dérogations devient difficile (« quelqu’un de l’équipe », sans nom). Pour les corrections, on enregistre au moins que le changement a eu lieu, quand, et ce qui a changé; l’auteur seulement si le modèle d’accès le permet.
+- **Accès partagé protégé (un seul mot de passe ou code pour l’équipe) :** simple, mais on ne sait pas qui a fait quelle modification. La traçabilité des corrections et des dérogations devient difficile (« quelqu’un de l’équipe », sans nom). Pour les corrections, on enregistre au moins que le changement a eu lieu, quand, et ce qui a changé; l’auteur seulement si le modèle d’accès le permet. **Décisions confirmées :** tout membre autorisé peut corriger un résultat enregistré et donner un coup de pouce — **aucun privilège supplémentaire** (pas de permission réservée à Maxime, pas de code administrateur) pour ces actions. Raison écrite facultative pour les corrections; vérification automatique obligatoire (toutes les versions, horodatage, avant / après). Corrections à tout moment, sans limite de temps. Sous réserve de l’approbation de Maxime pour qui est autorisé à utiliser le sélecteur en général.
 - **Comptes individuels (chaque membre de l’équipe a son accès) :** on sait qui a enregistré, modifié ou corrigé quoi. Plus de gestion (créer / retirer des comptes), mais meilleure traçabilité.
 - **Lien protégé / code d’accès :** intermédiaire — plus simple que des comptes, mais la protection dépend du secret du lien ou du code, et il faut pouvoir le changer si le code circule.
 
 **Point à trancher :** la traçabilité des corrections et des dérogations exige-t-elle de savoir *qui* a agi, ou suffit-il de savoir *que* c’était manuel? La réponse change le modèle d’accès.
 
-## 4. Accès simultané (question ouverte 11)
+## 4. Accès simultané — un seul éditeur, plusieurs spectateurs + reprise sécuritaire (politique confirmée, question 11 partiellement résolue)
 
-Si deux membres de l’équipe modifient le même tirage en même temps, à partir de deux appareils, que se passe-t-il? Options à discuter, sans en choisir une :
+**Décision confirmée :** seul **UN** membre / appareil peut modifier activement une sélection donnée (jour de semaine / date) à la fois. Les autres appareils autorisés peuvent consulter son état et ses résultats, mais ne doivent pas modifier, écraser, régénérer, corriger ni finaliser cette même sélection en cours. Indiquer clairement aux spectateurs que la modification est déjà en cours (« Tirage en cours sur un autre appareil » si l’identité n’est pas disponible). Empêcher les écrasements silencieux du type « dernière écriture gagne » et les doubles enregistrements finaux. **Reprise sécuritaire obligatoire :** un navigateur fermé, déconnecté ou abandonné ne doit pas bloquer définitivement le tirage du jour — un autre membre autorisé doit pouvoir reprendre le contrôle en sécurité (par exemple, bail à expiration géré par le serveur + reprise contrôlée, vérifications de version). Valider à nouveau l’autorité à l’enregistrement final; empêcher un éditeur d’origine périmé d’écraser le travail après une reprise. Aucune cérémonie quotidienne obligatoire de verrouillage / déverrouillage. S’il existe un dossier final terminé pour le jour, un autre appareil affiche ce dossier, pas un deuxième résultat officiel en conflit. Les corrections de l’historique enregistré ont aussi besoin d’une protection contre les conflits / versions.
 
-- **Un seul brouillon actif par groupe et par jour :** la première personne qui ouvre le tirage le « réserve »; les autres voient qu’il est en cours de modification.
-- **Verrouillage pendant la modification :** l’outil empêche deux modifications en même temps.
-- **Dernière modification gagne :** simple, mais une modification peut écraser l’autre sans avertissement.
-- **Signalement de conflit :** l’outil prévient que le tirage a changé entre-temps et demande de vérifier avant d’enregistrer.
-
-Dans la pratique quotidienne (un tirage par groupe et par jour, fait par une personne à la fois), les conflits devraient être rares. Mais il faut un comportement défini, sinon le premier conflit réel produira deux versions du « résultat officiel ».
+**Reste ouvert :** la conception technique exacte du verrouillage / de la reprise et le délai d’expiration (choix d’ingénierie à tester; aucune valeur de temporisation approuvée).
 
 ## 5. Autres points à trancher avec l’architecture
 
 - **Sauvegarde et récupération :** comment on sauvegarde l’historique, et comment on le récupère si quelque chose brise? À quelle fréquence?
 - **Exportation :** l’équipe peut-elle exporter l’historique (par exemple, pour Max ou pour archives)? Dans quel format?
-- **Suppression et conservation :** combien de temps garde-t-on l’historique? Que se passe-t-il quand une personne quitte l’atelier — garde-t-on ses anciens tirages (oui, en principe, pour l’historique), et retire-t-on son nom des tirages futurs?
+- **Suppression et conservation :** combien de temps garde-t-on l’historique? Que se passe-t-il quand une personne quitte l’atelier — garde-t-on ses anciens tirages (oui, en principe, pour l’historique), et retire-t-on son nom des tirages futurs? **Décidé :** une personne qui quitte puis revient dans le même groupe conserve son historique (identifiant interne stable); les anciens tirages restent. **Décidé :** conserver l’ordre généré d’origine + l’ordre final pour chaque sélection terminée. Format exact de conservation et fournisseur non réglés.
 - **Fonctionnement sans connexion :** si le wifi coupe pendant un tirage, que se passe-t-il? Le brouillon est-il conservé localement en attendant?
 - **Coût et maintenance :** qui paie (s’il y a un coût)? Qui est prévenu si le service tombe? Qui corrige si quelque chose brise?
 - **Protection des données :** où sont hébergées les données (pays)? Qui a accès au service d’hébergement, en plus de l’équipe? Les prénoms seuls réduisent le risque, mais l’historique des présences reste une donnée sensible à protéger.
-- **Journal d’audit :** quelles actions consigne-t-on (priorités, modifications, dérogations, corrections)? Pour chaque action, consigne-t-on la date, l’heure et, selon le modèle d’accès, la personne?
+- **Journal d’audit :** quelles actions consigne-t-on (priorités, modifications, dérogations, corrections)? Pour chaque action, consigne-t-on la date, l’heure et, selon le modèle d’accès, la personne? **Décidé :** les corrections conservent toutes les versions, l’horodatage et les détails avant / après (raison écrite facultative); les coups de pouce réellement actifs sont enregistrés (à qui, pour quel tirage); l’auteur seulement si le modèle d’accès le permet vraiment.
 
 ## 6. Liste des décisions : tranchées vs à prendre (pour la discussion)
 
 **Tranchée :** option d’architecture = **A** (site statique + base de données hébergée, éventuellement fonctions serveur gérées), sous réserve d’une évaluation réaliste de l’hébergement, de la confidentialité, de l’accès, des sauvegardes / exportations et de la protection contre les écrasements concurrents.
 
+**Tranchées (suite) :**
+
+- Accès simultané : un seul éditeur, plusieurs spectateurs + reprise sécuritaire (question 11, politique réglée; conception technique / délai ouverts).
+- Corrections : tout membre autorisé; raison écrite facultative; aucune limite de temps; toutes les versions conservées, vérification automatique (question 7, résolue).
+- Coups de pouce : tout membre autorisé, sans privilège supplémentaire; raison non applicable (question 18, permission réglée).
+- Conservation : ordre généré d’origine + ordre final conservés (question 15, résolue); identifiant interne stable par personne (question 16, résolue); nom usuel + initiale si collision (question 13, résolue).
+
 **À prendre :**
 
 1. Fournisseur, base de données, schéma d’authentification, région d’hébergement — aucun choix fait.
 2. Modèle d’accès définitif — préférence initiale : accès d’équipe protégé simple, **sous réserve de l’approbation opérationnelle / confidentialité de Max** — et ce que ça implique pour la traçabilité (auteur des corrections seulement si le modèle le permet).
-3. Comportement en cas d’accès simultané + protection contre les écrasements concurrents (à évaluer).
+3. Conception technique du verrouillage / de la reprise + délai d’expiration (à tester).
 4. Sauvegarde, exportation, conservation, suppression.
 5. Fonctionnement sans connexion.
 6. Coût, hébergement, maintenance, et qui est responsable de chaque point.
