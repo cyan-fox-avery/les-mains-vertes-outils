@@ -128,13 +128,9 @@ Tant que les simulations ne sont pas faites, la pondération reste une hypothès
 
 ## 12. Vue « Équité des tirages »
 
-**Question :** Est-ce qu’une vue détaillée de statistiques d’équité vaut la peine?
+**RÉSOLU 2026-10-14 (décision d’Avery) — voir `regles-selecteur.md` §8.3.**
 
-**Ce qu’il faudra décider :**
-
-- Est-ce que l’équipe la consulterait vraiment, ou est-ce que ça ajoute de la complexité pour peu de bénéfice?
-- Si oui, qu’est-ce qu’on y montre (sans jargon, sans équations) : par exemple, combien de fois chaque personne a été dans la première moitié vs la deuxième moitié, sur les dernières semaines?
-- Est-ce que cette vue pourrait créer des malentendus (« pourquoi j’ai eu plus de mauvaises places? ») et comment on l’explique?
+**Décision :** inclure une page **facultative, distincte et facile à comprendre** de statistiques / aperçu de l’historique d’équité, loin du sélecteur quotidien sans encombrement. Facultative *à consulter* ne veut pas dire facultative *à mettre en place*. Elle aide l’équipe à comprendre comment les occasions ont été réparties, par exemple des comptes de places en première moitié vs en deuxième moitié, à partir des résultats réellement enregistrés. Elle ne doit **pas** ressembler à une évaluation du rendement ni classer les personnes par mérite; éviter le jargon et les affirmations trompeuses de garanties mathématiques. Distinguer correctement les absences, les pauses d’anniversaire, les séances uniques exclues et les priorités / modifications manuelles enregistrées. Les mesures individuelles et les détails de visualisation seront choisis pendant la conception de l’interface.
 
 ## 13. Prénoms identiques
 
