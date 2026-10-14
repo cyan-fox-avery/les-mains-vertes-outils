@@ -170,10 +170,11 @@ Approche choisie : **hasard pondéré avec équilibrage doux à long terme**. Le
 
 - L’équipe peut désigner **jusqu’à trois personnes prioritaires** pour un tirage donné.
 - Habituellement, une seule personne a besoin d’une priorité.
-- Les personnes prioritaires occupent les places **1, 2 et 3**, selon le cas, **dans l’ordre indiqué** par l’équipe.
+- **En l’absence d’anniversaires**, les personnes prioritaires occupent les places **1, 2 et 3**, selon le cas, **dans l’ordre indiqué** par l’équipe.
   - Une seule priorité → place 1.
   - Deux priorités → places 1 et 2, dans l’ordre indiqué.
   - Trois priorités → places 1, 2 et 3, dans l’ordre indiqué.
+- Si le mode anniversaire est actif, les personnes fêtées occupent les premières places et les priorités ordinaires suivent (voir §6.3) : les anniversaires s’ajoutent à la limite de trois priorités, ils n’y sont pas inclus.
 - Les autres personnes sont placées par tirage aléatoire avec l’algorithme d’équité, dans les places restantes.
 - Les priorités doivent être **enregistrées comme des décisions manuelles** (pas comme des résultats du hasard).
 - Les places réellement obtenues **comptent quand même** pour l’équité à long terme. Par exemple, une personne prioritaire qui obtient la place 1 verra cette place 1 dans son historique.
@@ -207,10 +208,10 @@ Approche choisie : **hasard pondéré avec équilibrage doux à long terme**. Le
 
 Voir `questions-ouvertes.md`, question 19.
 
-### 6.4 Question liée aux priorités (non tranchée)
+### 6.4 Questions liées aux priorités
 
-- Qu’est-ce qui se passe si une personne prioritaire est absente le jour même? (Sa priorité est-elle ignorée, déplacée, ou annulée?)
-- Qu’est-ce qui se passe si une priorité entre en conflit avec la règle de non-répétition de la dernière place dans un très petit groupe? (Voir section 5.4.)
+- **Personne prioritaire absente (décision confirmée) :** retirer automatiquement cette personne de la liste des priorités du jour, en gardant l’ordre des autres priorités et en resserrant les places. Exemple : Camille 1, Émilie 2, Benoît 3; si Émilie ne participe pas, Camille reste 1 et Benoît devient 2. Les places restantes sont attribuées aléatoirement selon les règles d’équité convenues. L’historique de la personne absente se met en pause, et aucune priorité n’est reportée. Les places d’anniversaire restent avant les priorités ordinaires, comme déjà convenu.
+- **Question ouverte :** qu’est-ce qui se passe si une priorité entre en conflit avec la règle de non-répétition de la dernière place dans un très petit groupe? (Voir section 5.4.)
 
 ## 7. Brouillon, modification et enregistrement du résultat final
 
@@ -269,10 +270,13 @@ Pour chaque tirage enregistré, on conserve :
 - Si une séance d’un jour de semaine est **sautée** (par exemple, pas de séance un mardi), la séance suivante utilise le **dernier historique pertinent complété** pour ce groupe-là. On ne « repart pas à zéro » parce qu’on a sauté une semaine.
 - Idéalement, l’application offre une **page d’historique** où l’équipe peut consulter les résultats passés.
 
-### 8.3 Vue « Équité des tirages » (proposition, pas une exigence initiale)
+### 8.3 Page de statistiques d’équité (facultative à consulter, approuvée)
 
-- On pourrait éventuellement ajouter une vue simple « Équité des tirages » pour expliquer comment les places ont été réparties.
-- C’est une **fonctionnalité proposée**, pas une exigence initiale. Son utilité réelle (est-ce que l’équipe la consulterait? est-ce qu’elle aide à la confiance?) reste à évaluer.
+- **Décision confirmée :** inclure une page **facultative, distincte et facile à comprendre** de statistiques / aperçu de l’historique d’équité, loin du sélecteur quotidien sans encombrement. Facultative *à consulter* ne veut pas dire facultative *à mettre en place*.
+- Elle aide l’équipe à comprendre comment les occasions ont été réparties, par exemple des comptes de places en première moitié vs en deuxième moitié, à partir des résultats réellement enregistrés.
+- Elle ne doit **pas** ressembler à une évaluation du rendement des employés ni classer les personnes par mérite; éviter le jargon et les affirmations trompeuses de garanties mathématiques.
+- Distinguer correctement les absences, les pauses d’anniversaire individuelles, les séances uniques exclues et les priorités / modifications manuelles enregistrées, pour que les affichages ne contredisent pas le calcul d’équité.
+- Les mesures individuelles et les détails de visualisation seront choisis pendant la conception de l’interface. La page principale quotidienne reste plus simple que le contenant de yogourt.
 
 ## 9. Interface et accessibilité
 
