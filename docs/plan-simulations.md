@@ -58,13 +58,23 @@ Chaque seuil est une **proposition** à approuver. Un paramètre n’est retenu 
 
 **Horizons :** on teste des horizons réalistes de travail, pas seulement un horizon idéalisé. Un horizon de 500 tirages comptabilisés représente environ 9,6 ans à une séance par semaine — il teste la stabilité statistique, mais l’équipe et Maxime doivent voir une équité utile sur des mois ordinaires et sur la conservation proposée de six mois. On teste donc : **court (6 sélections hebdomadaires), moyen (12 et 26 sélections — 26 ≈ six mois), long (500 tirages comptabilisés par trajectoire, au moins 100 trajectoires)**. Pour les horizons courts et moyens, on ajoute des absences périodiques. Les seuils ci-dessous s’appliquent aux **moyennes entre trajectoires** (avec l’écart-type entre trajectoires rapporté), **pas** à une seule trajectoire : on ne déclare pas un échec parce que le bruit stochastique d’une seule trajectoire sort des bandes. Chaque mesure est comparée à une **base neutre non pondérée appariée** (mêmes contraintes dures, tirage uniforme).
 
+**Critères principaux — mesures intra-trajectoire.** Les parts moyennes par personne entre trajectoires ne suffisent pas comme preuve principale : si tout le monde commence symétriquement et subit les mêmes règles, l’échangeabilité des étiquettes garantit que l’espérance de chaque personne est ≈ 1/12 (premières places) et ≈ 1/2 (première moitié), même pour des stratégies de pondération trop fortes, trop faibles ou très irrégulières. Agréger les moyennes par nom sur de nombreuses graines garantirait presque les larges bandes, tout en masquant l’inéquité *au sein de l’historique d’une vraie équipe*. Les mesures ci-dessous sont donc les critères principaux : chacune est calculée **à l’intérieur d’une trajectoire**, puis on rapporte sa distribution (médiane, 90e percentile) sur les trajectoires indépendantes, comparée à une base non pondérée appariée (mêmes contraintes dures).
+
+| Mesure (critère principal) | Seuil proposé |
+| --- | --- |
+| Disparité intra-trajectoire : étendue (max − min) des parts de places en première moitié par personne, **dans une même trajectoire** — médiane et 90e percentile sur les trajectoires | **Médiane ≤ médiane de la base appariée**, et **90e percentile ≤ 90e percentile de la base appariée** (la pondération resserre la disparité réelle au sein d’une équipe) |
+| Disparité intra-trajectoire : étendue (max − min) du rang normalisé moyen par personne, dans une même trajectoire — médiane et 90e percentile | **Médiane ≤ médiane de la base appariée** |
+| Longueur extrême de série tardive : plus longue série de places en deuxième moitié par personne et par trajectoire — 90e percentile sur les trajectoires | **Plus courte qu’avec la base appariée** |
+| Personne « due » — (a) longueur moyenne de la plus longue série de places en deuxième moitié par trajectoire, pondéré vs base non pondérée appariée | **Plus courte** avec pondération |
+| Personne « due » — (b) P(première moitié au prochain tirage \| 3 places consécutives en deuxième moitié), pondéré vs base non pondérée appariée | **Supérieure d’au moins 10 points de pourcentage** avec pondération |
+
+**Contrôles de cohérence (sanity checks, pas une preuve suffisante à eux seuls) :**
+
 | Mesure | Seuil proposé |
 | --- | --- |
 | Part de premières places par personne (moyenne entre trajectoires) | Chacune entre **4 % et 13 %** (attendu neutre ≈ 8,3 %) |
 | Part de places en première moitié par personne (moyenne entre trajectoires) | Chacune entre **40 % et 60 %** (attendu neutre 50 %) |
 | Ratio avantage max / min (parts de premières places, moyennes entre trajectoires) | **≤ 2** |
-| Personne « due » — amélioration réelle vs base appariée : (a) longueur moyenne de la plus longue série de places en deuxième moitié par trajectoire, pondéré vs base non pondérée appariée | **Plus courte** avec pondération |
-| Personne « due » — (b) P(première moitié au prochain tirage \| 3 places consécutives en deuxième moitié), pondéré vs base non pondérée appariée | **Supérieure d’au moins 10 points de pourcentage** avec pondération |
 
 **Pourquoi pas « ≥ 80 % en première moitié dans les 5 prochains » :** pour un tirage neutre 50/50 sans contrainte, le hasard pur donne déjà P(au moins une première moitié dans les 5 prochains) = 1 − (1/2)⁵ = **96,875 %**. Un tel seuil ne démontrerait pas que la pondération aide. La comparaison contre la base appariée et les mesures (a)–(b) testent une amélioration réelle. **Aucun délai déterministe de récupération n’est promis.**
 
@@ -74,7 +84,7 @@ Chaque seuil est une **proposition** à approuver. Un paramètre n’est retenu 
 | --- | --- |
 | Poids d’une personne après **une seule** sélection comptabilisée (lissage) | Reste dans **[0,9 ; 1,1]** (pas d’ajustement plein régime après un seul tirage) |
 | Contribution de la sélection comptabilisée la plus récente au poids total (récence, **fenêtre complète de six sélections uniquement**) | **≤ 30 %** (un seul jour ne domine pas l’historique) |
-| Écart entre la personne la plus avantagée et la plus désavantagée en probabilité de première place, à historique égal sauf un tirage | **≤ 2×** |
+| Écart entre la personne la plus avantagée et la plus désavantagée en probabilité de première place, à historique égal sauf un tirage | **≤ 2×** — mesuré sur les **poids de base sans contrainte** (pour isoler l’effet de la pondération; ce ratio est toujours défini). En complément, le ratio des probabilités conditionnelles de première place est mesuré **uniquement entre personnes ayant la même admissibilité à la première place, sans place réservée de priorité / anniversaire, et avec une probabilité de base positive** — sans ce cadrage, la règle dure de non-répétition rendrait le ratio indéfini (division par zéro) ou infiniment grand, quelle que soit la douceur de la pondération. Les tests de non-répétition restent stricts et séparés (§4.1). |
 
 **Historiques courts :** le plafond de 30 % sur la contribution de la sélection la plus récente **ne s’applique que si la fenêtre complète de six sélections existe**. Pour 1, 2 ou 3 sélections comptabilisées, il est mathématiquement impossible : si les contributions sont normalisées sur les seuls éléments observés, la plus récente reçoit nécessairement ≥ 1/n (et davantage avec une pondération de récence). Les courts historiques sont évalués par le test de lissage séparé (poids dans [0,9 ; 1,1] après une seule sélection), pas par le plafond de 30 %.
 
