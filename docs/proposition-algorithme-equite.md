@@ -49,6 +49,7 @@ En six étapes, pour chaque tirage :
 
 - **Anniversaires d’abord (décision confirmée) :** placer les personnes fêtées aux premières places, AVANT les priorités ordinaires. Un anniversaire : place 1. Deux anniversaires : places 1–2, ordre aléatoire entre elles. Les anniversaires **s’ajoutent** à la limite de trois priorités ordinaires, ils n’y sont pas inclus (deux anniversaires + trois priorités : places 1–2 anniversaire, places 3–5 priorités). La sélection simultanée anniversaire / priorité de la même personne et les cas avec plus de places spéciales que de personnes présentes sont des détails explicites de validation de l’interface.
 - Placer ensuite les priorités ordinaires selon l’ordre indiqué (voir `regles-selecteur.md` §6).
+- **Personne prioritaire absente (décision confirmée) :** retirer automatiquement cette personne de la liste des priorités du jour, en gardant l’ordre des autres et en resserrant les places. Son historique se met en pause, aucune priorité reportée.
 - Si une priorité placerait quelqu’un en première place pour une deuxième fois consécutive : **avertissement + dérogation explicite**, comme convenu.
 - Les places prioritaires comptent dans l’historique d’équité, comme convenu.
 - **Décision confirmée (question 14, résolue) :** les places prioritaires comptent exactement comme les autres (« tout compte pareil »). Aucune catégorie d’accommodement, aucun champ de raison médicale, aucune exclusion spéciale. Cette proposition applique ce traitement.
@@ -200,6 +201,7 @@ Si l’équipe **modifie manuellement** l’ordre (brouillon) de façon à crée
 - **Seul le résultat final enregistré** nourrit l’historique d’équité des tirages suivants.
 - **Re-tirage (décision confirmée, question 6, résolue) :** recommencer un tirage provisoire exige une confirmation explicite avant la révélation; après la révélation, l’équipe fait des corrections manuelles explicites; les ordres écartés ne comptent jamais pour l’équité. Seul le détail d’un journal d’audit minimal des tentatives annulées reste ouvert.
 - **Conserver les deux ordres (décision confirmée, question 15, résolue) :** pour une sélection terminée, conserver l’ordre généré d’origine **et** l’ordre final confirmé, consultables ensemble dans le détail d’un résultat passé. Seul l’ordre final sert à la pondération et à l’historique première / dernière; l’original sert à la transparence / vérification. Les corrections conservent les versions antérieures; seul l’ordre final corrigé courant fournit les positions faisant foi.
+- **Page de statistiques d’équité (décision confirmée, question 12, résolue) :** page facultative, distincte et facile à comprendre, à partir des résultats réellement enregistrés (par exemple, comptes de places en première vs deuxième moitié). Elle ne doit pas ressembler à une évaluation du rendement ni classer par mérite. Les affichages doivent distinguer absences, pauses d’anniversaire, séances uniques exclues et priorités / modifications manuelles, pour ne pas contredire le calcul d’équité.
 - Un brouillon non enregistré ne compte pas.
 
 ## 9. Simulations : comment valider avant de décider
@@ -249,6 +251,12 @@ Si l’équipe **modifie manuellement** l’ordre (brouillon) de façon à crée
 - Personne qui revient : historique conservé dans le même groupe; identifiant interne stable (question 16, résolue).
 - Coups de pouce : positifs seulement; un seul niveau fixe doux; plusieurs égaux possibles; tout membre autorisé, sans privilège supplémentaire; aucune confirmation pour appliquer; strictement le jour courant, sans option permanente (question 18, partiellement résolue — valeur numérique et détails ouverts).
 - Mode anniversaire : pause d’historique pour la personne fêtée; deux anniversaires → deux premières places, ordre aléatoire, les deux en pause; anniversaires avant les priorités (en plus de la limite de trois); réorganisation hors des places réservées → exemption annulée; personne fêtée absente → « Absent(e) au tirage », aucun rattrapage (question 19, résolue).
+- Personne prioritaire absente : retrait automatique + resserrement de la liste, sans pénalité ni report (question 6.4 des règles, décidée).
+- Page de statistiques d’équité facultative approuvée (question 12, résolue).
+- Poursuite hors connexion d’un tirage déjà ouvert; sauvegardes automatiques + exportation sur demande (questions 20–21, exigences réglées; détails techniques ouverts).
+- Accès d’équipe partagée proposé, en attente de Maxime / examen de sécurité (question 10, proposition approuvée).
+- « Comment ça fonctionne? » : 1–2 pages + page distincte « L’essentiel en bref » (question 17, résolue).
+- Conservation : six mois proposés, en attente de Maxime; tension conservation / continuité OUVERTE (question 22, provisoire).
 
 **À prendre (pour la discussion / les simulations) :**
 
@@ -259,5 +267,6 @@ Si l’équipe **modifie manuellement** l’ordre (brouillon) de façon à crée
 5. Plan de simulations : mesures, scénarios, seuils d’acceptation (question 9).
 6. Méthode de tirage et d’application des contraintes : la course exponentielle et le tirage séquentiel pondéré produisent la même distribution (Plackett-Luce) — le choix est une question d’implémentation. Pour les contraintes : la base « faisabilité explicite + échantillonnage conditionné (acceptation / rejet + solution exacte pour petits cas ou faible taux d’acceptation) » convient-elle comme base testable?
 7. Coups de pouce : valeur numérique exacte (simulations), garde-fous pendant le tirage, détails de la représentation de vérification, coup de pouce + absence (question 18).
+8. Synchronisation hors connexion (stratégie technique + fournisseur de mise en cache), fréquence / format / outillage des sauvegardes et exportations, réconciliation conservation / continuité + approbations de Maxime (conservation, accès partagé) (questions 20–22, 10).
 
 Tant que les paramètres mathématiques ne sont pas validés par simulations, on ne programme pas l’algorithme. Ce document est une base de discussion et de simulation, pas une spécification finale.
