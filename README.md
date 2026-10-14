@@ -61,6 +61,7 @@ Tout le contenu destiné aux personnes qui utilisent l’outil est écrit en fra
 | `docs/regles-selecteur.md` | Règles fonctionnelles détaillées et comportements convenus. C’est le document de référence pour programmer et tester l’outil. |
 | `docs/questions-ouvertes.md` | Décisions qui restent à prendre. Ces questions sont volontairement séparées des règles convenues. Rien dans ce fichier ne doit être lu comme déjà décidé. |
 | `docs/guide-equipe.md` | Guide court (une à deux pages) pour Max et l’équipe : ce que l’outil fait, comment l’utiliser, et comment le tirage reste juste. Sans jargon technique. |
+| `docs/plan-simulations.md` | Plan de simulations : méthode, mesures, seuils proposés, scénarios, grille de paramètres — **proposition à approuver**. Aucun coefficient n’est adopté. (Voir aussi la proposition d’algorithme, demande nº 2, en discussion.) |
 
 ## Logo
 
