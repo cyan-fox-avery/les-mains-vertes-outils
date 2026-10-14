@@ -99,7 +99,7 @@ Les tirages de chaque jour (lundi, mardi, mercredi, jeudi) sont calculés sépar
 ## Questions fréquentes
 
 **Est-ce que l’outil favorise quelqu’un?**
-Pas selon la personne ni selon son rendement : il ne connaît que les prénoms et les résultats passés. Par contre, il donne un léger avantage statistique aux personnes qui se sont retrouvées souvent vers la fin dernièrement, pour rééquilibrer les chances au fil du temps.
+Il ne favorise personne selon son identité ni son rendement; il s’appuie sur les résultats enregistrés et les ajustements explicitement indiqués par l’équipe. Par contre, il donne un léger avantage statistique aux personnes qui se sont retrouvées souvent vers la fin dernièrement, pour rééquilibrer les chances au fil du temps.
 
 **Est-ce qu’on peut encore changer l’ordre à la main?**
 Oui. Vous pouvez modifier l’ordre, et vous devez enregistrer le résultat final.
@@ -108,7 +108,7 @@ Oui. Vous pouvez modifier l’ordre, et vous devez enregistrer le résultat fina
 Non. Une absence ne compte pas comme une mauvaise place.
 
 **Qu’est-ce que « Ajuster les chances »?**
-C’est une option avancée, hors de l’écran quotidien. Elle change les chances pour le jour même seulement — elle ne donne pas une place garantie à quelqu’un. Elle se réinitialise le lendemain.
+C’est une option avancée, hors de l’écran quotidien. Par défaut, elle change les chances pour le jour même seulement — elle ne donne pas une place garantie à quelqu’un. Elle se réinitialise le lendemain.
 
 **Qu’est-ce qu’on fait si l’outil propose quelque chose qui ne fonctionne pas?**
 Vous modifiez l’ordre, puis vous enregistrez le résultat final. Si le problème revient souvent, dites-le à Avery pour qu’on ajuste l’outil.
