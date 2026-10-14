@@ -25,7 +25,7 @@ En six étapes, pour chaque tirage :
 2. **Placer les priorités** aux places 1–3, avec avertissement si une priorité répète la première place.
 3. **Calculer un poids** pour chaque personne restante, à partir de son historique de places normalisées.
 4. **Tirer un ordre pondéré** en une seule fois (mélange pondéré), pas un choix glouton place par place.
-5. **Vérifier les contraintes** de non-répétition (première / dernière). Si elles sont violées, réparer ou retirer à nouveau, puis appliquer le repli si nécessaire.
+5. **Vérifier les contraintes** de non-répétition (première / dernière) : d’abord déterminer explicitement si un ordre valide existe; si oui, échantillonner dans la distribution pondérée conditionnée au respect des contraintes (voir §7.2); le repli ne s’applique que s’il n’existe vraiment aucun ordre valide ou lors d’une dérogation manuelle explicitement autorisée.
 6. **Présenter l’ordre comme brouillon.** L’équipe peut le modifier; seul le résultat final enregistré nourrit l’historique.
 
 ## 3. Étape 1 — Personnes admissibles
@@ -127,7 +127,14 @@ Après le mélange, vérifier :
 
 1. **Déterminer explicitement si un ordre valide existe.** Avant tout tirage, vérifier s’il existe au moins un ordre qui respecte les contraintes dures (places prioritaires, non-répétition de la première / dernière, éligibilité). Cette vérification porte sur l’existence d’un ordre valide, pas sur le résultat d’un nombre limité d’essais.
 2. **Si un ordre valide existe : échantillonner dans la distribution pondérée conditionnée au respect des contraintes.** Par exemple, par acceptation / rejet : tirer un mélange pondéré, le garder s’il respecte les contraintes, sinon retirer à nouveau — jusqu’à obtenir un ordre valide. L’acceptation / rejet échantillonne correctement la distribution conditionnée, quel que soit le nombre d’essais nécessaires.
-3. **Prévoir une solution toujours correcte pour les petits cas ou les cas à faible taux d’acceptation.** L’acceptation / rejet peut prendre longtemps si les ordres valides sont très rares. Pour ces cas, prévoir une autre méthode exacte (par exemple, énumération directe pour les très petits groupes, ou construction contrainte qui ne propose que des ordres valides). À discuter et à tester.
+3. **Prévoir une solution toujours correcte pour les petits cas ou les cas à faible taux d’acceptation.** L’acceptation / rejet peut prendre longtemps si les ordres valides sont très rares. Pour ces cas, prévoir une autre méthode exacte (par exemple, énumération directe pour les très petits groupes, ou échantillonnage conditionné correctement pondéré). À discuter et à tester.
+
+**Ce que « exacte » veut dire ici — deux propriétés à tester séparément :**
+
+- **(a) Contraintes respectées :** chaque ordre produit respecte bien toutes les contraintes dures (places prioritaires, non-répétition, éligibilité).
+- **(b) Distribution non faussée :** les probabilités relatives des ordres valides correspondent bien à la distribution pondérée conditionnée voulue — on ne modifie pas subrepticement les chances en choisissant une méthode plus rapide.
+
+Une construction contrainte générique peut satisfaire (a) tout en violant (b) : elle produit toujours des ordres valides, mais change leurs probabilités relatives. Une telle méthode ne doit pas être présentée comme mathématiquement équivalente à l’échantillonnage conditionné. Elle ne peut être retenue comme approximation explicite que si Avery l’accepte après simulations, en connaissant ce qu’elle sacrifie.
 
 **Ce que cette base exclut, et pourquoi :**
 
@@ -162,6 +169,7 @@ Si l’équipe **modifie manuellement** l’ordre (brouillon) de façon à crée
 - Distribution des places sur plusieurs centaines de tirages simulés : chaque personne obtient-elle, à long terme, une part équitable de bonnes et de moins bonnes places?
 - Taux de répétition première / dernière : les règles de non-répétition sont-elles respectées quand c’est possible?
 - Non-relâchement : vérifier que les contraintes ne sont jamais relâchées au simple motif qu’un nombre limité d’essais a échoué — le repli ne doit se produire que lorsqu’il n’existe vraiment aucun ordre valide.
+- Fidélité de la distribution : vérifier que la méthode retenue pour les cas à faible taux d’acceptation préserve les probabilités relatives de la distribution pondérée conditionnée (propriété b, §7.2), et pas seulement la validité des ordres (propriété a).
 - Temps d’attente : combien de tirages faut-il, en moyenne, pour qu’une personne « due » obtienne une bonne place?
 - Écart entre la personne la plus avantagée et la plus désavantagée : l’écart reste-t-il borné, ou une personne accumule-t-elle un avantage?
 - Effet des priorités : que se passe-t-il quand une personne reçoit souvent des priorités?
