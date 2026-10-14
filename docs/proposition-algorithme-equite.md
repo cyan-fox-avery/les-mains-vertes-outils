@@ -67,19 +67,24 @@ Exemples : 1re sur 12 → 0. 12e sur 12 → 1. 6e sur 11 → 0,5. 10e sur 14 →
 
 ### 5.3 Conversion en poids
 
-**Proposition de départ à tester :** plus la moyenne des positions normalisées est élevée (places tardives répétées), plus le poids est élevé — mais avec un **plafond**.
+**Proposition de départ à tester :** plus la moyenne des positions normalisées est élevée (places tardives répétées), plus le poids est élevé — mais avec un **plancher et un plafond choisis indépendamment**.
 
 Forme proposée (à simuler, pas adoptée) :
 
-> poids = 1 + k × (moyenne normalisée − 0,5), borné entre 1 et un maximum Wmax
+> poids = 1 + k × (moyenne normalisée − 0,5), borné entre Wmin et Wmax
+
+avec Wmin dans ]0, 1[ (plancher) et Wmax > 1 (plafond), choisis indépendamment l’un de l’autre.
 
 - Une personne dont la moyenne est de 0,5 (milieu de groupe en moyenne) obtient un poids neutre de 1.
-- Une personne souvent en fin de liste obtient un poids supérieur à 1.
-- Une personne souvent en début de liste obtient un poids inférieur à 1, sans jamais descendre sous le plancher.
+- Une personne souvent en fin de liste obtient un poids supérieur à 1, sans jamais dépasser Wmax.
+- Une personne souvent en début de liste obtient un poids inférieur à 1, sans jamais descendre sous Wmin.
+- La borne porte sur le **ratio Wmax / Wmin** (le rapport entre le poids le plus élevé et le poids le plus faible possibles), pas sur Wmax seul. C’est ce ratio qui limite l’écart relatif entre les poids.
 
-**Valeurs de départ à tester (pas adoptées) :** k autour de 1 à 2, Wmax autour de 2 à 3 (personne n’obtient plus de 2 à 3 fois les chances d’une autre). Ces valeurs sont des points de départ pour les simulations, pas des décisions.
+**Valeurs de départ à tester (pas adoptées) :** k autour de 1 à 2; Wmin et Wmax choisis de façon que le ratio Wmax / Wmin soit autour de 2 à 3 (par exemple, Wmin = 0,5 et Wmax = 1,5, ratio 3). Ces valeurs sont des points de départ pour les simulations, pas des décisions.
 
-**Point ouvert (question 1) :** la forme exacte (linéaire, exponentielle, autre), la force k et le plafond Wmax restent à décider après simulations.
+**Limite à ne pas surpromettre :** le ratio Wmax / Wmin borne le rapport entre les poids, pas le rapport entre les probabilités réelles d’obtenir la première place. Les contraintes dures (éligibilité, non-répétition, priorités) modifient les probabilités réalisées. On ne promet donc pas un ratio de probabilités inconditionnel.
+
+**Point ouvert (question 1) :** la forme exacte (linéaire, exponentielle, autre), la force k, le plancher Wmin et le plafond Wmax restent à décider après simulations.
 
 ### 5.4 Nouvelle personne
 
@@ -99,7 +104,9 @@ Forme proposée (à simuler, pas adoptée) :
 
 - Elle produit un ordre complet en une seule fois, où chaque personne apparaît exactement une fois.
 - Elle respecte les poids : une personne avec un poids plus élevé a plus de chances de sortir tôt, mais rien n’est garanti.
-- Elle évite les distorsions d’un tirage glouton place par place (où les premiers choix « consomment » les poids et faussent les places suivantes).
+- Elle est pratique à programmer : un seul passage, sans renormalisation itérative.
+
+**Équivalence à ne pas perdre de vue :** tirer chaque place l’une après l’autre, avec une probabilité proportionnelle aux poids des personnes encore restantes (tirage séquentiel pondéré sans remise, correctement renormalisé), produit **la même distribution** que la course exponentielle — la distribution dite de Plackett-Luce. La course exponentielle n’évite donc aucune « distorsion » propre au tirage séquentiel : les deux méthodes sont deux implémentations de la même distribution. Le choix entre les deux est une question de commodité d’implémentation, pas de justesse mathématique.
 
 **Ce que cette méthode ne fait pas :** elle ne garantit pas à elle seule les règles de non-répétition. C’est l’étape 5 qui les vérifie.
 
@@ -114,19 +121,24 @@ Après le mélange, vérifier :
 
 « Tirage pertinent précédent » dépend de la définition de « consécutive » — **point ouvert (question 4)** : tirages du groupe, tirages où la personne était présente, ou semaines civiles consécutives. Le choix change la vérification.
 
-### 7.2 Réparation / nouveau tirage
+### 7.2 Faisabilité d’abord, puis échantillonnage conditionné
 
-**Proposition à tester :**
+**Base testable proposée :**
 
-1. Si une seule règle est violée, essayer de **réparer par échange** : échanger la personne fautive avec une autre place, en choisissant un échange qui corrige la violation sans en créer une nouvelle.
-2. Sinon, **retirer à nouveau** (nouveau mélange pondéré), jusqu’à un petit nombre d’essais (par exemple, 10 — valeur à tester).
-3. Si aucun essai ne satisfait les contraintes, appliquer le **repli** (voir §7.3) et l’indiquer clairement dans l’interface.
+1. **Déterminer explicitement si un ordre valide existe.** Avant tout tirage, vérifier s’il existe au moins un ordre qui respecte les contraintes dures (places prioritaires, non-répétition de la première / dernière, éligibilité). Cette vérification porte sur l’existence d’un ordre valide, pas sur le résultat d’un nombre limité d’essais.
+2. **Si un ordre valide existe : échantillonner dans la distribution pondérée conditionnée au respect des contraintes.** Par exemple, par acceptation / rejet : tirer un mélange pondéré, le garder s’il respecte les contraintes, sinon retirer à nouveau — jusqu’à obtenir un ordre valide. L’acceptation / rejet échantillonne correctement la distribution conditionnée, quel que soit le nombre d’essais nécessaires.
+3. **Prévoir une solution toujours correcte pour les petits cas ou les cas à faible taux d’acceptation.** L’acceptation / rejet peut prendre longtemps si les ordres valides sont très rares. Pour ces cas, prévoir une autre méthode exacte (par exemple, énumération directe pour les très petits groupes, ou construction contrainte qui ne propose que des ordres valides). À discuter et à tester.
 
-**Point ouvert :** le nombre d’essais, la méthode de réparation exacte et la façon d’indiquer le repli à l’équipe restent à décider.
+**Ce que cette base exclut, et pourquoi :**
+
+- **Pas de réparation par échange arbitraire.** Échanger des places après coup pour corriger une violation modifie la pondération voulue de façon difficile à prévoir. On n’utilise pas d’échange comme méthode de réparation sans une analyse propre de son effet sur la distribution.
+- **Pas de repli au motif que « N essais ont échoué ».** Un nombre fini d’essais infructueux ne prouve pas l’impossibilité. Le repli ne s’applique que lorsqu’il n’existe vraiment aucun ordre valide (voir §7.3) ou lors d’une dérogation manuelle explicitement autorisée (par exemple, dérogation de priorité, ou exception manuelle selon la question 8).
+
+**Point ouvert :** la méthode exacte de vérification de faisabilité, la méthode exacte pour les cas à faible taux d’acceptation, et la façon d’indiquer un repli à l’équipe restent à décider.
 
 ### 7.3 Repli quand les contraintes sont impossibles
 
-Quand il est impossible de respecter les deux règles en même temps (cas particuliers : séance précédente à une seule personne avec au plus deux personnes admissibles au tirage suivant, priorités en conflit — voir `regles-selecteur.md` §5.4), il faut une hiérarchie de repli explicite.
+Quand il n’existe vraiment aucun ordre valide (cas particuliers : séance précédente à une seule personne avec au plus deux personnes admissibles au tirage suivant, priorités en conflit — voir `regles-selecteur.md` §5.4), il faut une hiérarchie de repli explicite. Le repli ne se déclenche jamais au simple motif qu’un nombre limité d’essais a échoué.
 
 **Point ouvert (question 5) :** laquelle relâcher en premier? Options déjà listées (dernière d’abord, première d’abord, les deux avec pondération seulement, tirage parmi les ordres qui violent le moins de règles). **Aucune hiérarchie n’est choisie ici.** Il faut aussi décider si les séances à une seule personne sont exemptées des contraintes de positions consécutives.
 
@@ -149,6 +161,7 @@ Si l’équipe **modifie manuellement** l’ordre (brouillon) de façon à crée
 
 - Distribution des places sur plusieurs centaines de tirages simulés : chaque personne obtient-elle, à long terme, une part équitable de bonnes et de moins bonnes places?
 - Taux de répétition première / dernière : les règles de non-répétition sont-elles respectées quand c’est possible?
+- Non-relâchement : vérifier que les contraintes ne sont jamais relâchées au simple motif qu’un nombre limité d’essais a échoué — le repli ne doit se produire que lorsqu’il n’existe vraiment aucun ordre valide.
 - Temps d’attente : combien de tirages faut-il, en moyenne, pour qu’une personne « due » obtienne une bonne place?
 - Écart entre la personne la plus avantagée et la plus désavantagée : l’écart reste-t-il borné, ou une personne accumule-t-elle un avantage?
 - Effet des priorités : que se passe-t-il quand une personne reçoit souvent des priorités?
@@ -166,7 +179,7 @@ Si l’équipe **modifie manuellement** l’ordre (brouillon) de façon à crée
 
 ## 10. Liste des décisions à prendre (pour la discussion)
 
-1. Formule de pondération : forme, force k, plafond Wmax (question 1).
+1. Formule de pondération : forme, force k, plancher Wmin, plafond Wmax, et ratio Wmax / Wmin (question 1).
 2. Normalisation exacte des positions, y compris le cas d’une seule personne présente (question 2).
 3. Fenêtre d’historique : nombre, tirages du groupe vs tirages assistés, pondération des récents, traitement des nouvelles personnes (question 3).
 4. Définition de « consécutive » pour la vérification des contraintes (question 4).
@@ -175,6 +188,6 @@ Si l’équipe **modifie manuellement** l’ordre (brouillon) de façon à crée
 7. Traitement d’une réorganisation manuelle qui crée une répétition (question 8).
 8. Plan de simulations : mesures, scénarios, seuils d’acceptation (question 9).
 9. Traitement des priorités récurrentes / accommodements dans le calcul d’équité (question 14).
-10. Méthode de tirage : la course exponentielle proposée convient-elle, ou préfère-t-on une autre méthode de mélange pondéré?
+10. Méthode de tirage et d’application des contraintes : la course exponentielle et le tirage séquentiel pondéré produisent la même distribution (Plackett-Luce) — le choix est une question d’implémentation. Pour les contraintes : la base « faisabilité explicite + échantillonnage conditionné (acceptation / rejet + solution exacte pour petits cas ou faible taux d’acceptation) » convient-elle comme base testable?
 
 Tant que ces décisions ne sont pas prises, on ne programme pas l’algorithme. Ce document est une base de discussion et de simulation, pas une spécification finale.
