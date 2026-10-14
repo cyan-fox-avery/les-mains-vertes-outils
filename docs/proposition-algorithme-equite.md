@@ -42,12 +42,13 @@ En six étapes, pour chaque tirage :
 
 - Partir de la liste du groupe du jour.
 - Retirer les personnes **absentes au tirage**.
-- Retirer les personnes **prioritaires** (elles seront placées à l’étape 2).
+- Retirer les personnes **fêtées** (mode anniversaire, placées d’abord à l’étape 2) et les personnes **prioritaires** (placées ensuite à l’étape 2).
 - Les personnes restantes sont celles que l’algorithme place par hasard pondéré.
 
-## 4. Étape 2 — Priorités
+## 4. Étape 2 — Anniversaires, puis priorités
 
-- Placer les priorités aux places 1, 2, 3 selon l’ordre indiqué (voir `regles-selecteur.md` §6).
+- **Anniversaires d’abord (décision confirmée) :** placer les personnes fêtées aux premières places, AVANT les priorités ordinaires. Un anniversaire : place 1. Deux anniversaires : places 1–2, ordre aléatoire entre elles. Les anniversaires **s’ajoutent** à la limite de trois priorités ordinaires, ils n’y sont pas inclus (deux anniversaires + trois priorités : places 1–2 anniversaire, places 3–5 priorités). La sélection simultanée anniversaire / priorité de la même personne et les cas avec plus de places spéciales que de personnes présentes sont des détails explicites de validation de l’interface.
+- Placer ensuite les priorités ordinaires selon l’ordre indiqué (voir `regles-selecteur.md` §6).
 - Si une priorité placerait quelqu’un en première place pour une deuxième fois consécutive : **avertissement + dérogation explicite**, comme convenu.
 - Les places prioritaires comptent dans l’historique d’équité, comme convenu.
 - **Décision confirmée (question 14, résolue) :** les places prioritaires comptent exactement comme les autres (« tout compte pareil »). Aucune catégorie d’accommodement, aucun champ de raison médicale, aucune exclusion spéciale. Cette proposition applique ce traitement.
@@ -68,11 +69,11 @@ Exemples : 1re sur 12 → 0. 12e sur 12 → 1. 6e sur 11 → 0,5. 10e sur 14 →
 
 **Décision confirmée :** la moyenne des positions normalisées sur les **six dernières sélections comptabilisées dans l’historique d’équité de cette personne**, par groupe du jour. Six sélections comptabilisées, pas nécessairement six semaines civiles : seules les sélections ordinaires participées comptent; une absence, une sélection d’anniversaire (pour la personne fêtée) et une séance à une seule personne ne font pas avancer la fenêtre.
 
-**Points toujours ouverts (question 3) :**
+**Récence (décision confirmée) :** les sélections comptabilisées plus récentes ont une influence légèrement plus grande que les plus anciennes dans la fenêtre de six. Décroissance douce : les six contribuent. La récence reflète l’ordre des six dernières sélections comptabilisées, pas les semaines civiles écoulées pendant les pauses.
 
-- Pondération égale pour chaque tirage de la fenêtre, ou plus de poids aux tirages récents?
-- Traitement des très courts historiques (combien de tirages avant que l’historique compte « pleinement »? lissage des premiers tirages?).
-- Nouvelle personne sans historique : poids neutre (voir §5.4).
+**Courts historiques (décision confirmée) :** l’influence de l’historique propre d’une nouvelle personne augmente graduellement à mesure que ses sélections comptabilisées s’accumulent (voir §5.4). Une seule première ou dernière place ne produit pas un ajustement à pleine force.
+
+**Points toujours ouverts (question 3) :** poids relatifs / courbe exacts de la récence; fonction / échelle exactes de lissage; seuils d’acceptation des simulations pour la récence + le lissage ensemble.
 
 ### 5.3 Conversion en poids
 
@@ -93,13 +94,13 @@ avec Wmin dans ]0, 1[ (plancher) et Wmax > 1 (plafond), choisis indépendamment 
 
 **Limite à ne pas surpromettre :** le ratio Wmax / Wmin borne le rapport entre les poids, pas le rapport entre les probabilités réelles d’obtenir la première place. Les contraintes dures (éligibilité, non-répétition, priorités) modifient les probabilités réalisées. On ne promet donc pas un ratio de probabilités inconditionnel.
 
-**Point ouvert (question 1) :** la forme exacte (linéaire, exponentielle, autre), la force k, le plancher Wmin et le plafond Wmax restent à décider après simulations.
+**Point ouvert (question 1) :** la forme exacte (linéaire, exponentielle, autre), la force k, le plancher Wmin et le plafond Wmax restent à décider après simulations. La formule finale doit aussi intégrer les composantes décidées : moyenne pondérée par la récence douce, facteur de lissage des courts historiques, et coup de pouce positif unique éventuel (voir §5.6). Les valeurs de ces composantes restent à calibrer par simulations.
 
-### 5.4 Nouvelle personne
+### 5.4 Nouvelle personne et courts historiques
 
-**Proposition de départ :** une personne sans historique (ou avec trop peu d’historique) commence avec un **poids neutre**, sans avantage ni désavantage. Son historique se construit au fil de ses tirages.
+**Décision confirmée :** une personne sans historique commence avec un **poids neutre**, sans avantage ni désavantage, puis l’influence de son propre historique comptabilisé **augmente graduellement** à mesure qu’il s’accumule. Une seule première ou dernière place ne doit pas produire un ajustement de poids à pleine force. À mesure que la personne s’approche de six sélections comptabilisées dans ce groupe du jour, l’influence de son historique s’approche en douceur du niveau calibré normal. La fonction / l’échelle exactes de lissage seront choisies par simulations. Les règles strictes de non-répétition s’appliquent quand même dès la première sélection comptabilisée, quand c’est mathématiquement possible, sous réserve du repli convenu (voir §7.3). Le lissage ne vise **que** l’équilibrage probabiliste doux, pas ces règles strictes. On ne compte que les sélections individuelles réellement enregistrées et admissibles. Les historiques restent séparés par groupe du jour.
 
-**Point ouvert :** à partir de combien de tirages son historique compte-t-il « pleinement »? Faut-il lisser ses premiers tirages pour éviter qu’un seul mauvais tirage fausse son poids? À discuter.
+**Personne qui revient :** ne pas réinitialiser silencieusement une personne qui revient comme « nouvelle ». Si elle réintègre le même groupe du jour, son historique existant est conservé (voir `regles-selecteur.md` §2.3). L’identifiant interne stable préserve l’historique à travers les changements de nom, les retraits / réadmissions et les groupes.
 
 ### 5.5 Pause anniversaire (décision confirmée)
 
@@ -112,16 +113,22 @@ Le mode anniversaire est une exception célébratoire, pas une priorité ordinai
 - **Deux anniversaires le même jour (décision confirmée) :** les deux personnes obtiennent les deux premières places, ordonnées **aléatoirement entre elles**, et les deux bénéficient de la pause d’historique.
 - On distingue `absent au tirage` de `participant anniversaire (présent; position réelle conservée, exclue du calcul personnel)`.
 - Activation manuelle le jour même, sans base de données de dates de naissance : recommandation UX, pas une exigence confirmée.
-- **Interactions ouvertes :** anniversaire + priorités ordinaires, personne marquée anniversaire absente au tirage, réorganisation manuelle après un tirage en mode anniversaire. Des résolutions intuitives sont proposées pour approbation dans la demande de règles (voir `regles-selecteur.md` §6.3 et `questions-ouvertes.md`, question 19).
+- **Anniversaire avant les priorités (décision confirmée) :** les personnes fêtées occupent toujours les premières places, avant les priorités ordinaires; les anniversaires s’ajoutent à la limite de trois priorités, ils n’y sont pas inclus (voir §4).
+- **Réorganisation manuelle (décision confirmée) :** une personne fêtée déplacée manuellement hors des places réservées aux anniversaires **perd son exemption**; sa position finale réelle enregistrée compte normalement. Échanger simplement deux personnes fêtées entre les places 1 et 2 conserve les deux exemptions. Évaluer sur l’ordre final enregistré (ou corrigé), pas sur un brouillon ni l’ordre généré initial.
+- **Personne fêtée absente (décision confirmée) :** le mode anniversaire s’applique seulement si la personne fêtée est **présente à la sélection**. Sinon, « Absent(e) au tirage », aucune place réservée, pause normale due à l’absence, aucune priorité transférée, **aucun rattrapage automatique**. Aucun indicateur d’anniversaire périmé dans un brouillon ou un résultat final pour la personne absente.
 
-### 5.6 Ajustements manuels des chances : aujourd’hui seulement (décision confirmée)
+### 5.6 Coups de pouce manuels (« Donner un coup de pouce ») : aujourd’hui seulement, sans option permanente (décisions confirmées)
 
-Option avancée « Ajuster les chances », hors de l’écran quotidien ordinaire :
+Option avancée « Donner un coup de pouce », hors de l’écran quotidien ordinaire :
 
-- Un ajustement manuel des chances / probabilités / poids affecte **par défaut la sélection du jour courant seulement** et se réinitialise pour les jours suivants, plutôt que de persister silencieusement.
-- Ce n’est **pas** une priorité : un ajustement change les chances, il n’attribue pas de place garantie.
-- La modification du jour doit être compréhensible et identifiable comme manuelle; elle ne réécrit pas les positions historiques.
-- **Points ouverts (question 18) :** multiplicateur / plage exacts, direction, avertissement / confirmation, affichage de vérification, permission, réinitialisation, effet sur les simulations, et existence éventuelle d’une variante explicitement persistante. Aucun biais permanent caché du système d’équité.
+- **Positif seulement :** un coup de pouce peut seulement augmenter les chances d’une personne; aucun contrôle pour diminuer explicitement la pondération / les chances de quelqu’un. Nuance : augmenter le poids relatif d’une personne diminue par définition légèrement les probabilités relatives des autres — acceptable, mais ne pas présenter la fonction comme laissant toutes les autres exactement inchangées.
+- **Un seul niveau fixe, doux et positif :** pas de niveaux sélectionnables, pas de curseur. Le multiplicateur / effet numérique n’est **pas** approuvé : à calibrer par simulations (utile mais modeste, hasard préservé, non-répétition respectée).
+- **Plusieurs coups de pouce égaux :** plus d’une personne peut recevoir le même coup de pouce calibré. Pas de forces différentes par personne, pas d’empilement, pas de réduction. Si toutes les personnes admissibles reçoivent le même facteur, leurs probabilités relatives restent inchangées (neutre / redondant).
+- **Qui :** tout membre autorisé de l’équipe qui est autorisé à faire fonctionner le sélecteur; aucun mot de passe supplémentaire, code administrateur distinct, ni permission réservée à Maxime. Enregistrer l’action (sous réserve du modèle d’identification); avec une connexion partagée, enregistrer au minimum les coups de pouce appliqués, à qui, pour quel tirage.
+- **Aucune confirmation pour appliquer :** l’interface indique clairement chaque personne dont le coup de pouce est actif; on peut retirer / annuler avant de générer le tirage, sans confirmation supplémentaire. Cela n’affaiblit pas la confirmation pour recommencer un brouillon ni l’avertissement + confirmation pour déroger à une règle de première / dernière.
+- **Durée :** strictement la sélection du jour courant, **sans option permanente ni report**. Un coup de pouce est une entrée pour une seule sélection, jamais un ajustement à long terme de la pondération de base.
+- Ce n’est **pas** une priorité : un coup de pouce change les chances, il n’attribue pas de place garantie. Il reste soumis à l’admissibilité, aux réservations d’anniversaire, aux priorités et aux contraintes strictes / repli convenu. Le dossier montre les coups de pouce réellement actifs pour le brouillon généré utilisé dans le résultat final; les coups de pouce annulés avant le tirage ne comptent pas comme actifs; un tirage écarté n’entre jamais dans l’historique.
+- **Points ouverts (question 18) :** valeur numérique exacte (simulations), garde-fous pendant le tirage, détails de la représentation de vérification, que faire quand une personne ayant reçu un coup de pouce devient absente. Aucun biais permanent caché du système d’équité.
 
 ## 6. Étape 4 — Mélange pondéré (tirage en une seule fois)
 
@@ -178,7 +185,9 @@ Une construction contrainte générique peut satisfaire (a) tout en violant (b) 
 
 Quand il n’existe vraiment aucun ordre valide (cas particuliers : priorités en conflit avec les règles de non-répétition; ou les deux personnes admissibles ont toutes les deux été premières à leur dernier tirage comptabilisé respectif — voir `regles-selecteur.md` §5.4), il faut une hiérarchie de repli explicite. Le repli ne se déclenche jamais au simple motif qu’un nombre limité d’essais a échoué.
 
-**Point ouvert (question 5) :** laquelle relâcher en premier? Options déjà listées (dernière d’abord, première d’abord, les deux avec pondération seulement, tirage parmi les ordres qui violent le moins de règles). **Aucune hiérarchie n’est choisie ici.** Les séances à une seule personne sont exemptées des contraintes de positions consécutives (décision confirmée).
+**Hiérarchie de repli (décision confirmée, question 5, politique réglée) :** quand il est mathématiquement impossible de respecter les deux règles de non-répétition à la fois, **protéger en priorité la non-répétition de la DERNIÈRE place**. D’abord essayer de respecter les deux règles; seulement quand les deux sont conjointement impossibles, protéger la non-répétition de la dernière place si un ordre valide la respectant existe, même si cela veut dire permettre une répétition de la première place. Si même la non-répétition de la dernière place ne peut pas être respectée, produire un ordre valide au moyen d’un repli secondaire clairement documenté (encore à concevoir / tester), avec un avis clair; ne pas échouer, ne pas inventer de garantie, ne pas écarter la règle silencieusement. Les priorités manuelles / dérogations et les exemptions d’anniversaire restent régies par leurs règles propres.
+
+**Points ouverts (question 5) :** la méthode technique exacte d’échantillonnage contraint / repli et le départage entre ordres également admissibles. Les séances à une seule personne sont exemptées des contraintes de positions consécutives (décision confirmée).
 
 ### 7.4 Exception manuelle
 
@@ -189,7 +198,9 @@ Si l’équipe **modifie manuellement** l’ordre (brouillon) de façon à crée
 - L’ordre produit est un **brouillon**, comme convenu.
 - L’équipe peut le modifier, puis **enregistrer le résultat final**.
 - **Seul le résultat final enregistré** nourrit l’historique d’équité des tirages suivants.
-- Un brouillon non enregistré ne compte pas. Une régénération éventuelle d’un brouillon est régie par la **question ouverte 6** (permise ou non, dans quelles circonstances, journalisée ou non).
+- **Re-tirage (décision confirmée, question 6, résolue) :** recommencer un tirage provisoire exige une confirmation explicite avant la révélation; après la révélation, l’équipe fait des corrections manuelles explicites; les ordres écartés ne comptent jamais pour l’équité. Seul le détail d’un journal d’audit minimal des tentatives annulées reste ouvert.
+- **Conserver les deux ordres (décision confirmée, question 15, résolue) :** pour une sélection terminée, conserver l’ordre généré d’origine **et** l’ordre final confirmé, consultables ensemble dans le détail d’un résultat passé. Seul l’ordre final sert à la pondération et à l’historique première / dernière; l’original sert à la transparence / vérification. Les corrections conservent les versions antérieures; seul l’ordre final corrigé courant fournit les positions faisant foi.
+- Un brouillon non enregistré ne compte pas.
 
 ## 9. Simulations : comment valider avant de décider
 
@@ -213,9 +224,11 @@ Si l’équipe **modifie manuellement** l’ordre (brouillon) de façon à crée
 - Priorités fréquentes (dont une personne prioritaire récurrente).
 - Nouvelle personne qui arrive dans un groupe avec historique.
 - Tirages avec modifications manuelles du brouillon.
-- Exceptions d’anniversaire : (a) la personne fêtée est placée première; (b) sa place d’anniversaire ne modifie pas son poids futur ni sa séquence des extrêmes; (c) les positions réelles des autres continuent de compter; (d) un re-tirage / une annulation ne crée pas d’historique fantôme. Brouillons non enregistrés : jamais comptés.
-- Ajustements manuels des chances : effet le jour même seulement, par défaut, réinitialisation le lendemain, ajustement identifiable comme manuel, pas de persistance silencieuse.
-- Corrections de résultats enregistrés : version antérieure conservée, ordre corrigé utilisé pour la suite, aucune réécriture rétroactive des séances passées.
+- Exceptions d’anniversaire : (a) la personne fêtée est placée première; (b) sa place d’anniversaire ne modifie pas son poids futur ni sa séquence des extrêmes; (c) les positions réelles des autres continuent de compter; (d) un re-tirage / une annulation ne crée pas d’historique fantôme. Brouillons non enregistrés : jamais comptés. (e) Anniversaire avant les priorités : deux anniversaires + trois priorités → places 1–2 anniversaire, places 3–5 priorités. (f) Personne fêtée déplacée hors des places réservées → exemption annulée. (g) Personne fêtée absente → « Absent(e) au tirage », aucune place réservée, aucun rattrapage.
+- Coups de pouce manuels : effet le jour même seulement, sans option permanente, ajustement identifiable comme manuel; plusieurs coups de pouce égaux; toutes les personnes avec un coup de pouce → probabilités relatives inchangées; coup de pouce annulé avant le tirage → non compté comme actif.
+- Corrections de résultats enregistrés : toutes les versions antérieures conservées, ordre corrigé utilisé pour la suite, aucune réécriture rétroactive des séances passées, aucune limite de temps.
+- Hiérarchie de repli : impossibilité conjointe → protéger la non-répétition de la dernière place; même celle-ci impossible → repli secondaire documenté + avis clair.
+- Récence + lissage : un tirage malchanceux unique, un tirage chanceux unique, absences; influence graduelle d’un nouvel historique.
 
 **Seuils d’acceptation :** à définir avec Avery et Mira avant de considérer l’algorithme acceptable. Tant que les simulations ne sont pas faites, la pondération reste une hypothèse, pas une garantie.
 
@@ -223,24 +236,28 @@ Si l’équipe **modifie manuellement** l’ordre (brouillon) de façon à crée
 
 **Tranchées (décisions confirmées 2026-10-14, Avery) :**
 
-- Fenêtre d’historique : six sélections comptabilisées par personne, par groupe (question 3, partiellement résolue).
+- Fenêtre d’historique : six sélections comptabilisées par personne, par groupe; récence douce (les récentes comptent légèrement plus); lissage graduel des courts historiques (question 3, partiellement résolue — courbes / seuils ouverts).
 - « Consécutive » = deux dernières sélections comptabilisées de la personne (question 4, résolue).
-- Séances à une seule personne : exclues de la pondération et de la contrainte des extrêmes consécutifs (question 5, partiellement résolue).
+- Séances à une seule personne : exclues de la pondération et de la contrainte des extrêmes consécutifs (question 5, partiellement résolue — méthode technique ouverte).
+- Hiérarchie de repli : quand les deux règles sont conjointement impossibles, protéger la non-répétition de la **dernière** place; si même celle-ci est impossible, repli secondaire documenté + avis clair (question 5, politique réglée).
 - Re-tirage : possible avant la révélation avec confirmation « Êtes-vous sûr(e)? »; après le début, corrections manuelles; propositions écartées jamais dans l’historique (question 6, résolue; la conservation d’une trace d’audit minimale des tentatives annulées est un détail d’implémentation).
 - Réorganisation manuelle qui crée une répétition : avertissement + confirmation + enregistrement comme exception manuelle; le résultat réel compte (question 8, résolue).
+- Corrections : tout membre autorisé; raison écrite facultative; aucune limite de temps; toutes les versions conservées, vérification automatique (question 7, résolue).
+- Prénoms identiques : nom usuel préféré; initiale seulement si deux noms d’affichage identiques dans le groupe (question 13, résolue).
 - Priorités : tout compte pareil; aucune catégorie d’accommodement, aucun champ de raison médicale, aucune exclusion spéciale (question 14, résolue).
-- Ajustements manuels des chances : par défaut, aujourd’hui seulement (question 18, partiellement résolue).
-- Mode anniversaire : pause d’historique pour la personne fêtée; deux anniversaires → deux premières places, ordre aléatoire, les deux en pause (question 19, partiellement résolue).
+- Original + final conservés; seul le final sert à l’équité; l’original sert à la transparence (question 15, résolue).
+- Personne qui revient : historique conservé dans le même groupe; identifiant interne stable (question 16, résolue).
+- Coups de pouce : positifs seulement; un seul niveau fixe doux; plusieurs égaux possibles; tout membre autorisé, sans privilège supplémentaire; aucune confirmation pour appliquer; strictement le jour courant, sans option permanente (question 18, partiellement résolue — valeur numérique et détails ouverts).
+- Mode anniversaire : pause d’historique pour la personne fêtée; deux anniversaires → deux premières places, ordre aléatoire, les deux en pause; anniversaires avant les priorités (en plus de la limite de trois); réorganisation hors des places réservées → exemption annulée; personne fêtée absente → « Absent(e) au tirage », aucun rattrapage (question 19, résolue).
 
 **À prendre (pour la discussion / les simulations) :**
 
-1. Formule de pondération : forme, force k, plancher Wmin, plafond Wmax, et ratio Wmax / Wmin (question 1).
+1. Formule de pondération : forme, force k, plancher Wmin, plafond Wmax, et ratio Wmax / Wmin — en intégrant récence, lissage et coup de pouce (question 1).
 2. Normalisation exacte des positions, y compris le cas d’une seule personne présente (question 2).
-3. Fenêtre : pondération des tirages récents vs égale; traitement des très courts historiques (question 3).
-4. Hiérarchie de repli quand aucun ordre valide n’existe (question 5).
+3. Fenêtre : courbe exacte de récence; fonction / échelle exactes de lissage; seuils de simulation (question 3).
+4. Repli : méthode technique exacte d’échantillonnage contraint / repli; départage entre ordres également admissibles (question 5).
 5. Plan de simulations : mesures, scénarios, seuils d’acceptation (question 9).
 6. Méthode de tirage et d’application des contraintes : la course exponentielle et le tirage séquentiel pondéré produisent la même distribution (Plackett-Luce) — le choix est une question d’implémentation. Pour les contraintes : la base « faisabilité explicite + échantillonnage conditionné (acceptation / rejet + solution exacte pour petits cas ou faible taux d’acceptation) » convient-elle comme base testable?
-7. Ajustements manuels des chances : multiplicateur / plage, direction, avertissement / confirmation, affichage de vérification, permission, réinitialisation, effet sur les simulations, existence éventuelle d’une variante explicitement persistante (question 18).
-8. Interactions du mode anniversaire : anniversaire + priorités ordinaires, personne marquée anniversaire absente, réorganisation manuelle après un tirage en mode anniversaire (question 19).
+7. Coups de pouce : valeur numérique exacte (simulations), garde-fous pendant le tirage, détails de la représentation de vérification, coup de pouce + absence (question 18).
 
 Tant que les paramètres mathématiques ne sont pas validés par simulations, on ne programme pas l’algorithme. Ce document est une base de discussion et de simulation, pas une spécification finale.
