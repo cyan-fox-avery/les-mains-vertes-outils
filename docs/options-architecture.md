@@ -16,6 +16,7 @@ Ce que l’architecture doit permettre (d’après les règles convenues) :
 - **Historique séparé par groupe** (lundi, mardi, mercredi, jeudi).
 - **Traçabilité des décisions manuelles :** priorités, modifications manuelles, dérogations, corrections éventuelles — on doit savoir que c’était manuel, pas du hasard.
 - **Accessibilité :** interface simple, grandes zones tactiles, texte lisible, en français québécois.
+- **Critère d’acceptation non négociable :** l’outil doit être réellement **plus facile et plus intuitif à utiliser que les petits papiers dans le contenant de yogourt** qu’il remplace. Ce critère gouverne l’interface *et* l’architecture : une approche d’authentification ou de synchronisation qui se met sans cesse en travers du chemin contredit son but. Règle complète dans `regles-selecteur.md` §13 (proposée dans la demande nº 3). On ne simplifie pas en retirant des exigences choisies (deux modes de révélation, priorités facultatives, résultat modifiable, enregistrement final explicite) — on simplifie par une divulgation progressive et de meilleurs réglages par défaut.
 
 ## 2. Options
 
@@ -119,5 +120,6 @@ Dans la pratique quotidienne (un tirage par groupe et par jour, fait par une per
 5. Fonctionnement sans connexion.
 6. Coût, hébergement, maintenance, et qui est responsable de chaque point.
 7. Protection des données : hébergement, accès au service, journal d’audit.
+8. Respect du critère « plus facile que le contenant de yogourt » : l’option choisie permet-elle un parcours quotidien presque sans friction (groupe du jour déjà sélectionné, présences rapides à cocher, brouillon retrouvé après rafraîchissement, statut « brouillon » vs « enregistré » clair, pas de ré-authentification répétée qui bloque)?
 
 Tant que ces décisions ne sont pas prises, on ne programme pas l’application. La proposition d’algorithme d’équité (`proposition-algorithme-equite.md`) est indépendante de l’option choisie : elle décrit le calcul, pas où il tourne.
