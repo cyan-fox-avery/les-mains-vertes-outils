@@ -10,7 +10,7 @@ Ce guide explique ce que fait le nouvel outil, comment l’utiliser chaque jour,
 
 C’est un outil qui remplace le tirage avec les petits papiers dans le contenant de yogourt.
 
-Chaque matin, l’outil tire **l’ordre** dans lequel les personnes participantes vont choisir leur tâche du jour. La première personne choisit en premier, la deuxième choisit ensuite, et ainsi de suite.
+Chaque jour où il y a une séance, l’outil tire **l’ordre** dans lequel les personnes participantes vont choisir leur tâche du jour. La première personne choisit en premier, la deuxième choisit ensuite, et ainsi de suite.
 
 **Important :** l’outil ne choisit pas les tâches à votre place. Il dit seulement **qui choisit en premier, en deuxième, en troisième…** Chaque personne choisit ensuite sa tâche, comme avant.
 
@@ -22,7 +22,7 @@ Le nouvel outil garde le hasard, mais il se souvient des tirages passés pour é
 
 **En bref :** c’est encore un tirage au sort. Mais l’outil tient compte des résultats précédents pour répartir les bonnes et les moins bonnes places plus équitablement, au fil des semaines.
 
-Ce n’est pas une rotation (« chacun son tour »). L’ordre reste imprévisible d’un jour à l’autre. Personne ne peut deviner à l’avance qui va passer premier.
+Ce n’est pas une rotation (« chacun son tour »). Dans un tirage normal, sans priorité, l’ordre reste imprévisible d’un jour à l’autre : personne ne peut deviner à l’avance qui va passer premier. (Si l’équipe a indiqué une priorité, la personne prioritaire passe première, comme décidé par l’équipe.)
 
 ## Comment l’utiliser, chaque jour
 
