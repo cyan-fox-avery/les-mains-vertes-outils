@@ -39,7 +39,7 @@ Dans **« Présences »**, cochez les personnes **absentes** aujourd’hui.
 
 ### 3. Indiquer les priorités, s’il y en a
 
-Dans **« Priorités de passage »**, indiquez jusqu’à **trois** personnes qui doivent passer en premier aujourd’hui, dans l’ordre voulu.
+Dans **« Priorités de passage »**, indiquez jusqu’à **trois** personnes qui doivent passer en premier aujourd’hui, dans l’ordre voulu. S’il y a un anniversaire ce jour-là, la personne fêtée passe avant les priorités (voir « Et si c’est l’anniversaire de quelqu’un? »).
 
 - Le plus souvent, il n’y a qu’une seule priorité, ou aucune.
 - Une priorité, c’est une décision de l’équipe, pas un résultat du hasard. L’outil la note comme telle.
