@@ -120,7 +120,10 @@ Vous pouvez voir ce qui se passe, mais pas modifier en même temps. L’écran i
 Vous modifiez l’ordre, puis vous enregistrez le résultat final. Si le problème revient souvent, dites-le à Avery pour qu’on ajuste l’outil.
 
 **Où puis-je réexpliquer le fonctionnement?**
-Bouton **« Comment ça fonctionne? »** dans l’outil. Il reprend ce guide en version courte.
+Bouton **« Comment ça fonctionne? »** dans l’outil : une explication d’une à deux pages, suivie d’une page distincte **« L’essentiel en bref »** avec seulement l’essentiel.
+
+**Et si la connexion coupe pendant un tirage?**
+Continuez le tirage déjà ouvert : révélation et corrections restent possibles. L’écran affiche « Hors connexion — résultat non encore synchronisé ». Le résultat n’est officiellement enregistré que quand le serveur l’a confirmé. Si un autre appareil a pris la relève entre-temps, on vous demandera de trancher — jamais deux résultats officiels pour le même jour.
 
 ---
 
