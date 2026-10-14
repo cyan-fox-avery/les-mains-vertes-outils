@@ -19,8 +19,8 @@ D’après les règles convenues :
 
 **Décisions confirmées 2026-10-14 (Avery) intégrées à la proposition — paramètres mathématiques toujours à valider par simulations :**
 
-- **Absences = pause :** pour les règles de non-répétition, on compare les **deux derniers tirages auxquels la personne a réellement participé**, dans le groupe du jour. Une semaine d’absence ne réinitialise ni ne fait avancer la séquence de la personne et ne fournit aucune position. Une séance à une seule personne peut être enregistrée comme événement, mais sa première/dernière place inévitable est **exclue de la pondération d’équité et de la contrainte des extrêmes consécutifs**.
-- **Fenêtre d’historique : six tirages participés** par personne, par groupe du jour (six tirages assistés, pas nécessairement six semaines civiles).
+- **Absences = pause :** pour les règles de non-répétition, on compare les **deux dernières sélections comptabilisées** de la personne, dans le groupe du jour. Une semaine d’absence ne réinitialise ni ne fait avancer la séquence de la personne et ne fournit aucune position. Une séance à une seule personne peut être enregistrée comme événement, mais sa première/dernière place inévitable est **exclue de la pondération d’équité et de la contrainte des extrêmes consécutifs**.
+- **Fenêtre d’historique : six dernières sélections comptabilisées dans l’historique d’équité de cette personne**, par groupe du jour (six sélections comptabilisées, pas six semaines civiles : seules les sélections ordinaires participées comptent).
 - **Priorités comptent normalement :** toute place prioritaire compte pleinement dans l’historique, avec sa provenance manuelle enregistrée. Aucune catégorie d’accommodement, aucun champ de raison médicale, aucune exclusion spéciale.
 - **Pause anniversaire :** la place de première obtenue en mode anniversaire est exclue de la fenêtre de pondération et de la séquence des extrêmes consécutifs de la personne fêtée; les autres personnes comptent normalement (voir §5.5).
 - **Ajustements manuels des chances : par défaut, aujourd’hui seulement** (voir §5.6). Ce ne sont pas des priorités : ils changent les chances, ils n’attribuent pas de place garantie.
@@ -50,7 +50,7 @@ En six étapes, pour chaque tirage :
 - Placer les priorités aux places 1, 2, 3 selon l’ordre indiqué (voir `regles-selecteur.md` §6).
 - Si une priorité placerait quelqu’un en première place pour une deuxième fois consécutive : **avertissement + dérogation explicite**, comme convenu.
 - Les places prioritaires comptent dans l’historique d’équité, comme convenu.
-- **Point ouvert (question 14) :** si une personne reçoit souvent des priorités pour un accommodement récurrent, ses places prioritaires comptent-elles exactement comme les autres dans le calcul, ou sont-elles signalées / traitées différemment? Cette proposition ne tranche pas — elle suppose pour l’instant le traitement « tout compte pareil », à discuter, parce que l’autre traitement changerait le calcul.
+- **Décision confirmée (question 14, résolue) :** les places prioritaires comptent exactement comme les autres (« tout compte pareil »). Aucune catégorie d’accommodement, aucun champ de raison médicale, aucune exclusion spéciale. Cette proposition applique ce traitement.
 
 ## 5. Étape 3 — Poids à partir de l’historique (proposition à tester)
 
@@ -66,7 +66,7 @@ Exemples : 1re sur 12 → 0. 12e sur 12 → 1. 6e sur 11 → 0,5. 10e sur 14 →
 
 ### 5.2 Fenêtre d’historique
 
-**Décision confirmée :** la moyenne des positions normalisées sur les **six derniers tirages auxquels la personne a assisté**, par groupe du jour. Six tirages participés, pas nécessairement six semaines civiles : les séances manquées mettent l’historique effectif en pause.
+**Décision confirmée :** la moyenne des positions normalisées sur les **six dernières sélections comptabilisées dans l’historique d’équité de cette personne**, par groupe du jour. Six sélections comptabilisées, pas nécessairement six semaines civiles : seules les sélections ordinaires participées comptent; une absence, une sélection d’anniversaire (pour la personne fêtée) et une séance à une seule personne ne font pas avancer la fenêtre.
 
 **Points toujours ouverts (question 3) :**
 
@@ -106,7 +106,7 @@ avec Wmin dans ]0, 1[ (plancher) et Wmax > 1 (plafond), choisis indépendamment 
 Le mode anniversaire est une exception célébratoire, pas une priorité ordinaire ni un résultat pondéré :
 
 - La personne fêtée obtient la première place, même si elle était première à son dernier tirage ordinaire participé.
-- Sa position du jour d’anniversaire **n’entre pas** dans sa fenêtre glissante de six tirages participés, et sa séquence des extrêmes consécutifs continue à partir de sa dernière sélection ordinaire comptabilisée. Autrement dit, la sélection d’anniversaire est essentiellement un tirage sauté **pour sa propre histoire d’équité**, même si elle a participé et choisi une tâche.
+- Sa position du jour d’anniversaire **n’entre pas** dans sa fenêtre glissante de six sélections comptabilisées, et sa séquence des extrêmes consécutifs continue à partir de sa dernière sélection ordinaire comptabilisée. Autrement dit, la sélection d’anniversaire est essentiellement un tirage sauté **pour sa propre histoire d’équité**, même si elle a participé et choisi une tâche.
 - Sa position réelle reste dans l’ordre final enregistré de la date, explicitement marquée comme exception d’anniversaire.
 - Les autres personnes (non fêtées) comptent normalement : leurs positions finales réelles nourrissent leur équité future.
 - **Deux anniversaires le même jour (décision confirmée) :** les deux personnes obtiennent les deux premières places, ordonnées **aléatoirement entre elles**, et les deux bénéficient de la pause d’historique.
@@ -118,7 +118,7 @@ Le mode anniversaire est une exception célébratoire, pas une priorité ordinai
 
 Option avancée « Ajuster les chances », hors de l’écran quotidien ordinaire :
 
-- Un ajustement manuel des chances / probabilités / poids affecte **la sélection du jour courant seulement** et se réinitialise pour les jours suivants, plutôt que de persister silencieusement.
+- Un ajustement manuel des chances / probabilités / poids affecte **par défaut la sélection du jour courant seulement** et se réinitialise pour les jours suivants, plutôt que de persister silencieusement.
 - Ce n’est **pas** une priorité : un ajustement change les chances, il n’attribue pas de place garantie.
 - La modification du jour doit être compréhensible et identifiable comme manuelle; elle ne réécrit pas les positions historiques.
 - **Points ouverts (question 18) :** multiplicateur / plage exacts, direction, avertissement / confirmation, affichage de vérification, permission, réinitialisation, effet sur les simulations, et existence éventuelle d’une variante explicitement persistante. Aucun biais permanent caché du système d’équité.
@@ -150,7 +150,7 @@ Après le mélange, vérifier :
 - La première personne du tirage n’est pas celle qui était première au tirage pertinent précédent.
 - La dernière personne du tirage n’est pas celle qui était dernière au tirage pertinent précédent.
 
-« Tirage pertinent précédent » — **décision confirmée (question 4 résolue) :** on compare les **deux derniers tirages auxquels la personne a réellement participé**, dans le groupe du jour. Une semaine d’absence ne réinitialise ni ne fait avancer sa séquence. Une séance à une seule personne est exclue de la contrainte des extrêmes consécutifs (voir §1).
+« Tirage pertinent précédent » — **décision confirmée (question 4 résolue) :** on compare les **deux dernières sélections comptabilisées** de la personne, dans le groupe du jour. Une semaine d’absence ne réinitialise ni ne fait avancer sa séquence. Une séance à une seule personne est exclue de la contrainte des extrêmes consécutifs (voir §1).
 
 ### 7.2 Faisabilité d’abord, puis échantillonnage conditionné
 
@@ -176,13 +176,13 @@ Une construction contrainte générique peut satisfaire (a) tout en violant (b) 
 
 ### 7.3 Repli quand les contraintes sont impossibles
 
-Quand il n’existe vraiment aucun ordre valide (cas particuliers : séance précédente à une seule personne avec au plus deux personnes admissibles au tirage suivant, priorités en conflit — voir `regles-selecteur.md` §5.4), il faut une hiérarchie de repli explicite. Le repli ne se déclenche jamais au simple motif qu’un nombre limité d’essais a échoué.
+Quand il n’existe vraiment aucun ordre valide (cas particuliers : priorités en conflit avec les règles de non-répétition; ou les deux personnes admissibles ont toutes les deux été premières à leur dernier tirage comptabilisé respectif — voir `regles-selecteur.md` §5.4), il faut une hiérarchie de repli explicite. Le repli ne se déclenche jamais au simple motif qu’un nombre limité d’essais a échoué.
 
-**Point ouvert (question 5) :** laquelle relâcher en premier? Options déjà listées (dernière d’abord, première d’abord, les deux avec pondération seulement, tirage parmi les ordres qui violent le moins de règles). **Aucune hiérarchie n’est choisie ici.** Il faut aussi décider si les séances à une seule personne sont exemptées des contraintes de positions consécutives.
+**Point ouvert (question 5) :** laquelle relâcher en premier? Options déjà listées (dernière d’abord, première d’abord, les deux avec pondération seulement, tirage parmi les ordres qui violent le moins de règles). **Aucune hiérarchie n’est choisie ici.** Les séances à une seule personne sont exemptées des contraintes de positions consécutives (décision confirmée).
 
 ### 7.4 Exception manuelle
 
-Si l’équipe **modifie manuellement** l’ordre (brouillon) de façon à créer une répétition de première ou de dernière place, le traitement (avertissement, confirmation, enregistrement de l’exception) est une **question ouverte (question 8)**. La proposition ne choisit pas : l’application ne doit pas traiter silencieusement une exception manuelle comme un résultat aléatoire conforme.
+Si l’équipe **modifie manuellement** l’ordre (brouillon) de façon à créer une répétition de première ou de dernière place, le traitement est **décidé (question 8, résolue) :** avertissement + confirmation explicite + enregistrement comme exception manuelle; le résultat réel compte. L’application ne doit pas traiter silencieusement une exception manuelle comme un résultat aléatoire conforme.
 
 ## 8. Étape 6 — Brouillon et résultat final
 
@@ -214,7 +214,7 @@ Si l’équipe **modifie manuellement** l’ordre (brouillon) de façon à crée
 - Nouvelle personne qui arrive dans un groupe avec historique.
 - Tirages avec modifications manuelles du brouillon.
 - Exceptions d’anniversaire : (a) la personne fêtée est placée première; (b) sa place d’anniversaire ne modifie pas son poids futur ni sa séquence des extrêmes; (c) les positions réelles des autres continuent de compter; (d) un re-tirage / une annulation ne crée pas d’historique fantôme. Brouillons non enregistrés : jamais comptés.
-- Ajustements manuels des chances : effet le jour même seulement, réinitialisation le lendemain, ajustement identifiable comme manuel, pas de persistance silencieuse.
+- Ajustements manuels des chances : effet le jour même seulement, par défaut, réinitialisation le lendemain, ajustement identifiable comme manuel, pas de persistance silencieuse.
 - Corrections de résultats enregistrés : version antérieure conservée, ordre corrigé utilisé pour la suite, aucune réécriture rétroactive des séances passées.
 
 **Seuils d’acceptation :** à définir avec Avery et Mira avant de considérer l’algorithme acceptable. Tant que les simulations ne sont pas faites, la pondération reste une hypothèse, pas une garantie.
@@ -223,8 +223,8 @@ Si l’équipe **modifie manuellement** l’ordre (brouillon) de façon à crée
 
 **Tranchées (décisions confirmées 2026-10-14, Avery) :**
 
-- Fenêtre d’historique : six tirages participés par personne, par groupe (question 3, partiellement résolue).
-- « Consécutive » = deux derniers tirages participés de la personne (question 4, résolue).
+- Fenêtre d’historique : six sélections comptabilisées par personne, par groupe (question 3, partiellement résolue).
+- « Consécutive » = deux dernières sélections comptabilisées de la personne (question 4, résolue).
 - Séances à une seule personne : exclues de la pondération et de la contrainte des extrêmes consécutifs (question 5, partiellement résolue).
 - Re-tirage : possible avant la révélation avec confirmation « Êtes-vous sûr(e)? »; après le début, corrections manuelles; propositions écartées jamais dans l’historique (question 6, résolue; la conservation d’une trace d’audit minimale des tentatives annulées est un détail d’implémentation).
 - Réorganisation manuelle qui crée une répétition : avertissement + confirmation + enregistrement comme exception manuelle; le résultat réel compte (question 8, résolue).
