@@ -14,7 +14,7 @@ D’après les règles convenues :
 - Les positions historiques sont **normalisées selon la taille du groupe**.
 - L’équité se calcule **séparément pour chaque groupe du jour**.
 - Seul le **résultat final enregistré** compte pour l’équité future.
-- Les **priorités manuelles** (max 3, places 1–3) sont appliquées avant le tirage aléatoire et comptent quand même dans l’historique.
+- Les **priorités manuelles** (max 3) sont appliquées avant le tirage aléatoire et comptent quand même dans l’historique. En l’absence d’anniversaires, elles occupent les places 1–3; si le mode anniversaire est actif, les personnes fêtées occupent les premières places et les priorités suivent (voir §4).
 - Les **absences** ne pénalisent pas : une absence ne compte ni comme une place ni comme une mauvaise place.
 
 **Décisions confirmées 2026-10-14 (Avery) intégrées à la proposition — paramètres mathématiques toujours à valider par simulations :**
@@ -23,7 +23,7 @@ D’après les règles convenues :
 - **Fenêtre d’historique : six dernières sélections comptabilisées dans l’historique d’équité de cette personne**, par groupe du jour (six sélections comptabilisées, pas six semaines civiles : seules les sélections ordinaires participées comptent).
 - **Priorités comptent normalement :** toute place prioritaire compte pleinement dans l’historique, avec sa provenance manuelle enregistrée. Aucune catégorie d’accommodement, aucun champ de raison médicale, aucune exclusion spéciale.
 - **Pause anniversaire :** la place de première obtenue en mode anniversaire est exclue de la fenêtre de pondération et de la séquence des extrêmes consécutifs de la personne fêtée; les autres personnes comptent normalement (voir §5.5).
-- **Ajustements manuels des chances : par défaut, aujourd’hui seulement** (voir §5.6). Ce ne sont pas des priorités : ils changent les chances, ils n’attribuent pas de place garantie.
+- **Ajustements manuels des chances (coups de pouce) : strictement le jour courant seulement, sans option permanente** (voir §5.6). Ce ne sont pas des priorités : ils changent les chances, ils n’attribuent pas de place garantie.
 - **Re-tirage :** possible avant la révélation, avec confirmation obligatoire « Êtes-vous sûr(e)? »; après le début de la sélection, corrections manuelles explicites. Les propositions écartées n’entrent **jamais** dans l’historique d’équité.
 - **Corrections :** version antérieure conservée, correction enregistrée; l’ordre corrigé sert aux calculs futurs; pas de nouveau tirage rétroactif des séances passées. Une réorganisation manuelle qui crée une répétition première/dernière déclenche un avertissement + confirmation, puis est conservée comme exception manuelle, le résultat réel comptant quand même.
 
@@ -32,7 +32,7 @@ D’après les règles convenues :
 En six étapes, pour chaque tirage :
 
 1. **Déterminer les personnes admissibles** (présentes, moins les priorités).
-2. **Placer les priorités** aux places 1–3, avec avertissement si une priorité répète la première place.
+2. **Placer les anniversaires d’abord** (places réservées), **puis les priorités** aux places suivantes (en l’absence d’anniversaires : places 1–3), avec avertissement si une priorité répète la première place.
 3. **Calculer un poids** pour chaque personne restante, à partir de son historique de places normalisées.
 4. **Tirer un ordre pondéré** en une seule fois (mélange pondéré), pas un choix glouton place par place.
 5. **Vérifier les contraintes** de non-répétition (première / dernière) : d’abord déterminer explicitement si un ordre valide existe; si oui, échantillonner dans la distribution pondérée conditionnée au respect des contraintes (voir §7.2); le repli ne s’applique que s’il n’existe vraiment aucun ordre valide ou lors d’une dérogation manuelle explicitement autorisée.
