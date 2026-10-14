@@ -39,7 +39,7 @@ Dans **« Présences »**, cochez les personnes **absentes** aujourd’hui.
 
 ### 3. Indiquer les priorités, s’il y en a
 
-Dans **« Priorités de passage »**, indiquez jusqu’à **trois** personnes qui doivent passer en premier aujourd’hui, dans l’ordre voulu.
+Dans **« Priorités de passage »**, indiquez jusqu’à **trois** personnes qui doivent passer en premier aujourd’hui, dans l’ordre voulu. S’il y a un anniversaire ce jour-là, la personne fêtée passe avant les priorités (voir « Et si c’est l’anniversaire de quelqu’un? »).
 
 - Le plus souvent, il n’y a qu’une seule priorité, ou aucune.
 - Une priorité, c’est une décision de l’équipe, pas un résultat du hasard. L’outil la note comme telle.
@@ -71,11 +71,11 @@ C’est ce résultat final — celui qui s’est vraiment passé — qui compte 
 
 **N’oubliez pas cette étape.** Tant que le résultat n’est pas enregistré, il ne compte pas dans l’historique.
 
-Si une erreur est découverte après l’enregistrement, on peut corriger le résultat. L’ancienne version est conservée, et la correction est notée.
+Si une erreur est découverte après l’enregistrement, n’importe quel membre autorisé de l’équipe peut corriger le résultat, à tout moment. Pas besoin d’écrire une raison (on peut en ajouter une si c’est utile). Toutes les anciennes versions sont conservées, et la correction est notée.
 
 ### 7. Consulter l’historique, au besoin
 
-**« Historique »** vous montre les tirages passés : la date, le groupe, les personnes présentes, l’ordre final et les priorités. On y voit aussi les exceptions (anniversaire, correction).
+**« Historique »** vous montre les tirages passés : la date, le groupe, les personnes présentes, l’ordre final et les priorités. On y voit aussi les exceptions (anniversaire, correction). Le détail d’un résultat passé montre aussi l’ordre généré au départ à côté de l’ordre final, pour voir ce qui a changé. Seul l’ordre final compte pour les prochains tirages.
 
 ## Et si quelqu’un arrive après le tirage?
 
@@ -107,8 +107,14 @@ Oui. Vous pouvez modifier l’ordre, et vous devez enregistrer le résultat fina
 **Est-ce qu’une absence est pénalisante?**
 Non. Une absence ne compte pas comme une mauvaise place.
 
-**Qu’est-ce que « Ajuster les chances »?**
-C’est une option avancée, hors de l’écran quotidien. Par défaut, elle change les chances pour le jour même seulement — elle ne donne pas une place garantie à quelqu’un. Elle se réinitialise le lendemain.
+**Qu’est-ce que « Donner un coup de pouce »?**
+C’est une option avancée, hors de l’écran quotidien. Elle donne un petit coup de pouce positif à une ou plusieurs personnes, pour le jour même seulement — elle ne donne pas une place garantie à quelqu’un, et il n’y a pas d’option pour la rendre permanente. Tout le monde qui reçoit un coup de pouce reçoit le même. Pas besoin de confirmation : les noms avec un coup de pouce actif sont clairement indiqués, et on peut retirer un coup de pouce avant de lancer le tirage. N’importe quel membre autorisé de l’équipe peut en donner un.
+
+**Deux personnes ont le même prénom?**
+Chaque personne utilise son nom usuel. Seulement si deux personnes du même groupe auraient le même nom affiché, on ajoute une initiale, par exemple « Alex M. » et « Alex T. ». On ne donne jamais de numéros (« Alex 1 »).
+
+**Quelqu’un d’autre est déjà en train de modifier le tirage?**
+Vous pouvez voir ce qui se passe, mais pas modifier en même temps. L’écran indique « Tirage en cours sur un autre appareil ». Si la personne ne revient pas, l’équipe peut reprendre le contrôle en sécurité.
 
 **Qu’est-ce qu’on fait si l’outil propose quelque chose qui ne fonctionne pas?**
 Vous modifiez l’ordre, puis vous enregistrez le résultat final. Si le problème revient souvent, dites-le à Avery pour qu’on ajuste l’outil.

@@ -39,10 +39,15 @@
 
 **Décision confirmée 2026-10-14 (Avery) :** fenêtre = **six dernières sélections comptabilisées dans l’historique d’équité de cette personne**, par groupe du jour. Six sélections comptabilisées, pas nécessairement six semaines civiles : seules les sélections ordinaires participées comptent; une absence, une sélection d’anniversaire (pour la personne fêtée) et une séance à une seule personne ne font pas avancer la fenêtre. Les personnes nouvelles commencent avec un poids neutre. Voir `regles-selecteur.md` §5.2.
 
+**Récence (décision confirmée) :** les sélections comptabilisées plus récentes ont une influence légèrement plus grande que les plus anciennes dans l’historique glissant de six sélections. Décroissance douce : les six contribuent. La récence reflète l’ordre des six dernières sélections comptabilisées, pas les semaines civiles écoulées pendant les pauses.
+
+**Courts historiques (décision confirmée) :** une nouvelle personne commence neutre, puis l’influence de son propre historique comptabilisé augmente graduellement à mesure qu’il s’accumule. Une seule première ou dernière place ne produit pas un ajustement à pleine force. Les règles strictes de non-répétition s’appliquent quand même dès la première sélection comptabilisée, quand c’est possible, sous réserve du repli convenu. Le lissage ne vise que l’équilibrage probabiliste doux. Une personne qui revient n’est pas réinitialisée comme « nouvelle » (voir question 16).
+
 **Ce qu’il reste à décider :**
 
-- Est-ce que les tirages récents comptent plus que les plus anciens, ou est-ce que chaque tirage de la fenêtre compte également?
-- Traitement des très courts historiques (à partir de combien de tirages l’historique compte-t-il « pleinement »? faut-il lisser les premiers tirages?).
+- Poids relatifs / courbe exacts de la récence (à calibrer / valider par simulations).
+- Fonction / échelle exactes de lissage des courts historiques (simulations).
+- Seuils d’acceptation des simulations pour la récence + le lissage ensemble (tirage malchanceux unique, tirage chanceux unique, absences).
 
 ## 4. « Consécutive » : que veut dire deux sélections de suite?
 
@@ -67,7 +72,9 @@
 - Relâcher les deux et se fier seulement à la pondération.
 - Tirer au hasard parmi les ordres qui violent le moins de règles.
 
-**Ce qu’il faudra décider :** la hiérarchie de repli, et le message affiché à l’équipe quand une règle n’a pas pu être respectée.
+**Hiérarchie de repli (décision confirmée 2026-10-14, Avery) :** quand il est mathématiquement impossible de respecter les deux règles de non-répétition à la fois, protéger en priorité le fait de ne pas placer quelqu’un en **DERNIÈRE** place deux fois de suite. D’abord essayer de respecter les deux règles; seulement quand les deux sont conjointement impossibles, protéger la non-répétition de la dernière place si un ordre valide la respectant existe, même si cela veut dire permettre une répétition de la première place. Si même la non-répétition de la dernière place ne peut pas être respectée, produire un ordre valide au moyen d’un repli secondaire clairement documenté (encore à concevoir / tester), avec un avis clair. Voir `regles-selecteur.md` §5.4.
+
+**Ce qu’il reste à décider :** la méthode technique exacte d’échantillonnage contraint / repli, le départage entre ordres également admissibles, et le message affiché à l’équipe quand une règle n’a pas pu être respectée.
 
 ## 6. Régénération d’un brouillon non terminé
 
@@ -75,15 +82,11 @@
 
 **Décision :** on peut recommencer un tirage provisoire, avec une **confirmation obligatoire « Êtes-vous sûr(e)? »**. Avant la révélation, l’équipe peut recommencer après confirmation; après le début de la sélection, on utilise des corrections manuelles explicites plutôt que de remplacer secrètement des noms déjà révélés. Les propositions écartées **n’entrent jamais** dans l’historique d’équité. Le parcours distingue « nouveau brouillon », « tirage écarté » et « résultat final enregistré ». Conserver ou non une trace d’audit minimale des tentatives annulées est un détail d’implémentation.
 
-## 7. Corrections aux résultats enregistrés (partiellement résolue)
+## 7. Corrections aux résultats enregistrés
 
-**Décisions confirmées 2026-10-14 (Avery) — voir `regles-selecteur.md` §7.4 :** les résultats enregistrés **peuvent être corrigés**. On **conserve la version antérieure** et on **enregistre la correction** (au moins que le changement a eu lieu, quand, et ce qui a changé; l’auteur, si le modèle d’accès le permet). L’**ordre corrigé** sert aux calculs futurs. On ne fait **pas** de nouveau tirage rétroactif des séances passées.
+**RÉSOLU 2026-10-14 (décisions d’Avery) — voir `regles-selecteur.md` §7.4.**
 
-**Ce qu’il reste à décider :**
-
-- Qui peut corriger un résultat enregistré?
-- Jusqu’à quand (le jour même? tant que le tirage suivant n’a pas eu lieu? toujours?)?
-- Est-ce que la correction elle-même est enregistrée avec une raison?
+**Décisions :** les résultats enregistrés **peuvent être corrigés**. **Qui :** tout membre autorisé de l’équipe qui est autorisé à faire fonctionner le sélecteur; aucune permission réservée à Maxime ni justificatif administrateur distinct (sous réserve de l’approbation de Maxime pour l’accès au sélecteur en général). **Raison écrite : facultative** — on doit pouvoir corriger sans taper d’explication; une brève note est possible, jamais une condition préalable. **Aucune limite de temps :** corrections à tout moment, **aucune limite arbitraire fondée sur l’âge**. **Vérification obligatoire et automatique :** conserver **toutes** les versions enregistrées antérieures, la date / heure de chaque correction et ce qui a changé; identifier l’auteur seulement si le modèle d’accès le permet vraiment (avec des justificatifs partagés, enregistrer au moins l’événement, l’horodatage et les détails avant / après). L’**ordre corrigé** sert aux calculs futurs. On ne fait **pas** de nouveau tirage rétroactif des séances passées. Le tirage généré d’origine est conservé séparément (voir question 15).
 
 ## 8. Réorganisation manuelle qui crée une répétition de première ou de dernière place
 
@@ -117,42 +120,23 @@ Tant que les simulations ne sont pas faites, la pondération reste une hypothès
 - Où les données sont hébergées et qui y a accès.
 - Sauvegarde et récupération en cas de problème.
 
-## 11. Accès simultané et modifications à partir de plusieurs appareils
+## 11. Accès simultané et modifications à partir de plusieurs appareils (partiellement résolue)
 
-**Question :** Que se passe-t-il si deux membres de l’équipe modifient le même tirage en même temps?
+**Politique confirmée 2026-10-14 (Avery) — voir `regles-selecteur.md` §10 : un seul éditeur, plusieurs spectateurs + reprise sécuritaire.** **Seul UN membre / appareil** peut modifier activement une sélection donnée (jour de semaine / date) à la fois. Les autres appareils autorisés peuvent **consulter** son état et ses résultats, mais ne doivent pas modifier, écraser, régénérer, corriger ni finaliser cette même sélection en cours pendant qu’un autre appareil en détient le contrôle. Indiquer clairement aux spectateurs que la modification est déjà en cours, en français québécois simple (« Tirage en cours sur un autre appareil » si l’identité n’est pas disponible). Empêcher les écrasements silencieux du type « dernière écriture gagne » et les doubles enregistrements finaux. **Reprise sécuritaire obligatoire :** si le navigateur qui modifie se ferme, perd la connexion ou est abandonné, un autre membre autorisé doit pouvoir reprendre le contrôle en sécurité (par exemple, bail à expiration géré par le serveur + reprise contrôlée, vérifications de version). Valider à nouveau l’autorité au moment d’enregistrer un résultat final; empêcher un éditeur d’origine périmé d’écraser le travail après une reprise. Aucune cérémonie quotidienne obligatoire de verrouillage / déverrouillage en plusieurs étapes. S’il existe un dossier final terminé pour le jour, ouvrir un autre appareil doit afficher ce dossier, pas lancer silencieusement un deuxième résultat officiel en conflit. Les corrections de l’historique enregistré ont aussi besoin d’une protection contre les conflits / versions.
 
-**À évaluer dans le cadre de la direction convenue (option A) :** la protection contre les écrasements concurrents fait partie des conditions d’évaluation avant de s’engager.
-
-**Ce qu’il faudra décider :**
-
-- Est-ce qu’un seul brouillon actif par groupe et par jour est permis?
-- Est-ce qu’on verrouille le tirage pendant qu’une personne le modifie?
-- Est-ce que la dernière modification écrase la précédente, ou est-ce qu’on signale un conflit?
-- Est-ce qu’on affiche « quelqu’un d’autre est en train de modifier ce tirage »?
+**Ce qu’il reste à décider :** la conception technique exacte du verrouillage / de la reprise et le délai d’expiration (choix d’ingénierie à tester; aucune valeur de temporisation approuvée).
 
 ## 12. Vue « Équité des tirages »
 
-**Question :** Est-ce qu’une vue détaillée de statistiques d’équité vaut la peine?
+**RÉSOLU 2026-10-14 (décision d’Avery) — voir `regles-selecteur.md` §8.3.**
 
-**Ce qu’il faudra décider :**
-
-- Est-ce que l’équipe la consulterait vraiment, ou est-ce que ça ajoute de la complexité pour peu de bénéfice?
-- Si oui, qu’est-ce qu’on y montre (sans jargon, sans équations) : par exemple, combien de fois chaque personne a été dans la première moitié vs la deuxième moitié, sur les dernières semaines?
-- Est-ce que cette vue pourrait créer des malentendus (« pourquoi j’ai eu plus de mauvaises places? ») et comment on l’explique?
+**Décision :** inclure une page **facultative, distincte et facile à comprendre** de statistiques / aperçu de l’historique d’équité, loin du sélecteur quotidien sans encombrement. Facultative *à consulter* ne veut pas dire facultative *à mettre en place*. Elle aide l’équipe à comprendre comment les occasions ont été réparties, par exemple des comptes de places en première moitié vs en deuxième moitié, à partir des résultats réellement enregistrés. Elle ne doit **pas** ressembler à une évaluation du rendement ni classer les personnes par mérite; éviter le jargon et les affirmations trompeuses de garanties mathématiques. Distinguer correctement les absences, les pauses d’anniversaire, les séances uniques exclues et les priorités / modifications manuelles enregistrées. Les mesures individuelles et les détails de visualisation seront choisis pendant la conception de l’interface.
 
 ## 13. Prénoms identiques
 
-**Question :** Comment distinguer deux personnes qui ont le même prénom dans un même groupe?
+**RÉSOLU 2026-10-14 (décision d’Avery) — voir `regles-selecteur.md` §2.3.**
 
-**Pourquoi ça compte :** On ne conserve que les prénoms. Deux « Alex » dans le même groupe rendraient l’ordre ambigu, autant à l’écran que dans l’historique.
-
-**Pistes à évaluer (sans en choisir une) :**
-
-- Ajouter une initiale ou un qualificatif visible seulement à l’écran (sans conserver de nom de famille).
-- Utiliser un surnom choisi par la personne.
-- Autre mécanisme d’identification convenu avec l’équipe.
-
-**Ce qu’il faudra décider :** le mécanisme, en respectant le principe « prénoms seulement ».
+**Décision :** utiliser le **nom usuel préféré** de chaque personne, tel qu’inscrit sur la liste. Si quelqu’un utilise déjà un surnom au quotidien, ce surnom est son nom d’affichage dès le départ. **Ne pas inventer, exiger ni attribuer de surnoms** pour distinguer des personnes qui préfèrent leur prénom. **Seulement** quand deux personnes du même groupe du jour auraient autrement des noms d’affichage identiques, les distinguer par une **initiale** appropriée, par exemple « Alex M. » et « Alex T. », inscrite / confirmée par l’équipe (jamais devinée automatiquement). Étiquettes claires et respectueuses, jamais « Alex 1 » / « Alex 2 ». Le nom d’affichage ou l’initiale n’est jamais la clé d’identité de la base de données : identifiant interne stable, étiquettes validées uniques dans chaque groupe actif. Si les initiales entrent aussi en collision, signaler l’ambiguïté pour une distinction respectueuse fournie explicitement par l’équipe. Aucun nom de famille ni autre détail personnel au-delà des initiales de distinction.
 
 ## 14. Priorités récurrentes et accommodements
 
@@ -162,21 +146,15 @@ Tant que les simulations ne sont pas faites, la pondération reste une hypothès
 
 ## 15. Ordre généré vs ordre final : que garde-t-on?
 
-**Question :** Quand l’équipe modifie manuellement un ordre, garde-t-on aussi l’ordre généré au départ?
+**RÉSOLU 2026-10-14 (décision d’Avery) — voir `regles-selecteur.md` §7.3.**
 
-**Règle convenue :** seul le résultat final compte pour l’équité future. Les brouillons écartés et les tirages annulés n’entrent jamais dans l’historique d’équité (décision 2026-10-14).
-
-**Ce qui reste à décider :** est-ce qu’on conserve l’ordre généré au départ à des fins de transparence (pour voir que l’équipe a modifié l’ordre, et comment), ou est-ce qu’on ne conserve que le résultat final? Conserver les deux aide la vérification, mais ajoute une donnée à expliquer.
+**Décision :** pour une sélection terminée, conserver **à la fois l’ordre généré d’origine** et **l’ordre final confirmé par l’équipe**, consultables ensemble dans le détail d’un résultat passé, avec une indication compréhensible de ce qui a changé. **Seul l’ordre final explicitement enregistré sert** à la pondération d’équité et à l’historique première / dernière; le brouillon d’origine sert à la transparence et à la vérification seulement. Les brouillons écartés et les tirages annulés n’entrent jamais dans l’historique d’équité. Si l’ordre final est identique à l’ordre généré, l’interface n’a pas besoin d’afficher un « changement » déroutant. En cas de correction d’un résultat enregistré, conserver les versions antérieures; seul l’ordre final corrigé courant fournit les positions faisant foi; ne pas écraser l’ordre généré d’origine. Les exemptions d’anniversaire, les priorités et les coups de pouce conservent leur provenance / leurs marqueurs. La comparaison appartient à la vue facultative historique / détail, pas à l’écran principal. Le format exact de conservation et le fournisseur de stockage ne sont pas réglés.
 
 ## 16. Personne renommée ou retirée : que devient son historique?
 
-**Question :** Si on renomme une personne dans un groupe, ou si on la retire, que devient son historique?
+**RÉSOLU 2026-10-14 (décision d’Avery) — voir `regles-selecteur.md` §2.3.**
 
-**Ce qu’il faudra décider :**
-
-- Est-ce que l’historique suit le nouveau nom?
-- Est-ce qu’on garde l’historique d’une personne retirée pour les tirages déjà enregistrés (oui, en principe), mais est-ce qu’on la retire des calculs futurs?
-- Est-ce qu’une personne qui revient après un retrait repart avec son ancien historique ou avec un historique vide?
+**Décision :** si une personne quitte un groupe du jour puis réintègre **le même groupe**, on **conserve son historique d’équité existant** (y compris les six dernières sélections comptabilisées et la dernière position extrême comptabilisée). Retirer quelqu’un de la liste active la rend inactive pour les tirages futurs; cela ne supprime ni ses dossiers enregistrés ni son identité sous-jacente. Une absence de plusieurs mois ne fait avancer ni ne réinitialise les séquences. L’historique des autres groupes reste indépendant. Une vraie nouvelle personne commence neutre; on ne traite pas silencieusement une personne qui revient comme une nouvelle personne. Corriger un nom ou utiliser un nom d’affichage préféré ne doit pas créer une nouvelle identité ni orpheliner l’historique : identifiant interne stable, parcours de réactivation qui évite les dossiers en double. On ne ressuscite pas d’absences ni de sélections inventées pour la période hors liste. La convention d’affichage des prénoms identiques est réglée séparément (voir question 13).
 
 ## 17. « Comment ça fonctionne? » : niveau de détail
 
@@ -184,27 +162,27 @@ Tant que les simulations ne sont pas faites, la pondération reste une hypothès
 
 La page « Comment ça fonctionne? » doit expliquer le principe sans jargon ni équations. Il faudra décider si on y montre des exemples concrets, et si on y mentionne les règles de non-répétition et la compensation douce, ou si on reste à un niveau très général (« le tirage tient compte des tirages passés »).
 
-## 18. Ajustements manuels des chances : mécanique exacte
+## 18. Coups de pouce manuels : mécanique exacte (partiellement résolue)
 
-**Décision confirmée 2026-10-14 (Avery) :** l’équipe peut ajuster manuellement les chances quand c’est nécessaire, par une option avancée « Ajuster les chances », hors de l’écran quotidien ordinaire. **Par défaut, aujourd’hui seulement** : l’ajustement affecte la sélection du jour courant et se réinitialise pour les jours suivants. Un ajustement change les chances, il n’attribue pas de place garantie — ce n’est pas une priorité. La modification du jour doit être compréhensible et identifiable comme manuelle; elle ne réécrit pas les positions historiques. Voir `regles-selecteur.md` §5.5.
+**Décisions confirmées 2026-10-14 (Avery) — voir `regles-selecteur.md` §5.5 :** l’équipe peut donner un coup de pouce manuel quand c’est nécessaire, par une option avancée « Donner un coup de pouce » (libellé de travail), hors de l’écran quotidien ordinaire. **Positif seulement :** les ajustements peuvent seulement augmenter les chances; aucun contrôle pour diminuer explicitement la pondération / les chances d’une personne. Nuance : augmenter le poids relatif d’une personne diminue par définition légèrement les probabilités relatives des autres — acceptable, mais ne pas présenter la fonction comme laissant toutes les autres exactement inchangées. **Un seul niveau fixe, doux et positif :** pas de niveaux sélectionnables, pas de curseur. **Plusieurs coups de pouce égaux :** plus d’une personne peut recevoir le même coup de pouce calibré; pas de forces différentes par personne, pas d’empilement, pas de réduction. Si toutes les personnes admissibles reçoivent le même facteur, leurs probabilités relatives restent inchangées (neutre / redondant). **Qui :** tout membre autorisé de l’équipe qui est autorisé à faire fonctionner le sélecteur; aucun mot de passe supplémentaire, code administrateur distinct, ni permission réservée à Maxime (sous réserve de l’approbation de Maxime pour l’accès au sélecteur en général). Enregistrer l’action; avec une connexion partagée, ne pas promettre d’attribution individuelle — enregistrer au minimum les coups de pouce appliqués, à qui, pour quel tirage (plus horodatages quand c’est faisable). **Aucune confirmation pour appliquer :** l’interface indique clairement chaque personne dont le coup de pouce est actif; on peut retirer / annuler avant de générer le tirage, sans confirmation supplémentaire. Cela n’affaiblit pas la confirmation pour recommencer un brouillon ni l’avertissement + confirmation pour déroger à une règle de première / dernière. **Durée :** strictement la sélection du jour courant, **sans option permanente ni report** (remplace « aujourd’hui seulement, par défaut »). Un coup de pouce est une entrée pour une seule sélection, jamais un ajustement à long terme de la pondération de base. Les coups de pouce restent soumis à l’admissibilité, aux réservations d’anniversaire, aux priorités et aux contraintes strictes / repli convenu. Le dossier montre les coups de pouce réellement actifs pour le brouillon généré utilisé dans le résultat final; les coups de pouce annulés avant le tirage ne comptent pas comme actifs; un tirage écarté n’entre jamais dans l’historique.
 
-**Ce qu’il reste à décider (sous-décisions ouvertes, avec garde-fous de sécurité / traçabilité) :**
+**Ce qu’il reste à décider :**
 
-- Ajustement individuel (une personne) ou de groupe, ou les deux?
-- Multiplicateur / plage exacts et direction (augmenter ou diminuer les chances de qui?).
-- Avertissement / confirmation avant d’appliquer.
-- Affichage de vérification (comment l’équipe voit que l’ajustement est actif et ce qu’il change).
-- Permission : qui peut ajuster?
-- Réinitialisation : automatique le lendemain, manuelle, ou les deux?
-- Effet sur les simulations (les scénarios de test doivent couvrir les ajustements).
-- Existence éventuelle d’une variante explicitement persistante — jamais de persistance silencieuse. **Aucun biais permanent caché** du système d’équité.
+- Valeur numérique exacte du coup de pouce (à calibrer / valider par simulations : utile mais modeste, hasard préservé, non-répétition respectée).
+- Garde-fous pendant le tirage et détails de la représentation de vérification.
+- Que faire quand une personne ayant reçu un coup de pouce devient absente.
+- Effet sur les simulations (les scénarios de test doivent couvrir les coups de pouce).
 
-## 19. Mode anniversaire : interactions ouvertes
+**Aucun biais permanent caché** du système d’équité.
 
-**Décisions confirmées 2026-10-14 (Avery) — voir `regles-selecteur.md` §6.3 :** le mode anniversaire est une exception célébratoire explicitement activée. La personne fêtée obtient la première place, sa sélection est une pause pour sa propre histoire d’équité (fenêtre de six sélections comptabilisées + séquence des extrêmes), sa position réelle reste dans l’ordre final enregistré, marquée comme exception d’anniversaire. Les autres personnes comptent normalement. Deux anniversaires le même jour : les deux premières places, ordre aléatoire entre les deux, les deux en pause. Activation manuelle le jour même, sans base de données de dates de naissance (recommandation UX, pas une exigence confirmée).
+## 19. Mode anniversaire : interactions
 
-**Interactions ouvertes — à trancher avec Avery (pas des décisions) :**
+**RÉSOLU 2026-10-14 (décisions d’Avery) — voir `regles-selecteur.md` §6.3.**
 
-- **Anniversaire + priorités ordinaires :** conflit à exposer, sans hiérarchie choisie. La règle d’Avery dit que les anniversaires passent devant, et la règle des priorités les limite à trois places (1, 2, 3). Avec deux anniversaires et trois priorités, cinq places de tête seraient revendiquées. Aucune hiérarchie n’est choisie ici : il faut demander à Avery comment ces règles se combinent.
-- **Personne marquée anniversaire absente au tirage :** *proposition :* l’exception ne s’applique pas ce jour-là (personne enregistrée comme `absente au tirage`; aucune première place d’anniversaire attribuée à quelqu’un d’autre; bascule du jour effacée).
-- **Réorganisation manuelle après un tirage en mode anniversaire :** la règle doit porter sur les **positions d’anniversaire attribuées** (places 1–2 si deux anniversaires), pas seulement sur la première place. Si l’équipe déplace manuellement une personne fêtée hors de sa position d’anniversaire attribuée, il reste à trancher avec Avery si l’exception est **annulée** (sa position finale réelle compte normalement) ou **conservée**.
+**Décisions de base (rappel) :** le mode anniversaire est une exception célébratoire explicitement activée. La personne fêtée obtient la première place, sa sélection est une pause pour sa propre histoire d’équité (fenêtre de six sélections comptabilisées + séquence des extrêmes), sa position réelle reste dans l’ordre final enregistré, marquée comme exception d’anniversaire. Les autres personnes comptent normalement. Deux anniversaires le même jour : les deux premières places, ordre aléatoire entre les deux, les deux en pause. Activation manuelle le jour même, sans base de données de dates de naissance (recommandation UX, pas une exigence confirmée).
+
+**Anniversaire avant les priorités ordinaires (décision confirmée) :** les personnes fêtées occupent toujours les premières places, AVANT les priorités manuelles ordinaires. Un anniversaire : place 1, priorités à partir de la place 2. Deux anniversaires : places 1–2, priorités à partir de la place 3. Les anniversaires **s’ajoutent** à la limite d’au plus trois priorités ordinaires, ils n’y sont pas inclus (deux anniversaires + trois priorités : places 1–2 anniversaire, places 3–5 priorités, reste en tirage aléatoire pondéré). Ne pas laisser tomber ni rétrograder une priorité approuvée; une priorité ne déplace pas une personne fêtée. La sélection simultanée anniversaire / priorité de la même personne et les cas avec plus de places spéciales que de personnes présentes sont des détails explicites de validation de l’interface.
+
+**Réorganisation manuelle (décision confirmée) :** une personne fêtée déplacée manuellement hors des places réservées aux anniversaires **perd son exemption**; sa position finale réelle enregistrée compte normalement. Échanger simplement les deux personnes fêtées entre les places 1 et 2 conserve les deux exemptions. Déplacer l’une des deux hors des deux premières places : seule la personne concernée perd son exemption. Pour un anniversaire, seule la place 1 compte. Évaluer sur l’ordre final enregistré (ou corrigé), pas sur un brouillon ni l’ordre généré initial. Garder une trace de vérification.
+
+**Personne fêtée absente (décision confirmée) :** le mode anniversaire s’applique seulement si la personne fêtée est **présente à la sélection**. Sinon, enregistrer « Absent(e) au tirage », aucune place réservée, pause normale due à l’absence, aucune priorité transférée, **aucun rattrapage automatique** à la sélection suivante. Règle d’arrivée tardive si la personne arrive après la sélection. Deux personnes fêtées prévues, une absente : seule la participante reçoit la place d’anniversaire. Aucun indicateur d’anniversaire périmé dans un brouillon ou un résultat final pour la personne absente.
