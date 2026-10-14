@@ -33,7 +33,7 @@ Ce que l’architecture doit permettre (d’après les règles convenues) :
 
 - Dépendance à un fournisseur : ses conditions, ses prix et l’endroit où les données sont hébergées.
 - L’authentification et les permissions doivent être configurées avec soin — un mauvais réglage peut exposer les données.
-- La logique du tirage (pondération, contraintes) tourne dans le navigateur, sauf si on ajoute une vérification côté serveur. Il faut décider si c’est acceptable.
+- La logique du tirage (pondération, contraintes) tourne dans le navigateur, sauf si on ajoute une vérification côté serveur. Il faut décider si c’est acceptable. Précision : un site statique ne se limite pas forcément à une logique dans le navigateur — il peut aussi s’appuyer sur des fonctions serveur gérées (hybride) pour faire tourner le tirage côté serveur. Aucun fournisseur n’est choisi ici.
 
 **Questions que cette option soulève :** quel fournisseur? Où sont hébergées les données? Quel plan (gratuit/payant)? Qui administre les accès?
 
