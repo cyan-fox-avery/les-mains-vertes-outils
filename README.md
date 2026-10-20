@@ -62,7 +62,7 @@ Tout le contenu destiné aux personnes qui utilisent l’outil est écrit en fra
 | `docs/questions-ouvertes.md` | Décisions qui restent à prendre. Ces questions sont volontairement séparées des règles convenues. Rien dans ce fichier ne doit être lu comme déjà décidé. |
 | `docs/guide-equipe.md` | Guide court (une à deux pages) pour Max et l’équipe : ce que l’outil fait, comment l’utiliser, et comment le tirage reste juste. Sans jargon technique. |
 | `docs/plan-simulations.md` | Plan de simulations : méthode, mesures, seuils proposés, scénarios, grille de paramètres — **proposition à approuver**. Aucun coefficient n’est adopté. (Voir aussi la proposition d’algorithme, demande nº 2, en discussion.) |
-| `docs/onglet-gestion-stockage.md` | Proposition d’un deuxième onglet, « Gestion du stockage », à côté du sélecteur : il rassemble les fonctions déjà décidées mais tenues loin du parcours quotidien (historique, statistiques, listes, corrections, sauvegardes / exportation, conservation). **Proposition seulement** — questions 23 à 26 des questions ouvertes. |
+| `docs/inventaire-produits.md` | Utilitaire nº 2 — **Inventaire des produits** : spécifications V1 convenues par Avery et Mira (produits finis physiques, lots, dates, emplacements, stock). Gel de périmètre V1 inclus. |
 
 ## Logo
 
